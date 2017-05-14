@@ -1,9 +1,10 @@
 {% extends 'layout.html.twig' %}
+    {% block head %}<title>{{'Empresa'}}</title>{% endblock %}
 
     {% block stylesheets %}
         {{ parent() }}
         <link rel="stylesheet" href="{{ asset('bundles/app/css/jquery.dataTables.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/app/css/form550x450.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/form650x450.css') }}">
     {% endblock %}
 
     {% block javascripts %}
@@ -11,45 +12,37 @@
         <script src="{{ asset('bundles/app/js/jquery.dataTables.min.js') }}"></script>
         <script>
             $(document).ready(function () {
-                $('#mytable').DataTable();
+                $('#mytable').DataTable({
+                    paging    : false,
+                    scrollY   : 225,
+                    searching : true,
+                    ordering  : false,
+                    select    : false
+                });
             });
         </script
     {% endblock %}
-
     {% block body %}
         {{ parent() }}
         <form>
-        Seleccionar empresa
+        <h4>Seleccionar empresa</h4>
         <div class="panel panel-success center-block">
             <div class="panel-body">
-                <table id="mytable" class="display" cellspacing="0" width="100%">
+                <table id="mytable" class="demo compac" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                <th>Corr</th>
+                <th>ID</th>
                 <th>Nombre</th>
-                <th>Origen</th>
-                <th>A&ntilde;o</th>
-                <th>Acci&oacute;n</th>
+                <th></th>
                 </tr>
                 </thead>
-                <tfoot>
-                <tr>
-                <th>Corr</th>
-                <th>Nombre</th>
-                <th>Origen</th>
-                <th>A&ntilde;o</th>
-                <th>Acci&oacute;n</th>
-                </tr>
-                </tfoot>
                 <tbody>
                 {% set i = 1 %}
                 {% for empresa in empresas %}
                 <tr>
                 <td>{{ i }}</td>
                 <td>{{ empresa.nombre }}</td>
-                <td>{{ empresa.origen }}</td>
-                <td>{{ empresa.createdby }}</td>
-                <td><a href="{{ path('sicem_user_homepage', {'empresa_id': empresa.id }) }}" class="btn btn-success">Abrir</a></td>
+                <td><a href="{{ path('index', {'empresa_id': empresa.id }) }}" class="btn btn-success">Abrir</a></td>
                 </tr>
                 {% set i = i + 1 %}
                 {% endfor %}

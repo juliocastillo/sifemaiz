@@ -13,6 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
 class CtlEmpresa
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_empresa_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="origen", type="string", length=3, nullable=true)
@@ -29,9 +39,9 @@ class CtlEmpresa
     /**
      * @var string
      *
-     * @ORM\Column(name="registro_fiscal", type="string", length=15, nullable=true)
+     * @ORM\Column(name="registro", type="string", length=15, nullable=true)
      */
-    private $registroFiscal;
+    private $registro;
 
     /**
      * @var string
@@ -48,44 +58,51 @@ class CtlEmpresa
     private $consolidadora;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
      * @var integer
      *
-     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     * @ORM\Column(name="created_by", type="integer", nullable=false)
      */
-    private $userAdd;
+    private $createdBy;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $dateAdd;
+    private $createdAt;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     * @ORM\Column(name="updated_by", type="integer", nullable=true)
      */
-    private $userMod;
+    private $updatedBy;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private $dateMod;
+    private $updatedAt;
+
+
 
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="ctl_empresa_id_seq", allocationSize=1, initialValue=1)
+     * @return integer
      */
-    private $id;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set origen
@@ -136,27 +153,27 @@ class CtlEmpresa
     }
 
     /**
-     * Set registroFiscal
+     * Set registro
      *
-     * @param string $registroFiscal
+     * @param string $registro
      *
      * @return CtlEmpresa
      */
-    public function setRegistroFiscal($registroFiscal)
+    public function setRegistro($registro)
     {
-        $this->registroFiscal = $registroFiscal;
+        $this->registro = $registro;
 
         return $this;
     }
 
     /**
-     * Get registroFiscal
+     * Get registro
      *
      * @return string
      */
-    public function getRegistroFiscal()
+    public function getRegistro()
     {
-        return $this->registroFiscal;
+        return $this->registro;
     }
 
     /**
@@ -208,108 +225,122 @@ class CtlEmpresa
     }
 
     /**
-     * Set userAdd
+     * Set activo
      *
-     * @param integer $userAdd
+     * @param boolean $activo
      *
      * @return CtlEmpresa
      */
-    public function setUserAdd($userAdd)
+    public function setActivo($activo)
     {
-        $this->userAdd = $userAdd;
+        $this->activo = $activo;
 
         return $this;
     }
 
     /**
-     * Get userAdd
+     * Get activo
+     *
+     * @return boolean
+     */
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param integer $createdBy
+     *
+     * @return CtlEmpresa
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
      *
      * @return integer
      */
-    public function getUserAdd()
+    public function getCreatedBy()
     {
-        return $this->userAdd;
+        return $this->createdBy;
     }
 
     /**
-     * Set dateAdd
+     * Set createdAt
      *
-     * @param \DateTime $dateAdd
+     * @param \DateTime $createdAt
      *
      * @return CtlEmpresa
      */
-    public function setDateAdd($dateAdd)
+    public function setCreatedAt($createdAt)
     {
-        $this->dateAdd = $dateAdd;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get dateAdd
+     * Get createdAt
      *
      * @return \DateTime
      */
-    public function getDateAdd()
+    public function getCreatedAt()
     {
-        return $this->dateAdd;
+        return $this->createdAt;
     }
 
     /**
-     * Set userMod
+     * Set updatedBy
      *
-     * @param integer $userMod
+     * @param integer $updatedBy
      *
      * @return CtlEmpresa
      */
-    public function setUserMod($userMod)
+    public function setUpdatedBy($updatedBy)
     {
-        $this->userMod = $userMod;
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }
 
     /**
-     * Get userMod
+     * Get updatedBy
      *
      * @return integer
      */
-    public function getUserMod()
+    public function getUpdatedBy()
     {
-        return $this->userMod;
+        return $this->updatedBy;
     }
 
     /**
-     * Set dateMod
+     * Set updatedAt
      *
-     * @param \DateTime $dateMod
+     * @param \DateTime $updatedAt
      *
      * @return CtlEmpresa
      */
-    public function setDateMod($dateMod)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->dateMod = $dateMod;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get dateMod
+     * Get updatedAt
      *
      * @return \DateTime
      */
-    public function getDateMod()
+    public function getUpdatedAt()
     {
-        return $this->dateMod;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->updatedAt;
     }
 }

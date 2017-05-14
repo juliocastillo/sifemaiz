@@ -13,6 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
 class CtlEmpresa
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_empresa_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="origen", type="string", length=3, nullable=true)
@@ -29,9 +39,9 @@ class CtlEmpresa
     /**
      * @var string
      *
-     * @ORM\Column(name="registro_fiscal", type="string", length=15, nullable=true)
+     * @ORM\Column(name="registro", type="string", length=15, nullable=true)
      */
-    private $registroFiscal;
+    private $registro;
 
     /**
      * @var string
@@ -48,42 +58,39 @@ class CtlEmpresa
     private $consolidadora;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
      * @var integer
      *
-     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     * @ORM\Column(name="created_by", type="integer", nullable=false)
      */
-    private $userAdd;
+    private $createdBy;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $dateAdd;
+    private $createdAt;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     * @ORM\Column(name="updated_by", type="integer", nullable=true)
      */
-    private $userMod;
+    private $updatedBy;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private $dateMod;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="ctl_empresa_id_seq", allocationSize=1, initialValue=1)
-     */
-    private $id;
+    private $updatedAt;
 
 
 }

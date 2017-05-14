@@ -22,7 +22,7 @@ class HerramientasController extends Controller
     public function contaEmpresaSelect()
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $empresas = $em->getRepository('NinfacContaBundle:CtlEmpresa')->findAll();
+        $empresas = $em->getRepository('NinfacContaBundle:CtlEmpresa')->findBy(array('activo'=>true));
         return $this->render('NinfacContaBundle:Empresa:seleccionar_empresa.html.twig', array(
             'empresas' => $empresas
         ));
