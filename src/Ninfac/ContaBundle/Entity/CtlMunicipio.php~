@@ -1,0 +1,44 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlMunicipio
+ *
+ * @ORM\Table(name="ctl_municipio", indexes={@ORM\Index(name="IDX_914172ED6325E299", columns={"id_departamento"})})
+ * @ORM\Entity
+ */
+class CtlMunicipio
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=80, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_municipio_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlDepartamento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlDepartamento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_departamento", referencedColumnName="id")
+     * })
+     */
+    private $idDepartamento;
+
+
+}
+

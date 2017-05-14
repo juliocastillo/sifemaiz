@@ -1,0 +1,347 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MntEmpleado
+ *
+ * @ORM\Table(name="mnt_empleado", indexes={@ORM\Index(name="IDX_2138DDC9664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_2138DDC96325E299", columns={"id_departamento"}), @ORM\Index(name="IDX_2138DDC97EAD49C7", columns={"id_municipio"}), @ORM\Index(name="IDX_2138DDC91BC6DB65", columns={"id_cargoempleado"}), @ORM\Index(name="IDX_2138DDC9995BA0E1", columns={"id_banco"}), @ORM\Index(name="IDX_2138DDC9A7194A90", columns={"id_sexo"}), @ORM\Index(name="IDX_2138DDC940C6C314", columns={"id_estadocivil"}), @ORM\Index(name="IDX_2138DDC9F8B09C83", columns={"id_centrotrabajo"}), @ORM\Index(name="IDX_2138DDC9DBDE0CDC", columns={"id_oficina"}), @ORM\Index(name="IDX_2138DDC92219D08C", columns={"id_tipocontrato"}), @ORM\Index(name="IDX_2138DDC96C0BA731", columns={"id_institucionsap"})})
+ * @ORM\Entity
+ */
+class MntEmpleado
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_dui", type="string", length=40, nullable=true)
+     */
+    private $nombreDui;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellido_dui", type="string", length=40, nullable=true)
+     */
+    private $apellidoDui;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_isss", type="string", length=40, nullable=true)
+     */
+    private $nombreIsss;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellido_isss", type="string", length=40, nullable=true)
+     */
+    private $apellidoIsss;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fnac", type="date", nullable=true)
+     */
+    private $fnac;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dui", type="string", length=10, nullable=true)
+     */
+    private $dui;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="isss", type="string", length=10, nullable=true)
+     */
+    private $isss;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nup", type="string", length=12, nullable=true)
+     */
+    private $nup;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nit", type="string", length=15, nullable=true)
+     */
+    private $nit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sueldo_base", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $sueldoBase;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="horas_laborales", type="integer", nullable=true)
+     */
+    private $horasLaborales;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=80, nullable=true)
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=20, nullable=true)
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=60, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cuenta_bancaria", type="string", length=30, nullable=true)
+     */
+    private $cuentaBancaria;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="emergencia", type="string", length=80, nullable=true)
+     */
+    private $emergencia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono_emergencia", type="string", length=20, nullable=true)
+     */
+    private $telefonoEmergencia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="parentezco_emergencia", type="string", length=25, nullable=true)
+     */
+    private $parentezcoEmergencia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nivel_estudio", type="string", length=30, nullable=true)
+     */
+    private $nivelEstudio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="profesion", type="string", length=30, nullable=true)
+     */
+    private $profesion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_licencia_conducir", type="string", length=15, nullable=true)
+     */
+    private $numeroLicenciaConducir;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clase_licencia", type="string", length=15, nullable=true)
+     */
+    private $claseLicencia;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_ingreso", type="date", nullable=true)
+     */
+    private $fechaIngreso;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="aplica_isss", type="boolean", nullable=true)
+     */
+    private $aplicaIsss;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comentario", type="string", length=255, nullable=true)
+     */
+    private $comentario;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="mnt_empleado_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlCentrotrabajo
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlCentrotrabajo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_centrotrabajo", referencedColumnName="id")
+     * })
+     */
+    private $idCentrotrabajo;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlOficina
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlOficina")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_oficina", referencedColumnName="id")
+     * })
+     */
+    private $idOficina;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipocontrato
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipocontrato")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipocontrato", referencedColumnName="id")
+     * })
+     */
+    private $idTipocontrato;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlInstitucionsap
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlInstitucionsap")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_institucionsap", referencedColumnName="id")
+     * })
+     */
+    private $idInstitucionsap;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEstadocivil
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEstadocivil")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_estadocivil", referencedColumnName="id")
+     * })
+     */
+    private $idEstadocivil;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlSexo
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlSexo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_sexo", referencedColumnName="id")
+     * })
+     */
+    private $idSexo;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlDepartamento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlDepartamento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_departamento", referencedColumnName="id")
+     * })
+     */
+    private $idDepartamento;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlMunicipio
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlMunicipio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_municipio", referencedColumnName="id")
+     * })
+     */
+    private $idMunicipio;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlCargoempleado
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlCargoempleado")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cargoempleado", referencedColumnName="id")
+     * })
+     */
+    private $idCargoempleado;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlBanco
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlBanco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_banco", referencedColumnName="id")
+     * })
+     */
+    private $idBanco;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+
+}
+

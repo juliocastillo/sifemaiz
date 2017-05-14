@@ -1,0 +1,41 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AclSecurityIdentities
+ *
+ * @ORM\Table(name="acl_security_identities", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_8835ee78772e836af85e0677", columns={"identifier", "username"})})
+ * @ORM\Entity
+ */
+class AclSecurityIdentities
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="identifier", type="string", length=200, nullable=false)
+     */
+    private $identifier;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="username", type="boolean", nullable=false)
+     */
+    private $username;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="acl_security_identities_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+
+}
+

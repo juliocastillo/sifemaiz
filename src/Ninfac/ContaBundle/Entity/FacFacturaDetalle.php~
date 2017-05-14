@@ -1,0 +1,147 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FacFacturaDetalle
+ *
+ * @ORM\Table(name="fac_factura_detalle", indexes={@ORM\Index(name="IDX_EC0AA727760979", columns={"id_factura"}), @ORM\Index(name="IDX_EC0AA73FA73721", columns={"id_tipoprecio"}), @ORM\Index(name="IDX_EC0AA723FA9FB2", columns={"id_bodega"}), @ORM\Index(name="IDX_EC0AA74C84185C", columns={"id_porcentaje_descuento"}), @ORM\Index(name="IDX_EC0AA7F760EA80", columns={"id_producto"})})
+ * @ORM\Entity
+ */
+class FacFacturaDetalle
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cantidad", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $cantidad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="precio", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $precio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="precio_descuento", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $precioDescuento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="valor", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $valor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="varlor_descuento", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $varlorDescuento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gravadas", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $gravadas;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="exentas", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $exentas;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iva", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $iva;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="total", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $total;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="costo", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $costo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="fac_factura_detalle_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlProducto
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlProducto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_producto", referencedColumnName="id")
+     * })
+     */
+    private $idProducto;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlPorcentajeDescuento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlPorcentajeDescuento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_porcentaje_descuento", referencedColumnName="id")
+     * })
+     */
+    private $idPorcentajeDescuento;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlBodega
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlBodega")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_bodega", referencedColumnName="id")
+     * })
+     */
+    private $idBodega;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipoprecio
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipoprecio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipoprecio", referencedColumnName="id")
+     * })
+     */
+    private $idTipoprecio;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\FacFactura
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\FacFactura")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_factura", referencedColumnName="id")
+     * })
+     */
+    private $idFactura;
+
+
+}
+

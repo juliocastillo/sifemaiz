@@ -1,0 +1,306 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlCliente
+ *
+ * @ORM\Table(name="ctl_cliente", indexes={@ORM\Index(name="IDX_232B3B6664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_232B3B6F57D32FD", columns={"id_pais"}), @ORM\Index(name="IDX_232B3B6F09CE00B", columns={"id_tipodocumento"}), @ORM\Index(name="IDX_232B3B623FA9FB2", columns={"id_bodega"}), @ORM\Index(name="IDX_232B3B66325E299", columns={"id_departamento"}), @ORM\Index(name="IDX_232B3B67EAD49C7", columns={"id_municipio"}), @ORM\Index(name="IDX_232B3B6B4892A2A", columns={"id_tamaniocliente"}), @ORM\Index(name="IDX_232B3B680844749", columns={"id_tipocliente"}), @ORM\Index(name="IDX_232B3B63FA73721", columns={"id_tipoprecio"})})
+ * @ORM\Entity
+ */
+class CtlCliente
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=20, nullable=false)
+     */
+    private $codigo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="razon_social", type="string", length=50, nullable=true)
+     */
+    private $razonSocial;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_ingreso", type="date", nullable=true)
+     */
+    private $fechaIngreso;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=80, nullable=true)
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=20, nullable=true)
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=60, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="registro", type="string", length=10, nullable=true)
+     */
+    private $registro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nit", type="string", length=20, nullable=true)
+     */
+    private $nit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dui", type="string", length=10, nullable=true)
+     */
+    private $dui;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="giro", type="string", length=50, nullable=true)
+     */
+    private $giro;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="exento", type="boolean", nullable=true)
+     */
+    private $exento;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="extranjero", type="boolean", nullable=true)
+     */
+    private $extranjero;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="con_credito", type="boolean", nullable=true)
+     */
+    private $conCredito;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recepcion_precepcion", type="boolean", nullable=true)
+     */
+    private $recepcionPrecepcion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="signo", type="integer", nullable=true)
+     */
+    private $signo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="credito", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $credito;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dias_validez", type="integer", nullable=true)
+     */
+    private $diasValidez;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="exede_credito", type="boolean", nullable=true)
+     */
+    private $exedeCredito;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="exede_dias_credito", type="boolean", nullable=true)
+     */
+    private $exedeDiasCredito;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="cuenta_incobrable", type="boolean", nullable=true)
+     */
+    private $cuentaIncobrable;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contacto", type="string", length=50, nullable=true)
+     */
+    private $contacto;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_cliente_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTamanio
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTamanio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tamaniocliente", referencedColumnName="id")
+     * })
+     */
+    private $idTamaniocliente;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipocliente
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipocliente")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipocliente", referencedColumnName="id")
+     * })
+     */
+    private $idTipocliente;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipoprecio
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipoprecio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipoprecio", referencedColumnName="id")
+     * })
+     */
+    private $idTipoprecio;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlMunicipio
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlMunicipio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_municipio", referencedColumnName="id")
+     * })
+     */
+    private $idMunicipio;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlDepartamento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlDepartamento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_departamento", referencedColumnName="id")
+     * })
+     */
+    private $idDepartamento;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlPais
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlPais")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pais", referencedColumnName="id")
+     * })
+     */
+    private $idPais;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipodocumento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipodocumento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipodocumento", referencedColumnName="id")
+     * })
+     */
+    private $idTipodocumento;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlBodega
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlBodega")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_bodega", referencedColumnName="id")
+     * })
+     */
+    private $idBodega;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+
+}
+

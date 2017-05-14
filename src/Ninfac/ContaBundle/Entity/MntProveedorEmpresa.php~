@@ -1,0 +1,67 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MntProveedorEmpresa
+ *
+ * @ORM\Table(name="mnt_proveedor_empresa", indexes={@ORM\Index(name="IDX_63BADDCE664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_63BADDCEB7E40309", columns={"id_cuentacontable_proveedor"}), @ORM\Index(name="IDX_63BADDCE1EDB5238", columns={"id_cuentacontable_gastos"}), @ORM\Index(name="IDX_63BADDCE9E5D6506", columns={"id_proveedores"})})
+ * @ORM\Entity
+ */
+class MntProveedorEmpresa
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="mnt_proveedor_empresa_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\MntProveedor
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\MntProveedor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_proveedores", referencedColumnName="id")
+     * })
+     */
+    private $idProveedores;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlCuentacontable
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlCuentacontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cuentacontable_gastos", referencedColumnName="id")
+     * })
+     */
+    private $idCuentacontableGastos;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlCuentacontable
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlCuentacontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cuentacontable_proveedor", referencedColumnName="id")
+     * })
+     */
+    private $idCuentacontableProveedor;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+
+}
+

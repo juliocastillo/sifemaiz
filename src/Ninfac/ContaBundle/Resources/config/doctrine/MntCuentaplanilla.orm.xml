@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\MntCuentaplanilla" table="mnt_cuentaplanilla">
+    <indexes>
+      <index name="IDX_308091637A999646" columns="id_tipoafecta"/>
+      <index name="IDX_308091639F541514" columns="id_tipoexpresa"/>
+      <index name="IDX_30809163B803F873" columns="id_tipoingreso"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_cuentaplanilla_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="descripcion" type="string" column="descripcion" length="40" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="expresado" type="boolean" column="expresado" nullable="true"/>
+    <field name="descuentoIsss" type="boolean" column="descuento_isss" nullable="true"/>
+    <field name="descuentoAfp" type="boolean" column="descuento_afp" nullable="true"/>
+    <field name="descuentoRenta" type="boolean" column="descuento_renta" nullable="true"/>
+    <field name="userAdd" type="integer" column="user_add" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dateAdd" type="datetime" column="date_add" nullable="false"/>
+    <field name="userMod" type="integer" column="user_mod" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dateMod" type="datetime" column="date_mod" nullable="true"/>
+    <many-to-one field="idTipoingreso" target-entity="CtlTipoingreso" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipoingreso" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipoexpresa" target-entity="CtlTipoexpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipoexpresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipoafecta" target-entity="CtlTipoafecta" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipoafecta" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

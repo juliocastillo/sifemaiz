@@ -1,0 +1,172 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MntProveedor
+ *
+ * @ORM\Table(name="mnt_proveedor", indexes={@ORM\Index(name="IDX_71E5C3606325E299", columns={"id_departamento"}), @ORM\Index(name="IDX_71E5C3607EAD49C7", columns={"id_municipio"}), @ORM\Index(name="IDX_71E5C360F57D32FD", columns={"id_pais"}), @ORM\Index(name="IDX_71E5C3602D3EB78E", columns={"id_tamanioproveedor"})})
+ * @ORM\Entity
+ */
+class MntProveedor
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=50, nullable=true)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=80, nullable=true)
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=20, nullable=true)
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=60, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="registro", type="string", length=10, nullable=true)
+     */
+    private $registro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dui", type="string", length=10, nullable=true)
+     */
+    private $dui;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nit", type="string", length=15, nullable=true)
+     */
+    private $nit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="giro", type="string", length=70, nullable=true)
+     */
+    private $giro;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="exento", type="boolean", nullable=true)
+     */
+    private $exento;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="extranjero", type="boolean", nullable=true)
+     */
+    private $extranjero;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="mnt_proveedor_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTamanio
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTamanio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tamanioproveedor", referencedColumnName="id")
+     * })
+     */
+    private $idTamanioproveedor;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlPais
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlPais")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pais", referencedColumnName="id")
+     * })
+     */
+    private $idPais;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlMunicipio
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlMunicipio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_municipio", referencedColumnName="id")
+     * })
+     */
+    private $idMunicipio;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlDepartamento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlDepartamento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_departamento", referencedColumnName="id")
+     * })
+     */
+    private $idDepartamento;
+
+
+}
+

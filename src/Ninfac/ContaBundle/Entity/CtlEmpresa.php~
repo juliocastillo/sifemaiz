@@ -1,0 +1,90 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlEmpresa
+ *
+ * @ORM\Table(name="ctl_empresa")
+ * @ORM\Entity
+ */
+class CtlEmpresa
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="origen", type="string", length=3, nullable=true)
+     */
+    private $origen;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=80, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="registro_fiscal", type="string", length=15, nullable=true)
+     */
+    private $registroFiscal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nit", type="string", length=14, nullable=true)
+     */
+    private $nit;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="consolidadora", type="boolean", nullable=true)
+     */
+    private $consolidadora;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_empresa_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+
+}
+

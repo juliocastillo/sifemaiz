@@ -1,0 +1,80 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AclObjectIdentities
+ *
+ * @ORM\Table(name="acl_object_identities", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_9407e5494b12ad6ea000b10", columns={"object_identifier", "class_id"})}, indexes={@ORM\Index(name="idx_9407e54977fa751a", columns={"parent_object_identity_id"})})
+ * @ORM\Entity
+ */
+class AclObjectIdentities
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="class_id", type="integer", nullable=false)
+     */
+    private $classId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="object_identifier", type="string", length=100, nullable=false)
+     */
+    private $objectIdentifier;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="entries_inheriting", type="boolean", nullable=false)
+     */
+    private $entriesInheriting;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="acl_object_identities_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\AclObjectIdentities
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\AclObjectIdentities")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent_object_identity_id", referencedColumnName="id")
+     * })
+     */
+    private $parentObjectentity;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Ninfac\ContaBundle\Entity\AclObjectIdentities", inversedBy="objectentity")
+     * @ORM\JoinTable(name="acl_object_identity_ancestors",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="object_identity_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ancestor_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $ancestor;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ancestor = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

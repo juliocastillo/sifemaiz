@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\MntEmpleado" table="mnt_empleado">
+    <indexes>
+      <index name="IDX_2138DDC9664AF320" columns="id_empresa"/>
+      <index name="IDX_2138DDC96325E299" columns="id_departamento"/>
+      <index name="IDX_2138DDC97EAD49C7" columns="id_municipio"/>
+      <index name="IDX_2138DDC91BC6DB65" columns="id_cargoempleado"/>
+      <index name="IDX_2138DDC9995BA0E1" columns="id_banco"/>
+      <index name="IDX_2138DDC9A7194A90" columns="id_sexo"/>
+      <index name="IDX_2138DDC940C6C314" columns="id_estadocivil"/>
+      <index name="IDX_2138DDC9F8B09C83" columns="id_centrotrabajo"/>
+      <index name="IDX_2138DDC9DBDE0CDC" columns="id_oficina"/>
+      <index name="IDX_2138DDC92219D08C" columns="id_tipocontrato"/>
+      <index name="IDX_2138DDC96C0BA731" columns="id_institucionsap"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_empleado_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="nombreDui" type="string" column="nombre_dui" length="40" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidoDui" type="string" column="apellido_dui" length="40" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombreIsss" type="string" column="nombre_isss" length="40" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidoIsss" type="string" column="apellido_isss" length="40" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fnac" type="date" column="fnac" nullable="true"/>
+    <field name="dui" type="string" column="dui" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isss" type="string" column="isss" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nup" type="string" column="nup" length="12" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nit" type="string" column="nit" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="sueldoBase" type="decimal" column="sueldo_base" precision="10" scale="2" nullable="true"/>
+    <field name="horasLaborales" type="integer" column="horas_laborales" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="direccion" type="string" column="direccion" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefono" type="string" column="telefono" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="string" column="email" length="60" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cuentaBancaria" type="string" column="cuenta_bancaria" length="30" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="emergencia" type="string" column="emergencia" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefonoEmergencia" type="string" column="telefono_emergencia" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="parentezcoEmergencia" type="string" column="parentezco_emergencia" length="25" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nivelEstudio" type="string" column="nivel_estudio" length="30" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="profesion" type="string" column="profesion" length="30" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numeroLicenciaConducir" type="string" column="numero_licencia_conducir" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="claseLicencia" type="string" column="clase_licencia" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechaIngreso" type="date" column="fecha_ingreso" nullable="true"/>
+    <field name="aplicaIsss" type="boolean" column="aplica_isss" nullable="true"/>
+    <field name="comentario" type="string" column="comentario" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="activo" nullable="true">
+      <options>
+        <option name="comment">especifica si el empleado esta activo o no</option>
+      </options>
+    </field>
+    <field name="userAdd" type="integer" column="user_add" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dateAdd" type="datetime" column="date_add" nullable="false"/>
+    <field name="userMod" type="integer" column="user_mod" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dateMod" type="datetime" column="date_mod" nullable="true"/>
+    <many-to-one field="idCentrotrabajo" target-entity="CtlCentrotrabajo" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_centrotrabajo" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idOficina" target-entity="CtlOficina" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_oficina" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipocontrato" target-entity="CtlTipocontrato" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipocontrato" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idInstitucionsap" target-entity="CtlInstitucionsap" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_institucionsap" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEstadocivil" target-entity="CtlEstadocivil" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_estadocivil" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idSexo" target-entity="CtlSexo" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_sexo" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idDepartamento" target-entity="CtlDepartamento" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_departamento" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idMunicipio" target-entity="CtlMunicipio" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_municipio" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCargoempleado" target-entity="CtlCargoempleado" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cargoempleado" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idBanco" target-entity="CtlBanco" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_banco" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\MntProveedorEmpresa" table="mnt_proveedor_empresa">
+    <indexes>
+      <index name="IDX_63BADDCE664AF320" columns="id_empresa"/>
+      <index name="IDX_63BADDCEB7E40309" columns="id_cuentacontable_proveedor"/>
+      <index name="IDX_63BADDCE1EDB5238" columns="id_cuentacontable_gastos"/>
+      <index name="IDX_63BADDCE9E5D6506" columns="id_proveedores"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_proveedor_empresa_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <many-to-one field="idProveedores" target-entity="MntProveedor" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_proveedores" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCuentacontableGastos" target-entity="CtlCuentacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cuentacontable_gastos" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCuentacontableProveedor" target-entity="CtlCuentacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cuentacontable_proveedor" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

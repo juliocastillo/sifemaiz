@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\FacAbonosDetalleCxc" table="fac_abonos_detalle_cxc">
+    <indexes>
+      <index name="IDX_33210D3D75802563" columns="id_abonos_cxc"/>
+      <index name="IDX_33210D3D664AF320" columns="id_empresa"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="fac_abonos_detalle_cxc_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="valor" type="decimal" column="valor" precision="10" scale="2" nullable="true"/>
+    <field name="saldo" type="decimal" column="saldo" precision="10" scale="2" nullable="true"/>
+    <field name="column" type="integer" column="Column" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idAbonosCxc" target-entity="FacAbonosCxc" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_abonos_cxc" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

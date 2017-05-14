@@ -1,0 +1,61 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlTipopartida
+ *
+ * @ORM\Table(name="ctl_tipopartida", indexes={@ORM\Index(name="IDX_3394E802B2B0C0A", columns={"id_formapartida"}), @ORM\Index(name="IDX_3394E80664AF320", columns={"id_empresa"})})
+ * @ORM\Entity
+ */
+class CtlTipopartida
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anio", type="integer", nullable=true)
+     */
+    private $anio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=40, nullable=true)
+     */
+    private $nombre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_tipopartida_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlFormapartida
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlFormapartida")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_formapartida", referencedColumnName="id")
+     * })
+     */
+    private $idFormapartida;
+
+
+}
+

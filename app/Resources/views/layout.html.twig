@@ -1,0 +1,17 @@
+{# app/Resources/views/layout.html.twig #}
+{% block head %}
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/bootstrap/css/bootstrap.min.css') }}" type="text/css" media="all" />
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/jquery.min.js')}}"></script>
+    <script src="{{ asset('bundles/app/bootstrap/js/bootstrap.min.js')}}"></script>
+{% endblock %}
+{% block body %}
+    <body style="background-image: url({{ asset('bundles/app/img/maiz_grises.png') }})">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ include('menu_home_page.html.twig') }}
+        {% endif %}
+    </body>
+{% endblock %}

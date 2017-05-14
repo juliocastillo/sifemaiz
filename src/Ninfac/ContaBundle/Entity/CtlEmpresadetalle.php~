@@ -1,0 +1,144 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlEmpresadetalle
+ *
+ * @ORM\Table(name="ctl_empresadetalle", indexes={@ORM\Index(name="IDX_5C948CE6325E299", columns={"id_departamento"}), @ORM\Index(name="IDX_5C948CE664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_5C948CE7EAD49C7", columns={"id_municipio"}), @ORM\Index(name="IDX_5C948CEF842EB5F", columns={"id_tamanioempresa"})})
+ * @ORM\Entity
+ */
+class CtlEmpresadetalle
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="anio", type="string", length=4, nullable=true)
+     */
+    private $anio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nit_representante", type="string", length=14, nullable=true)
+     */
+    private $nitRepresentante;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="representante", type="string", length=80, nullable=true)
+     */
+    private $representante;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nit_auditor", type="string", length=14, nullable=true)
+     */
+    private $nitAuditor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="auditor", type="string", length=80, nullable=true)
+     */
+    private $auditor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nit_contador", type="string", length=14, nullable=true)
+     */
+    private $nitContador;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="contador", type="integer", nullable=true)
+     */
+    private $contador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nit_propietario", type="string", length=14, nullable=true)
+     */
+    private $nitPropietario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dui_propietario", type="string", length=10, nullable=true)
+     */
+    private $duiPropietario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="propietario", type="string", length=80, nullable=true)
+     */
+    private $propietario;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tamanio_cta_mayor", type="smallint", nullable=true)
+     */
+    private $tamanioCtaMayor;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_empresadetalle_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTamanioempresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTamanioempresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tamanioempresa", referencedColumnName="id")
+     * })
+     */
+    private $idTamanioempresa;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlMunicipio
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlMunicipio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_municipio", referencedColumnName="id")
+     * })
+     */
+    private $idMunicipio;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlDepartamento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlDepartamento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_departamento", referencedColumnName="id")
+     * })
+     */
+    private $idDepartamento;
+
+
+}
+

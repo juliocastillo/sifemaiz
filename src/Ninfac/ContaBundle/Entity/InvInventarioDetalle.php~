@@ -1,0 +1,88 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * InvInventarioDetalle
+ *
+ * @ORM\Table(name="inv_inventario_detalle", indexes={@ORM\Index(name="IDX_65CFDB09CF93CE22", columns={"id_inventario"}), @ORM\Index(name="IDX_65CFDB09664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_65CFDB099C3C3AA2", columns={"id_cuentacontable"}), @ORM\Index(name="IDX_65CFDB09F760EA80", columns={"id_producto"})})
+ * @ORM\Entity
+ */
+class InvInventarioDetalle
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cantidad", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $cantidad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="costo", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $costo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="total", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $total;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="inv_inventario_detalle_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlProducto
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlProducto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_producto", referencedColumnName="id")
+     * })
+     */
+    private $idProducto;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlCuentacontable
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlCuentacontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cuentacontable", referencedColumnName="id")
+     * })
+     */
+    private $idCuentacontable;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\InvInventario
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\InvInventario")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_inventario", referencedColumnName="id")
+     * })
+     */
+    private $idInventario;
+
+
+}
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\MntCuentaEmpleado" table="mnt_cuenta_empleado">
+    <indexes>
+      <index name="IDX_A7B8DB1DB0295384" columns="ctl_empleado"/>
+      <index name="IDX_A7B8DB1D664AF320" columns="id_empresa"/>
+      <index name="IDX_A7B8DB1DA7F8B81" columns="id_cuenta_contable_anticipos"/>
+      <index name="IDX_A7B8DB1DBEA1C031" columns="id_cuenta_prestamo_interno"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_cuenta_empleado_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="anio" type="string" column="anio" length="4" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">nombre del sexo</option>
+      </options>
+    </field>
+    <many-to-one field="idCuentaPrestamoInterno" target-entity="CtlCuentacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cuenta_prestamo_interno" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCuentaContableAnticipos" target-entity="CtlCuentacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cuenta_contable_anticipos" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="ctlEmpleado" target-entity="MntEmpleado" fetch="LAZY">
+      <join-columns>
+        <join-column name="ctl_empleado" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

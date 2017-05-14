@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/jquery.dataTables.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/form550x450.css') }}">
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('bundles/app/js/jquery.dataTables.min.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                $('#mytable').DataTable();
+            });
+        </script
+    {% endblock %}
+
+    {% block body %}
+        {{ parent() }}
+        <form>
+        Seleccionar empresa
+        <div class="panel panel-success center-block">
+            <div class="panel-body">
+                <table id="mytable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                <th>Corr</th>
+                <th>Nombre</th>
+                <th>Origen</th>
+                <th>A&ntilde;o</th>
+                <th>Acci&oacute;n</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                <th>Corr</th>
+                <th>Nombre</th>
+                <th>Origen</th>
+                <th>A&ntilde;o</th>
+                <th>Acci&oacute;n</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                {% set i = 1 %}
+                {% for empresa in empresas %}
+                <tr>
+                <td>{{ i }}</td>
+                <td>{{ empresa.nombre }}</td>
+                <td>{{ empresa.origen }}</td>
+                <td>{{ empresa.createdby }}</td>
+                <td><a href="{{ path('sicem_user_homepage', {'empresa_id': empresa.id }) }}" class="btn btn-success">Abrir</a></td>
+                </tr>
+                {% set i = i + 1 %}
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        </form>
+    {% endblock %}

@@ -1,0 +1,58 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MntEmpleadoDocumento
+ *
+ * @ORM\Table(name="mnt_empleado_documento", indexes={@ORM\Index(name="IDX_A52D763F890253C7", columns={"id_empleado"})})
+ * @ORM\Entity
+ */
+class MntEmpleadoDocumento
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="date", nullable=true)
+     */
+    private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=50, nullable=true)
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="documento", type="string", length=255, nullable=false)
+     */
+    private $documento;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="mnt_empleado_documento_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\MntEmpleado
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\MntEmpleado")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empleado", referencedColumnName="id")
+     * })
+     */
+    private $idEmpleado;
+
+
+}
+

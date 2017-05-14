@@ -1,0 +1,58 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MntEmpleadoReferenciaFamiliar
+ *
+ * @ORM\Table(name="mnt_empleado_referencia_familiar", indexes={@ORM\Index(name="IDX_FCBEC16A890253C7", columns={"id_empleado"})})
+ * @ORM\Entity
+ */
+class MntEmpleadoReferenciaFamiliar
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=50, nullable=true)
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=50, nullable=true)
+     */
+    private $direccion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="mnt_empleado_referencia_familiar_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\MntEmpleado
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\MntEmpleado")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empleado", referencedColumnName="id")
+     * })
+     */
+    private $idEmpleado;
+
+
+}
+

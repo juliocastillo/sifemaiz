@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\FacAbonosCxc" table="fac_abonos_cxc">
+    <indexes>
+      <index name="IDX_F1CBE45B664AF320" columns="id_empresa"/>
+      <index name="IDX_F1CBE45BB803F873" columns="id_tipoingreso"/>
+      <index name="IDX_F1CBE45BE88F3A0E" columns="id_punto_venta"/>
+      <index name="IDX_F1CBE45B2A813255" columns="id_cliente"/>
+      <index name="IDX_F1CBE45B6AC8F6D3" columns="id_banco_cheque"/>
+      <index name="IDX_F1CBE45BD57EA380" columns="id_banco_remesa"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="fac_abonos_cxc_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="fecha" type="datetime" column="fecha" nullable="true"/>
+    <field name="referencia" type="string" column="referencia" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="montoEfectivo" type="decimal" column="monto_efectivo" precision="10" scale="2" nullable="true"/>
+    <field name="montoCheque" type="decimal" column="monto_cheque" precision="10" scale="2" nullable="true"/>
+    <field name="numeroCheque" type="string" column="numero_cheque" length="25" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="montoRemesa" type="decimal" column="monto_remesa" precision="10" scale="2" nullable="true"/>
+    <field name="comentario" type="string" column="comentario" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="userAdd" type="integer" column="user_add" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dateAdd" type="datetime" column="date_add" nullable="false"/>
+    <field name="userMod" type="integer" column="user_mod" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dateMod" type="datetime" column="date_mod" nullable="true"/>
+    <many-to-one field="idBancoCheque" target-entity="CtlBanco" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_banco_cheque" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idBancoRemesa" target-entity="CtlBanco" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_banco_remesa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCliente" target-entity="CtlCliente" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cliente" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idPuntoVenta" target-entity="CtlPuntoVenta" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_punto_venta" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipoingreso" target-entity="CtlTipoingreso" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipoingreso" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

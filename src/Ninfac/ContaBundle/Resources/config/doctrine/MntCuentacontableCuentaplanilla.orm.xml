@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\MntCuentacontableCuentaplanilla" table="mnt_cuentacontable_cuentaplanilla">
+    <indexes>
+      <index name="IDX_43E4D18A9C3C3AA2" columns="id_cuentacontable"/>
+      <index name="IDX_43E4D18ADBDE0CDC" columns="id_oficina"/>
+      <index name="IDX_43E4D18A664AF320" columns="id_empresa"/>
+      <index name="IDX_43E4D18A4CA1EAFD" columns="id_cuentaplanilla"/>
+      <index name="IDX_43E4D18A5D06F624" columns="id_tipocuentaplanilla"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_cuentacontable_cuentaplanilla_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <many-to-one field="idTipocuentaplanilla" target-entity="CtlTipocuentaplanilla" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipocuentaplanilla" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCuentaplanilla" target-entity="MntCuentaplanilla" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cuentaplanilla" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idOficina" target-entity="CtlOficina" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_oficina" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCuentacontable" target-entity="CtlCuentacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cuentacontable" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

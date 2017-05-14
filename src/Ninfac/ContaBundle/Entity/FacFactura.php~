@@ -1,0 +1,198 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FacFactura
+ *
+ * @ORM\Table(name="fac_factura", indexes={@ORM\Index(name="IDX_60ACA1A523FA9FB2", columns={"id_bodega"}), @ORM\Index(name="IDX_60ACA1A5890253C7", columns={"id_empleado"}), @ORM\Index(name="IDX_60ACA1A52A813255", columns={"id_cliente"}), @ORM\Index(name="IDX_60ACA1A5F09CE00B", columns={"id_tipodocumento"}), @ORM\Index(name="IDX_60ACA1A54D0513AD", columns={"id_partidacontable"}), @ORM\Index(name="IDX_60ACA1A5E12F6CD4", columns={"id_cotizacion"}), @ORM\Index(name="IDX_60ACA1A5B1476DEC", columns={"id_forma_pago"}), @ORM\Index(name="IDX_60ACA1A5E88F3A0E", columns={"id_punto_venta"})})
+ * @ORM\Entity
+ */
+class FacFactura
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=true)
+     */
+    private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_documento", type="string", length=10, nullable=true)
+     */
+    private $numeroDocumento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gravadas", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $gravadas;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="exentas", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $exentas;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iva", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $iva;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="retencion", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $retencion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descuento", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $descuento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="total", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $total;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="afecta", type="boolean", nullable=true)
+     */
+    private $afecta;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="fac_factura_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\FacCotizacion
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\FacCotizacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cotizacion", referencedColumnName="id")
+     * })
+     */
+    private $idCotizacion;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlFormaPago
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlFormaPago")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_forma_pago", referencedColumnName="id")
+     * })
+     */
+    private $idFormaPago;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlPuntoVenta
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlPuntoVenta")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_punto_venta", referencedColumnName="id")
+     * })
+     */
+    private $idPuntoVenta;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\ConPartidacontable
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\ConPartidacontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_partidacontable", referencedColumnName="id")
+     * })
+     */
+    private $idPartidacontable;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipodocumento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipodocumento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipodocumento", referencedColumnName="id")
+     * })
+     */
+    private $idTipodocumento;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\MntEmpleado
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\MntEmpleado")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empleado", referencedColumnName="id")
+     * })
+     */
+    private $idEmpleado;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlCliente
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlCliente")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cliente", referencedColumnName="id")
+     * })
+     */
+    private $idCliente;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlBodega
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlBodega")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_bodega", referencedColumnName="id")
+     * })
+     */
+    private $idBodega;
+
+
+}
+

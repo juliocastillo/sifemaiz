@@ -1,0 +1,120 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MntCuentaplanilla
+ *
+ * @ORM\Table(name="mnt_cuentaplanilla", indexes={@ORM\Index(name="IDX_308091637A999646", columns={"id_tipoafecta"}), @ORM\Index(name="IDX_308091639F541514", columns={"id_tipoexpresa"}), @ORM\Index(name="IDX_30809163B803F873", columns={"id_tipoingreso"})})
+ * @ORM\Entity
+ */
+class MntCuentaplanilla
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=40, nullable=true)
+     */
+    private $descripcion;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="expresado", type="boolean", nullable=true)
+     */
+    private $expresado;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="descuento_isss", type="boolean", nullable=true)
+     */
+    private $descuentoIsss;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="descuento_afp", type="boolean", nullable=true)
+     */
+    private $descuentoAfp;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="descuento_renta", type="boolean", nullable=true)
+     */
+    private $descuentoRenta;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="mnt_cuentaplanilla_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipoingreso
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipoingreso")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipoingreso", referencedColumnName="id")
+     * })
+     */
+    private $idTipoingreso;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipoexpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipoexpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipoexpresa", referencedColumnName="id")
+     * })
+     */
+    private $idTipoexpresa;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipoafecta
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipoafecta")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipoafecta", referencedColumnName="id")
+     * })
+     */
+    private $idTipoafecta;
+
+
+}
+

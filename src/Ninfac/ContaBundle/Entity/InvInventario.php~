@@ -1,0 +1,156 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * InvInventario
+ *
+ * @ORM\Table(name="inv_inventario", indexes={@ORM\Index(name="IDX_AE87F435664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_AE87F43560AE4CA2", columns={"id_bodega_origen"}), @ORM\Index(name="IDX_AE87F4354A851723", columns={"id_bodega_destino"}), @ORM\Index(name="IDX_AE87F4355A6BB32F", columns={"id_tipomovimiento"}), @ORM\Index(name="IDX_AE87F435C0674963", columns={"id_motivo_movimiento"}), @ORM\Index(name="IDX_AE87F435CE5B91D8", columns={"id_tipodocumento_inventario"}), @ORM\Index(name="IDX_AE87F43596F5D4E9", columns={"id_proveedor"}), @ORM\Index(name="IDX_AE87F4357C1986A7", columns={"id_inventario_traslado"})})
+ * @ORM\Entity
+ */
+class InvInventario
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_movimiento", type="date", nullable=true)
+     */
+    private $fechaMovimiento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_documento", type="string", length=10, nullable=true)
+     */
+    private $numeroDocumento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comentario", type="string", length=255, nullable=true)
+     */
+    private $comentario;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="inv_inventario_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipodocumentoInventario
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipodocumentoInventario")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipodocumento_inventario", referencedColumnName="id")
+     * })
+     */
+    private $idTipodocumentoInventario;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\MntProveedor
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\MntProveedor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
+     * })
+     */
+    private $idProveedor;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\InvInventario
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\InvInventario")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_inventario_traslado", referencedColumnName="id")
+     * })
+     */
+    private $idInventarioTraslado;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlMotivoMovimiento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlMotivoMovimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_motivo_movimiento", referencedColumnName="id")
+     * })
+     */
+    private $idMotivoMovimiento;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipomovimiento
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipomovimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipomovimiento", referencedColumnName="id")
+     * })
+     */
+    private $idTipomovimiento;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlBodega
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlBodega")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_bodega_origen", referencedColumnName="id")
+     * })
+     */
+    private $idBodegaOrigen;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlBodega
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlBodega")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_bodega_destino", referencedColumnName="id")
+     * })
+     */
+    private $idBodegaDestino;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+
+}
+

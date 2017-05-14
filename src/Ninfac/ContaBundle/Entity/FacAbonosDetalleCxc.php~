@@ -1,0 +1,68 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FacAbonosDetalleCxc
+ *
+ * @ORM\Table(name="fac_abonos_detalle_cxc", indexes={@ORM\Index(name="IDX_33210D3D75802563", columns={"id_abonos_cxc"}), @ORM\Index(name="IDX_33210D3D664AF320", columns={"id_empresa"})})
+ * @ORM\Entity
+ */
+class FacAbonosDetalleCxc
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="valor", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $valor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="saldo", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $saldo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="Column", type="integer", nullable=true)
+     */
+    private $column;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="fac_abonos_detalle_cxc_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\FacAbonosCxc
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\FacAbonosCxc")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_abonos_cxc", referencedColumnName="id")
+     * })
+     */
+    private $idAbonosCxc;
+
+
+}
+

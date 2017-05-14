@@ -1,0 +1,185 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlProducto
+ *
+ * @ORM\Table(name="ctl_producto", indexes={@ORM\Index(name="IDX_CE4BEAC3E88F3A0E", columns={"id_punto_venta"}), @ORM\Index(name="IDX_CE4BEAC3664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_CE4BEAC3628BDAE3", columns={"id_grupo"}), @ORM\Index(name="IDX_CE4BEAC3E98F4023", columns={"id_marca"}), @ORM\Index(name="IDX_CE4BEAC37569F2C7", columns={"id_presentacion"}), @ORM\Index(name="IDX_CE4BEAC3A666989C", columns={"id_subgrupo"})})
+ * @ORM\Entity
+ */
+class CtlProducto
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=25, nullable=false)
+     */
+    private $codigo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=80, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="exento", type="boolean", nullable=false)
+     */
+    private $exento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="minimo", type="decimal", precision=10, scale=0, nullable=false)
+     */
+    private $minimo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="maximo", type="decimal", precision=10, scale=0, nullable=false)
+     */
+    private $maximo;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="en_promocion", type="boolean", nullable=false)
+     */
+    private $enPromocion;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="no_sujeto", type="boolean", nullable=false)
+     */
+    private $noSujeto;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pistola", type="boolean", nullable=false)
+     */
+    private $pistola;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foto", type="string", length=80, nullable=true)
+     */
+    private $foto;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=false)
+     */
+    private $activo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_producto_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlPresentacion
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlPresentacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_presentacion", referencedColumnName="id")
+     * })
+     */
+    private $idPresentacion;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlSubgrupo
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlSubgrupo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_subgrupo", referencedColumnName="id")
+     * })
+     */
+    private $idSubgrupo;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlMarca
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlMarca")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_marca", referencedColumnName="id")
+     * })
+     */
+    private $idMarca;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlGrupo
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlGrupo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_grupo", referencedColumnName="id")
+     * })
+     */
+    private $idGrupo;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlPuntoVenta
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlPuntoVenta")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_punto_venta", referencedColumnName="id")
+     * })
+     */
+    private $idPuntoVenta;
+
+
+}
+

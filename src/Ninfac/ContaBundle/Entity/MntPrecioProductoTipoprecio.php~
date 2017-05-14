@@ -1,0 +1,96 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MntPrecioProductoTipoprecio
+ *
+ * @ORM\Table(name="mnt_precio_producto_tipoprecio", indexes={@ORM\Index(name="IDX_AB2F658BF760EA80", columns={"id_producto"}), @ORM\Index(name="IDX_AB2F658B3FA73721", columns={"id_tipoprecio"})})
+ * @ORM\Entity
+ */
+class MntPrecioProductoTipoprecio
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="precio", type="decimal", precision=10, scale=4, nullable=false)
+     */
+    private $precio;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="porcentaje_descuento", type="integer", nullable=true)
+     */
+    private $porcentajeDescuento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="precio_fijo_minimo", type="decimal", precision=10, scale=4, nullable=true)
+     */
+    private $precioFijoMinimo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="mnt_precio_producto_tipoprecio_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipoprecio
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipoprecio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipoprecio", referencedColumnName="id")
+     * })
+     */
+    private $idTipoprecio;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlProducto
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlProducto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_producto", referencedColumnName="id")
+     * })
+     */
+    private $idProducto;
+
+
+}
+

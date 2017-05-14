@@ -1,0 +1,164 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FacAbonosCxc
+ *
+ * @ORM\Table(name="fac_abonos_cxc", indexes={@ORM\Index(name="IDX_F1CBE45B664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_F1CBE45BB803F873", columns={"id_tipoingreso"}), @ORM\Index(name="IDX_F1CBE45BE88F3A0E", columns={"id_punto_venta"}), @ORM\Index(name="IDX_F1CBE45B2A813255", columns={"id_cliente"}), @ORM\Index(name="IDX_F1CBE45B6AC8F6D3", columns={"id_banco_cheque"}), @ORM\Index(name="IDX_F1CBE45BD57EA380", columns={"id_banco_remesa"})})
+ * @ORM\Entity
+ */
+class FacAbonosCxc
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=true)
+     */
+    private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="referencia", type="string", length=10, nullable=true)
+     */
+    private $referencia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="monto_efectivo", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $montoEfectivo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="monto_cheque", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $montoCheque;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_cheque", type="string", length=25, nullable=true)
+     */
+    private $numeroCheque;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="monto_remesa", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $montoRemesa;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comentario", type="string", length=100, nullable=true)
+     */
+    private $comentario;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="fac_abonos_cxc_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlBanco
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlBanco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_banco_cheque", referencedColumnName="id")
+     * })
+     */
+    private $idBancoCheque;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlBanco
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlBanco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_banco_remesa", referencedColumnName="id")
+     * })
+     */
+    private $idBancoRemesa;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlCliente
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlCliente")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cliente", referencedColumnName="id")
+     * })
+     */
+    private $idCliente;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlPuntoVenta
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlPuntoVenta")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_punto_venta", referencedColumnName="id")
+     * })
+     */
+    private $idPuntoVenta;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlTipoingreso
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipoingreso")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipoingreso", referencedColumnName="id")
+     * })
+     */
+    private $idTipoingreso;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+
+}
+

@@ -1,0 +1,116 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * InvAbonosCxp
+ *
+ * @ORM\Table(name="inv_abonos_cxp", indexes={@ORM\Index(name="IDX_902A5EAA664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_902A5EAA96F5D4E9", columns={"id_proveedor"}), @ORM\Index(name="IDX_902A5EAA995BA0E1", columns={"id_banco"}), @ORM\Index(name="IDX_902A5EAA4B41C0C4", columns={"id_inventario_referencia"})})
+ * @ORM\Entity
+ */
+class InvAbonosCxp
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=true)
+     */
+    private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="monto", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $monto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comentario", type="string", length=100, nullable=true)
+     */
+    private $comentario;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="inv_abonos_cxp_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\InvInventario
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\InvInventario")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_inventario_referencia", referencedColumnName="id")
+     * })
+     */
+    private $idInventarioReferencia;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlBanco
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlBanco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_banco", referencedColumnName="id")
+     * })
+     */
+    private $idBanco;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\MntProveedor
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\MntProveedor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
+     * })
+     */
+    private $idProveedor;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+
+}
+

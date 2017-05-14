@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\MntClienteCuenta" table="mnt_cliente_cuenta">
+    <indexes>
+      <index name="IDX_CF83951C2DE7A93B" columns="id_cuenta_contable"/>
+      <index name="IDX_CF83951C2A813255" columns="id_cliente"/>
+      <index name="IDX_CF83951C664AF320" columns="id_empresa"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_cliente_cuenta_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="anio" type="string" column="anio" length="4" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCliente" target-entity="CtlCliente" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cliente" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCuentaContable" target-entity="CtlCuentacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cuenta_contable" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

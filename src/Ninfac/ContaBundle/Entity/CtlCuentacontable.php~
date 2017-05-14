@@ -1,0 +1,149 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlCuentacontable
+ *
+ * @ORM\Table(name="ctl_cuentacontable", indexes={@ORM\Index(name="IDX_4979B440664AF320", columns={"id_empresa"})})
+ * @ORM\Entity
+ */
+class CtlCuentacontable
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="anio", type="string", length=4, nullable=false)
+     */
+    private $anio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cuenta", type="string", length=20, nullable=false)
+     */
+    private $cuenta;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tipo_cuenta", type="string", length=2, nullable=false)
+     */
+    private $tipoCuenta;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="depende", type="string", length=20, nullable=false)
+     */
+    private $depende;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="agrupa", type="string", length=20, nullable=false)
+     */
+    private $agrupa;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nivel", type="integer", nullable=false)
+     */
+    private $nivel;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="niveld", type="integer", nullable=false)
+     */
+    private $niveld;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cargar", type="integer", nullable=false)
+     */
+    private $cargar;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tipo_2", type="integer", nullable=false)
+     */
+    private $tipo2;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="subcuenta", type="boolean", nullable=false)
+     */
+    private $subcuenta;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=false)
+     */
+    private $activo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     */
+    private $userAdd;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     */
+    private $dateAdd;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     */
+    private $userMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     */
+    private $dateMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_cuentacontable_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+
+}
+

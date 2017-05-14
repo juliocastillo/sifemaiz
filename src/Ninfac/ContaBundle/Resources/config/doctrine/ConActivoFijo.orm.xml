@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\ConActivoFijo" table="con_activo_fijo">
+    <indexes>
+      <index name="IDX_FA4F7CE3664AF320" columns="id_empresa"/>
+      <index name="IDX_FA4F7CE38DFCA0F1" columns="id_activo"/>
+      <index name="IDX_FA4F7CE3890253C7" columns="id_empleado"/>
+      <index name="IDX_FA4F7CE3DBDE0CDC" columns="id_oficina"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="con_activo_fijo_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <many-to-one field="idOficina" target-entity="CtlOficina" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_oficina" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpleado" target-entity="MntEmpleado" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empleado" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idActivo" target-entity="CtlActivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_activo" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

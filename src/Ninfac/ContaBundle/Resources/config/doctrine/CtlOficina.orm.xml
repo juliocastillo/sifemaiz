@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\CtlOficina" table="ctl_oficina">
+    <indexes>
+      <index name="IDX_F36D8D3FF8B09C83" columns="id_centrotrabajo"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="ctl_oficina_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="nombre" type="string" column="nombre" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">nombre de la oficina</option>
+      </options>
+    </field>
+    <many-to-one field="idCentrotrabajo" target-entity="CtlCentrotrabajo" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_centrotrabajo" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

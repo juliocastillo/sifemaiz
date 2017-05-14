@@ -1,0 +1,44 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlOficina
+ *
+ * @ORM\Table(name="ctl_oficina", indexes={@ORM\Index(name="IDX_F36D8D3FF8B09C83", columns={"id_centrotrabajo"})})
+ * @ORM\Entity
+ */
+class CtlOficina
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_oficina_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \Ninfac\ContaBundle\Entity\CtlCentrotrabajo
+     *
+     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlCentrotrabajo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_centrotrabajo", referencedColumnName="id")
+     * })
+     */
+    private $idCentrotrabajo;
+
+
+}
+

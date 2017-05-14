@@ -1,0 +1,34 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlPais
+ *
+ * @ORM\Table(name="ctl_pais")
+ * @ORM\Entity
+ */
+class CtlPais
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=80, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_pais_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+
+}
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ninfac\ContaBundle\Entity\CtlEmpresadetalle" table="ctl_empresadetalle">
+    <indexes>
+      <index name="IDX_5C948CE6325E299" columns="id_departamento"/>
+      <index name="IDX_5C948CE664AF320" columns="id_empresa"/>
+      <index name="IDX_5C948CE7EAD49C7" columns="id_municipio"/>
+      <index name="IDX_5C948CEF842EB5F" columns="id_tamanioempresa"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="ctl_empresadetalle_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="anio" type="string" column="anio" length="4" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nitRepresentante" type="string" column="nit_representante" length="14" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="representante" type="string" column="representante" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nitAuditor" type="string" column="nit_auditor" length="14" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="auditor" type="string" column="auditor" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nitContador" type="string" column="nit_contador" length="14" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contador" type="integer" column="contador" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nitPropietario" type="string" column="nit_propietario" length="14" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="duiPropietario" type="string" column="dui_propietario" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="propietario" type="string" column="propietario" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tamanioCtaMayor" type="smallint" column="tamanio_cta_mayor" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idTamanioempresa" target-entity="CtlTamanioempresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tamanioempresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idMunicipio" target-entity="CtlMunicipio" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_municipio" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idDepartamento" target-entity="CtlDepartamento" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_departamento" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
