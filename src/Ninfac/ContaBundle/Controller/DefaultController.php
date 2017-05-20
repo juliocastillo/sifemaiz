@@ -15,39 +15,42 @@ class DefaultController extends Controller
      * @Route("/", name="index", options={"expose"=true})
      * @Method("GET")
      */
-     /* utilizado para menu principal del sistema.
+     /* utilizado desplegar nombre de la empresa.
       *
       */
     public function indexAction(Request $request)
     {
-            $em = $this->getDoctrine()->getEntityManager();
-            $empresa_id = $request->get('empresa_id');
-            if ($empresa_id != NULL)
-            { //Solo sucede cuando se ha decidido abrir una empresa
-                $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
-                              ->find($empresa_id);
-                $this->get('session')->set('empresa_id', $empresa->getId());
-                $this->get('session')->set('empresa_nombre', $empresa->getNombre());
-            } else { // si se va a ingresar por primera vez o ya hay una empresa abierta
-                $empresa_id = $this->get('session')->get('empresa_id');
-                if (!$empresa_id){ //si no hay empresa abierta abrir la consolidadora
-                    $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
-                                  ->findOneBy(array('consolidadora' => TRUE));
-                } else { //sino hay empresa abierta abrir continuar con la misma
-                    $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
-                                  ->find($empresa_id);
-                }
-                if ($empresa){ //si la consulta retorna una empresa
-                    $this->get('session')->set('empresa_id', $empresa->getId());
-                    $this->get('session')->set('empresa_nombre', $empresa->getNombre());
-                } else { //si la consulta no retorne ninguna empresa.
-                    $this->get('session')->set('empresa_id', null);
-                    $this->get('session')->set('empresa_nombre', 'ninguna empresa consolidadora');
-                }
+        $em = $this->getDoctrine()->getEntityManager();
+        $empresa_id = $request->get('empresa_id');
+        $periodo_id = $request->get('periodo_id');
+        if ($empresa_id == NULL) // entrar por primera vez
+        {
+            // abrir empresa consolidadora por default
+            $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
+                          ->findOneBy(array('consolidadora' => TRUE));
+            if ($empresa){ //si la consulta retorna una empresa consolidadora
+              $this->get('session')->set('empresa_id', $empresa->getId());
+              $this->get('session')->set('empresa_nombre', $empresa->getNombre());
+            } else { //si la consulta no retorne ninguna empresa.
+              $this->get('session')->set('empresa_id', NULL);
+              $this->get('session')->set('empresa_nombre', 'Sin nombre');
             }
-
-        return $this->render('NinfacContaBundle:Default:index.html.twig', array(
-            'empresa' => $empresa->getNombre()
-        ));
+        }
+        else
+        { // abrir la empresa solicitada
+            $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
+                          ->find($empresa_id);
+            $this->get('session')->set('empresa_id', $empresa->getId());
+            $this->get('session')->set('empresa_nombre', $empresa->getNombre());
+            if ($periodo_id == NULL) //Reset periodo contable
+            {
+                $this->get('session')->set('periodo_id', NULL);
+            }
+            else // seleccionar periodo contable
+            {
+                $this->get('session')->set('periodo_id', (int) $periodo_id);
+            }
+        }
+        return $this->render('NinfacContaBundle:Default:index.html.twig');
     }
 }

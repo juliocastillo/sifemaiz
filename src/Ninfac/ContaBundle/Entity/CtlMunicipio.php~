@@ -13,16 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class CtlMunicipio
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nombre", type="string", length=80, nullable=false)
-     */
-    private $nombre;
-
-    /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      * @ORM\SequenceGenerator(sequenceName="ctl_municipio_id_seq", allocationSize=1, initialValue=1)
@@ -30,9 +23,16 @@ class CtlMunicipio
     private $id;
 
     /**
-     * @var \Ninfac\ContaBundle\Entity\CtlDepartamento
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlDepartamento")
+     * @ORM\Column(name="nombre", type="string", length=80, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var \CtlDepartamento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlDepartamento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_departamento", referencedColumnName="id")
      * })

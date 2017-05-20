@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="CtlPeriodocontable" table="ctl_periodocontable">
+    <indexes>
+      <index name="IDX_A8B8A7AF2851975" columns="id_anio"/>
+      <index name="IDX_A8B8A7AFF06CD65F" columns="id_mes"/>
+      <index name="IDX_A8B8A7AF664AF320" columns="id_empresa"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="ctl_periodocontable_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="activo" type="boolean" column="activo" nullable="true"/>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idMes" target-entity="CtlMes" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_mes" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idAnio" target-entity="CtlAnio" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_anio" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

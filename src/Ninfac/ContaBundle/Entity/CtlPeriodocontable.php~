@@ -1,0 +1,64 @@
+<?php
+
+namespace Ninfac\ContaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlPeriodocontable
+ *
+ * @ORM\Table(name="ctl_periodocontable", indexes={@ORM\Index(name="IDX_A8B8A7AF2851975", columns={"id_anio"}), @ORM\Index(name="IDX_A8B8A7AFF06CD65F", columns={"id_mes"}), @ORM\Index(name="IDX_A8B8A7AF664AF320", columns={"id_empresa"})})
+ * @ORM\Entity
+ */
+class CtlPeriodocontable
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_periodocontable_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
+     * @var \CtlAnio
+     *
+     * @ORM\ManyToOne(targetEntity="CtlAnio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_anio", referencedColumnName="id")
+     * })
+     */
+    private $idAnio;
+
+    /**
+     * @var \CtlMes
+     *
+     * @ORM\ManyToOne(targetEntity="CtlMes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_mes", referencedColumnName="id")
+     * })
+     */
+    private $idMes;
+
+    /**
+     * @var \CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
+     * })
+     */
+    private $idEmpresa;
+
+
+}
+

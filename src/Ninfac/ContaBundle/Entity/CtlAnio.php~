@@ -5,12 +5,12 @@ namespace Ninfac\ContaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CtlTamanioempresa
+ * CtlAnio
  *
- * @ORM\Table(name="ctl_tamanioempresa")
+ * @ORM\Table(name="ctl_anio")
  * @ORM\Entity
  */
-class CtlTamanioempresa
+class CtlAnio
 {
     /**
      * @var integer
@@ -18,14 +18,14 @@ class CtlTamanioempresa
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="ctl_tamanioempresa_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="ctl_anio_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=80, nullable=true)
+     * @ORM\Column(name="nombre", type="string", length=4, nullable=true)
      */
     private $nombre;
 

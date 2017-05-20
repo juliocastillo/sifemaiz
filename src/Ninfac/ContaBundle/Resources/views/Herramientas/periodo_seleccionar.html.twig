@@ -1,5 +1,6 @@
 {% extends 'layout.html.twig' %}
-    {% block head %}<title>{{'Empresa'}}</title>{% endblock %}
+
+    {% block head %}<title>{{app.session.get('empresa_nombre')}}</title>{% endblock %}
 
     {% block stylesheets %}
         {{ parent() }}
@@ -25,24 +26,24 @@
     {% block body %}
         {{ parent() }}
         <form>
-        <h4>Seleccionar empresa</h4>
+        <h4>Seleccionar Periodo Contable</h4>
         <div class="panel panel-success center-block">
             <div class="panel-body">
                 <table id="mytable" class="demo compac" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                <th>ID</th>
-                <th>Nombre</th>
+                <th>Mes</th>
+                <th>Anio</th>
                 <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% set i = 1 %}
-                {% for empresa in empresas %}
+                {% for periodo in periodos %}
                 <tr>
-                <td>{{ i }}</td>
-                <td>{{ empresa.nombre }}</td>
-                <td><a href="{{ path('index', {'empresa_id': empresa.id }) }}" class="btn btn-success">Abrir</a></td>
+                <td>{{ periodo.idmes }}</td>
+                <td>{{ periodo.idanio }}</td>
+                <td><a href="{{ path('index', {'empresa_id': app.session.get('empresa_id'), 'periodo_id': periodo.id }) }}" class="btn btn-success">Abrir</a></td>
                 </tr>
                 {% set i = i + 1 %}
                 {% endfor %}

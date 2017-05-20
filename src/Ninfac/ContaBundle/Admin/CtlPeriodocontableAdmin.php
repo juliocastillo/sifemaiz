@@ -7,10 +7,10 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-use Sonata\AdminBundle\Route\RouteCollection;
-
-class CtlEmpresaAdmin extends AbstractAdmin
+class CtlPeriodocontableAdmin extends AbstractAdmin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -18,11 +18,9 @@ class CtlEmpresaAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('origen')
-            ->add('nombre')
-            ->add('registro')
-            ->add('nit')
-            ->add('consolidadora')
+            ->add('idEmpresa')
+            ->add('idAnio')
+            ->add('idMes')
         ;
     }
 
@@ -32,12 +30,10 @@ class CtlEmpresaAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('origen')
-            ->add('nombre')
-            ->add('registro')
-            ->add('nit')
-            ->add('consolidadora')
-            ->add('activo')
+            ->add('idAnio')
+            ->add('idMes')
+            ->add('activo',NULL,array('editable'=>TRUE))
+            ->add('idEmpresa')
             ->add('_action', null, array(
                 'actions' => array(
                     'show' => array(),
@@ -57,12 +53,8 @@ class CtlEmpresaAdmin extends AbstractAdmin
         $id = $entity->getId();
 
         $formMapper
-            ->add('origen')
-            ->add('nombre')
-            ->add('registro')
-            ->add('nit')
-            ->add('consolidadora')
-            ->add('anioInicial','string')
+        ->add('idAnio')
+        ->add('idMes')
         ;
         if ($id) {  // cuando se edite el registro
             if ($entity->getActivo() == TRUE) { // si el registro esta activo
@@ -85,12 +77,9 @@ class CtlEmpresaAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('origen')
-            ->add('nombre')
-            ->add('registro')
-            ->add('nit')
-            ->add('consolidadora')
-            ->add('activo')
+            ->add('id')
+            ->add('idAnio')
+            ->add('idMes')
         ;
     }
 
@@ -102,27 +91,10 @@ class CtlEmpresaAdmin extends AbstractAdmin
        */
 
       public function prePersist($val) {
-          $userId = $this->getConfigurationPool()
-                         ->getContainer()->get('security.token_storage')
-                         ->getToken()->getUser()
-                         ->getId();
-          $val->setCreatedBy($userId);
-          $val->setCreatedAt(new \DateTime());
-      }
-
-      /*
-       * Metodo que se ejecuta antes de realizar una actualizacion.
-       * Recibe como parametro una entidad;
-       * con los valores del formulario.
-       *
-       */
-
-      public function preUpdate($val) {
-          $userId = $this->getConfigurationPool()
-                         ->getContainer()->get('security.token_storage')
-                         ->getToken()->getUser()
-                         ->getId();
-          $val->setUpdatedBy($userId);
-          $val->setUpdatedAt(new \DateTime());
+          $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getEntityManager();
+          $empresa_id = $this->getRequest()->getSession()->get('empresa_id');
+          $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
+                        ->find($empresa_id);
+          $val->setIdEmpresa($empresa);
       }
 }

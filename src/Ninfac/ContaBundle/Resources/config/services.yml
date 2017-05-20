@@ -7,3 +7,15 @@ services:
         arguments: [~, Ninfac\ContaBundle\Entity\CtlEmpresa, SonataAdminBundle:CRUD]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: CtlEmpresa }
+
+    ninfac_conta.admin.ctl_anio:
+        class: Ninfac\ContaBundle\Admin\CtlAnioAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlAnio, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CtlAnio }
+
+    ninfac_conta.admin.ctl_periodocontable:
+        class: Ninfac\ContaBundle\Admin\CtlPeriodocontableAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlPeriodocontable, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CtlPeriodocontable }
