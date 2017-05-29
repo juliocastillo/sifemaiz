@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="CtlEmpresa" table="ctl_empresa">
+    <indexes>
+      <index name="IDX_4EF972C332AAAC2C" columns="id_anioinicio"/>
+    </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="SEQUENCE"/>
       <sequence-generator sequence-name="ctl_empresa_id_seq" allocation-size="1" initial-value="1"/>
@@ -47,5 +50,10 @@
       </options>
     </field>
     <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <many-to-one field="idAnioinicio" target-entity="CtlAnio" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_anioinicio" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
   </entity>
 </doctrine-mapping>

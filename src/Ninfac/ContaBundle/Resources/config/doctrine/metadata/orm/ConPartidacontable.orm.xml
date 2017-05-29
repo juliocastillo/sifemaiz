@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ConPartidacontable" table="con_partidacontable">
+    <indexes>
+      <index name="IDX_49C6AC6DD598460" columns="id_tipopartida"/>
+      <index name="IDX_49C6AC62B2B0C0A" columns="id_formapartida"/>
+      <index name="IDX_49C6AC6664AF320" columns="id_empresa"/>
+      <index name="IDX_49C6AC62851975" columns="id_anio"/>
+      <index name="IDX_49C6AC6E6696175" columns="id_periodocontable"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="con_partidacontable_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="numero" type="integer" column="numero" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">numero de partida compuesto por origen de la empres ay un numero correlativo por empresa</option>
+      </options>
+    </field>
+    <field name="corrAnual" type="integer" column="corr_anual" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="corrMensual" type="integer" column="corr_mensual" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="corrTipo" type="integer" column="corr_tipo" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fecha" type="datetime" column="fecha" nullable="false"/>
+    <field name="concepto" type="string" column="concepto" length="150" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="totalDebe" type="decimal" column="total_debe" precision="12" scale="2" nullable="false"/>
+    <field name="totalHaber" type="decimal" column="total_haber" precision="12" scale="2" nullable="false"/>
+    <field name="activo" type="boolean" column="activo" nullable="true"/>
+    <field name="createdBy" type="integer" column="created_by" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
+    <field name="modifiedBy" type="integer" column="modified_by" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="modifiedAt" type="datetime" column="modified_at" nullable="true"/>
+    <many-to-one field="idPeriodocontable" target-entity="CtlPeriodocontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_periodocontable" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idAnio" target-entity="CtlAnio" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_anio" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idFormapartida" target-entity="CtlFormapartida" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_formapartida" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipopartida" target-entity="CtlTipopartida" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipopartida" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

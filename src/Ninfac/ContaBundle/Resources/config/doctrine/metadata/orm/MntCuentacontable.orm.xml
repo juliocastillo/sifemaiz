@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="MntCuentacontable" table="mnt_cuentacontable">
+    <indexes>
+      <index name="IDX_E01D413C2851975" columns="id_anio"/>
+      <index name="IDX_E01D413C664AF320" columns="id_empresa"/>
+      <index name="IDX_E01D413CD2F96457" columns="id_tipocuenta_contable"/>
+      <index name="IDX_E01D413C18C9494C" columns="id_tipocuenta"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_cuentacontable_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="cuenta" type="string" column="cuenta" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="nombre" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="depende" type="string" column="depende" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">cuenta de la que depende</option>
+      </options>
+    </field>
+    <field name="nivel" type="integer" column="nivel" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Nivel en base al tipo de cuenta</option>
+      </options>
+    </field>
+    <field name="niveld" type="integer" column="niveld" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Nivel en base a digitos de la cuenta</option>
+      </options>
+    </field>
+    <field name="cargar" type="integer" column="cargar" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="subcuenta" type="boolean" column="subcuenta" nullable="true"/>
+    <field name="activo" type="boolean" column="activo" nullable="false"/>
+    <field name="createdBy" type="integer" column="created_by" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
+    <field name="modifiedBy" type="integer" column="modified_by" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="modifiedAt" type="datetime" column="modified_at" nullable="true"/>
+    <many-to-one field="idTipocuenta" target-entity="CtlTipocuenta" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipocuenta" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipocuentaContable" target-entity="CtlTipocuentaContable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipocuenta_contable" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idAnio" target-entity="CtlAnio" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_anio" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

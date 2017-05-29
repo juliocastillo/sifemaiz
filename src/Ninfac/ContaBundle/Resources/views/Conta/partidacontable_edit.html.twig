@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+    {% block head %}<title>{{app.session.get('empresa_nombre')}}</title>{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('bundles/app/js/jquery.dataTables.min.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                $('#mytable').DataTable({
+                    paging    : false,
+                    scrollY   : 225,
+                    searching : true,
+                    ordering  : false,
+                    select    : false
+                });
+            });
+        </script
+    {% endblock %}
+
+    {% block body %}
+        {{ parent() }}
+        {% include 'NinfacContaBundle:Conta:form650x.html.twig' %}
+        {{ form_start(form) }}
+            {{ form_row(form.numero) }}
+                <button type="submit">Register!</button>
+        {{ form_end(form) }}
+
+
+
+
+    {% endblock %}

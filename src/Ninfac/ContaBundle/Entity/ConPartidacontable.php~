@@ -7,17 +7,20 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ConPartidacontable
  *
- * @ORM\Table(name="con_partidacontable", indexes={@ORM\Index(name="IDX_49C6AC6664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_49C6AC6DD598460", columns={"id_tipopartida"}), @ORM\Index(name="IDX_49C6AC62B2B0C0A", columns={"id_formapartida"})})
+ * @ORM\Table(name="con_partidacontable", indexes={@ORM\Index(name="IDX_49C6AC6DD598460", columns={"id_tipopartida"}), @ORM\Index(name="IDX_49C6AC62B2B0C0A", columns={"id_formapartida"}), @ORM\Index(name="IDX_49C6AC6664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_49C6AC62851975", columns={"id_anio"}), @ORM\Index(name="IDX_49C6AC6E6696175", columns={"id_periodocontable"})})
  * @ORM\Entity
  */
 class ConPartidacontable
 {
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="anio", type="string", length=4, nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="con_partidacontable_id_seq", allocationSize=1, initialValue=1)
      */
-    private $anio;
+    private $id;
 
     /**
      * @var integer
@@ -50,7 +53,7 @@ class ConPartidacontable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha", type="date", nullable=false)
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
      */
     private $fecha;
 
@@ -85,55 +88,35 @@ class ConPartidacontable
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_add", type="integer", nullable=false)
+     * @ORM\Column(name="created_by", type="integer", nullable=false)
      */
-    private $userAdd;
+    private $createdBy;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $dateAdd;
+    private $createdAt;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_mod", type="integer", nullable=true)
+     * @ORM\Column(name="modified_by", type="integer", nullable=true)
      */
-    private $userMod;
+    private $modifiedBy;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_mod", type="datetime", nullable=true)
+     * @ORM\Column(name="modified_at", type="datetime", nullable=true)
      */
-    private $dateMod;
+    private $modifiedAt;
 
     /**
-     * @var integer
+     * @var \CtlTipopartida
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="con_partidacontable_id_seq", allocationSize=1, initialValue=1)
-     */
-    private $id;
-
-    /**
-     * @var \Ninfac\ContaBundle\Entity\CtlFormapartida
-     *
-     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlFormapartida")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_formapartida", referencedColumnName="id")
-     * })
-     */
-    private $idFormapartida;
-
-    /**
-     * @var \Ninfac\ContaBundle\Entity\CtlTipopartida
-     *
-     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlTipopartida")
+     * @ORM\ManyToOne(targetEntity="CtlTipopartida")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_tipopartida", referencedColumnName="id")
      * })
@@ -141,14 +124,44 @@ class ConPartidacontable
     private $idTipopartida;
 
     /**
-     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     * @var \CtlFormapartida
      *
-     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\ManyToOne(targetEntity="CtlFormapartida")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_formapartida", referencedColumnName="id")
+     * })
+     */
+    private $idFormapartida;
+
+    /**
+     * @var \CtlEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="CtlEmpresa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
      * })
      */
     private $idEmpresa;
+
+    /**
+     * @var \CtlAnio
+     *
+     * @ORM\ManyToOne(targetEntity="CtlAnio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_anio", referencedColumnName="id")
+     * })
+     */
+    private $idAnio;
+
+    /**
+     * @var \CtlPeriodocontable
+     *
+     * @ORM\ManyToOne(targetEntity="CtlPeriodocontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_periodocontable", referencedColumnName="id")
+     * })
+     */
+    private $idPeriodocontable;
 
 
 }

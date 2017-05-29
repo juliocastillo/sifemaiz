@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlEmpresa
  *
- * @ORM\Table(name="ctl_empresa")
+ * @ORM\Table(name="ctl_empresa", indexes={@ORM\Index(name="IDX_4EF972C332AAAC2C", columns={"id_anioinicio"})})
  * @ORM\Entity
  */
 class CtlEmpresa
@@ -91,6 +91,16 @@ class CtlEmpresa
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @var \CtlAnio
+     *
+     * @ORM\ManyToOne(targetEntity="CtlAnio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_anioinicio", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $idAnioinicio;
 
 
 
@@ -344,10 +354,32 @@ class CtlEmpresa
         return $this->updatedAt;
     }
 
+    /**
+     * Set idAnioinicio
+     *
+     * @param \Ninfac\ContaBundle\Entity\CtlAnio $idAnioinicio
+     *
+     * @return CtlEmpresa
+     */
+    public function setIdAnioinicio(\Ninfac\ContaBundle\Entity\CtlAnio $idAnioinicio = null)
+    {
+        $this->idAnioinicio = $idAnioinicio;
+
+        return $this;
+    }
+
+    /**
+     * Get idAnioinicio
+     *
+     * @return \Ninfac\ContaBundle\Entity\CtlAnio
+     */
+    public function getIdAnioinicio()
+    {
+        return $this->idAnioinicio;
+    }
 
     public function __toString()
     {
         return (string) $this->nombre;
     }
-
 }

@@ -5,7 +5,6 @@
     {% block stylesheets %}
         {{ parent() }}
         <link rel="stylesheet" href="{{ asset('bundles/app/css/jquery.dataTables.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/app/css/form650x450.css') }}">
     {% endblock %}
 
     {% block javascripts %}
@@ -25,11 +24,13 @@
     {% endblock %}
     {% block body %}
         {{ parent() }}
-        <form>
-        <h4>Seleccionar Periodo Contable</h4>
-        <div class="panel panel-success center-block">
-            <div class="panel-body">
-                <table id="mytable" class="demo compac" cellspacing="0" width="100%">
+        <div class="panel panel-primary box box-info center-block" style="width: 650px;">
+            <div class="panel-heading box-header with-border">
+                <text class="box-title">&nbsp&nbsp<span class="glyphicon glyphicon-check"></span> Seleccionar empresa</text>
+            </div>
+            <form action="" class="form-horizontal" method="post">
+                <div class="panel-body box-body">
+                <table id="mytable" class="cell border" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                 <th>Mes</th>
@@ -41,9 +42,9 @@
                 {% set i = 1 %}
                 {% for periodo in periodos %}
                 <tr>
-                <td>{{ periodo.idmes }}</td>
-                <td>{{ periodo.idanio }}</td>
-                <td><a href="{{ path('index', {'empresa_id': app.session.get('empresa_id'), 'periodo_id': periodo.id }) }}" class="btn btn-success">Abrir</a></td>
+                <td style="padding:2px;">{{ periodo.idmes }}</td>
+                <td style="padding:2px;">{{ periodo.idanio }}</td>
+                <td style="padding:2px;"><a href="{{ path('index', {'empresa_id': app.session.get('empresa_id'), 'periodo_id': periodo.id }) }}" class="btn btn-success">Abrir</a></td>
                 </tr>
                 {% set i = i + 1 %}
                 {% endfor %}

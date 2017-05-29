@@ -5,12 +5,12 @@ namespace Ninfac\ContaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CtlFormapartida
+ * CtlTipocontable
  *
- * @ORM\Table(name="ctl_formapartida")
+ * @ORM\Table(name="ctl_tipocontable")
  * @ORM\Entity
  */
-class CtlFormapartida
+class CtlTipocontable
 {
     /**
      * @var integer
@@ -18,14 +18,14 @@ class CtlFormapartida
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="ctl_formapartida_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="ctl_tipocontable_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=40, nullable=true)
+     * @ORM\Column(name="nombre", type="string", length=30, nullable=true)
      */
     private $nombre;
 

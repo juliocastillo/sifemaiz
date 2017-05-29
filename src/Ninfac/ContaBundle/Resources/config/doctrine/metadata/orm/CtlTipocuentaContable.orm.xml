@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="CtlTipocuentaContable" table="ctl_tipocuenta_contable">
+    <indexes>
+      <index name="IDX_7754F913DE7E3" columns="id_tipocontable"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="ctl_tipocuenta_contable_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="nombre" type="string" column="nombre" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idTipocontable" target-entity="CtlTipocontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipocontable" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
