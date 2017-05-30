@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -27,20 +29,26 @@ class ContaController extends Controller
     public function contaPartidacontableEditAction(Request $request)
     {
 
-        $task = new ConPartidacontable();
-        $task->setNumero(25);
-        $task->setCreatedAt(new \DateTime('tomorrow'));
+        $classForm = new ConPartidacontable();
+        $classForm->setFecha(new \DateTime('tomorrow'));
 
-        $form = $this->createFormBuilder($task)
-            ->add('numero', TextType::class)
-            ->add('createdAt', DateType::class)
+        $form = $this->createFormBuilder($classForm)
+            ->add('idTipopartida', 'entity', array(
+                'class' => 'NinfacContaBundle:CtlTipopartida',
+                'property' => 'nombre'
+            ))
+            ->add('corrAnual', IntegerType::class)
+            ->add('corrMensual', IntegerType::class)
+            ->add('corrTipo', IntegerType::class)
+            ->add('fecha', DateType::class)
+            ->add('concepto', TextType::class)
             ->add('save', SubmitType::class, array('label' => 'Guardar'))
             ->getForm();
 
         return $this->render('NinfacContaBundle:Conta:partidacontable_edit.html.twig', array(
             'form' => $form->createView(),
             'titulo' => 'Partida contable',
-            'icon'   => 'glyphicon glyphicon-usd',
+            'icon'   => 'fa fa-list-alt',
             'with'   => '860px'
         ));
         // $em = $this->getDoctrine()->getEntityManager();
