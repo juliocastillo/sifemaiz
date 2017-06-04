@@ -89,21 +89,21 @@ class MntCuentacontableAdmin extends AbstractAdmin
     * permitir cuztomizar las acciones edit, create o show
     */
 
-
-    public function getTemplate($name) {
-        switch ($name) {
-            case 'edit':
-                $entity = $this->getSubject();   //obtiene el elemento seleccionado en un objeto
-                $id = $entity->getId();
-                if ($id)  // cuando se edite el registro
-                    return 'NinfacContaBundle:CRUD:FacFacturaAdmin/edit.html.twig';
-                else
-                    return 'BundlesFacturaBundle:CRUD:FacFacturaAdmin/create.html.twig';
-                break;
-            default:
-                return parent::getTemplate($name);
-                break;
-        }
-    }
+    //
+    // public function getTemplate($name) {
+    //     switch ($name) {
+    //         case 'edit':
+    //             $entity = $this->getSubject();   //obtiene el elemento seleccionado en un objeto
+    //             $id = $entity->getId();
+    //             if ($id)  // cuando se edite el registro
+    //                 return 'NinfacContaBundle:CRUD:FacFacturaAdmin/edit.html.twig';
+    //             else
+    //                 return 'BundlesFacturaBundle:CRUD:FacFacturaAdmin/create.html.twig';
+    //             break;
+    //         default:
+    //             return parent::getTemplate($name);
+    //             break;
+    //     }
+    // }
 
 }

@@ -21,34 +21,42 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $empresa_id = $request->get('empresa_id');
-        $periodo_id = $request->get('periodo_id');
-        if ($empresa_id == NULL) // entrar por primera vez
+        $empresaId = $request->get('empresaId');
+        $periodoId = $request->get('periodoId');
+        if ($empresaId == NULL) // entrar por primera vez
         {
             // abrir empresa consolidadora por default
             $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
                           ->findOneBy(array('consolidadora' => TRUE));
             if ($empresa){ //si la consulta retorna una empresa consolidadora
-              $this->get('session')->set('empresa_id', $empresa->getId());
-              $this->get('session')->set('empresa_nombre', $empresa->getNombre());
+              $this->get('session')->set('empresaId', $empresa->getId());
+              $this->get('session')->set('empresaNombre', $empresa->getNombre());
             } else { //si la consulta no retorne ninguna empresa.
-              $this->get('session')->set('empresa_id', NULL);
-              $this->get('session')->set('empresa_nombre', 'Sin nombre');
+              $this->get('session')->set('empresaId', NULL);
+              $this->get('session')->set('empresaNombre', 'Sin nombre');
             }
         }
         else
         { // abrir la empresa solicitada
             $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
-                          ->find($empresa_id);
-            $this->get('session')->set('empresa_id', $empresa->getId());
-            $this->get('session')->set('empresa_nombre', $empresa->getNombre());
-            if ($periodo_id == NULL) //Reset periodo contable
+                          ->find($empresaId);
+            $this->get('session')->set('empresaId', $empresa->getId());
+            $this->get('session')->set('empresaNombre', $empresa->getNombre());
+            if ($periodoId == NULL) //Reset periodo contable
             {
-                $this->get('session')->set('periodo_id', NULL);
+                $this->get('session')->set('periodoId', NULL);
+                $this->get('session')->set('anioId', NULL);
+                $this->get('session')->set('mesId', NULL);
             }
             else // seleccionar periodo contable
             {
-                $this->get('session')->set('periodo_id', (int) $periodo_id);
+                $periodo = $em->getRepository('NinfacContaBundle:CtlPeriodocontable')
+                              ->find($periodoId);
+                $anioId  = $periodo->getIdAnio();
+                $mesId  = $periodo->getIdMes();
+                $this->get('session')->set('periodoId', (int) $periodoId);
+                $this->get('session')->set('anioId', $anioId);
+                $this->get('session')->set('mesId', $mesId);
             }
         }
         return $this->render('NinfacContaBundle:Default:index.html.twig');

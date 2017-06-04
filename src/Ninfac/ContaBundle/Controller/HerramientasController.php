@@ -41,10 +41,10 @@ class HerramientasController extends Controller
      */
     public function contaPeriodoSelectAction()
     {
-        $empresa_id = $this->get('session')->get('empresa_id');
-        // var_dump($empresa_id); exit();
+        $empresaId = $this->get('session')->get('empresaId');
+        // var_dump($empresaId); exit();
         $em = $this->getDoctrine()->getEntityManager();
-        $periodos = $em->getRepository('NinfacContaBundle:CtlPeriodocontable')->findBy(array('idEmpresa'=>$empresa_id, 'activo'=>true));
+        $periodos = $em->getRepository('NinfacContaBundle:CtlPeriodocontable')->findBy(array('idEmpresa'=>$empresaId, 'activo'=>true));
         return $this->render('NinfacContaBundle:Herramientas:periodo_seleccionar.html.twig', array(
             'periodos' => $periodos
         ));

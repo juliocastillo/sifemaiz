@@ -7,22 +7,25 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ConPartidacontableDetalle
  *
- * @ORM\Table(name="con_partidacontable_detalle", indexes={@ORM\Index(name="IDX_F85AB0AE4D0513AD", columns={"id_partidacontable"}), @ORM\Index(name="IDX_F85AB0AE664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_F85AB0AE9C3C3AA2", columns={"id_cuentacontable"})})
+ * @ORM\Table(name="con_partidacontable_detalle", indexes={@ORM\Index(name="IDX_F85AB0AE2851975", columns={"id_anio"}), @ORM\Index(name="IDX_F85AB0AE9C3C3AA2", columns={"id_cuentacontable"}), @ORM\Index(name="IDX_F85AB0AE664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_F85AB0AE4D0513AD", columns={"id_partidacontable"})})
  * @ORM\Entity
  */
 class ConPartidacontableDetalle
 {
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="anio", type="string", length=4, nullable=true)
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="con_partidacontable_detalle_id_seq", allocationSize=1, initialValue=1)
      */
-    private $anio;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle", type="string", length=200, nullable=true)
+     * @ORM\Column(name="detalle", type="string", length=200, nullable=false)
      */
     private $detalle;
 
@@ -41,19 +44,19 @@ class ConPartidacontableDetalle
     private $haber;
 
     /**
-     * @var integer
+     * @var \CtlAnio
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="con_partidacontable_detalle_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\ManyToOne(targetEntity="CtlAnio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_anio", referencedColumnName="id")
+     * })
      */
-    private $id;
+    private $idAnio;
 
     /**
-     * @var \Ninfac\ContaBundle\Entity\CtlCuentacontable
+     * @var \MntCuentacontable
      *
-     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlCuentacontable")
+     * @ORM\ManyToOne(targetEntity="MntCuentacontable")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_cuentacontable", referencedColumnName="id")
      * })
@@ -61,9 +64,9 @@ class ConPartidacontableDetalle
     private $idCuentacontable;
 
     /**
-     * @var \Ninfac\ContaBundle\Entity\CtlEmpresa
+     * @var \CtlEmpresa
      *
-     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\CtlEmpresa")
+     * @ORM\ManyToOne(targetEntity="CtlEmpresa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_empresa", referencedColumnName="id")
      * })
@@ -71,9 +74,9 @@ class ConPartidacontableDetalle
     private $idEmpresa;
 
     /**
-     * @var \Ninfac\ContaBundle\Entity\ConPartidacontable
+     * @var \ConPartidacontable
      *
-     * @ORM\ManyToOne(targetEntity="Ninfac\ContaBundle\Entity\ConPartidacontable")
+     * @ORM\ManyToOne(targetEntity="ConPartidacontable")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_partidacontable", referencedColumnName="id")
      * })
