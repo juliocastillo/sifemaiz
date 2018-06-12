@@ -153,17 +153,6 @@ class ConPartidacontable
      */
     private $idAnio;
 
-    /**
-     * @var \CtlPeriodocontable
-     *
-     * @ORM\ManyToOne(targetEntity="CtlPeriodocontable")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_periodocontable", referencedColumnName="id")
-     * })
-     */
-    private $idPeriodocontable;
-
-
 
     /**
      * Get id
@@ -581,29 +570,5 @@ class ConPartidacontable
     public function getIdAnio()
     {
         return $this->idAnio;
-    }
-
-    /**
-     * Set idPeriodocontable
-     *
-     * @param \Ninfac\ContaBundle\Entity\CtlPeriodocontable $idPeriodocontable
-     *
-     * @return ConPartidacontable
-     */
-    public function setIdPeriodocontable(\Ninfac\ContaBundle\Entity\CtlPeriodocontable $idPeriodocontable = null)
-    {
-        $this->idPeriodocontable = $idPeriodocontable;
-
-        return $this;
-    }
-
-    /**
-     * Get idPeriodocontable
-     *
-     * @return \Ninfac\ContaBundle\Entity\CtlPeriodocontable
-     */
-    public function getIdPeriodocontable()
-    {
-        return $this->idPeriodocontable;
     }
 }
