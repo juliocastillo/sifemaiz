@@ -8,53 +8,54 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class CtlAnioAdmin extends AbstractAdmin
-{
+class CtlAnioAdmin extends AbstractAdmin {
+
     /**
      * @param DatagridMapper $datagridMapper
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
         $datagridMapper
-            ->add('nombre')
+                ->add('nombre')
         ;
     }
 
     /**
      * @param ListMapper $listMapper
      */
-    protected function configureListFields(ListMapper $listMapper)
-    {
+    protected function configureListFields(ListMapper $listMapper) {
         $listMapper
-            ->add('nombre')
-            ->add('_action', null, array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
+                ->add('nombre')
+                ->add('_action', null, array(
+                    'actions' => array(
+                        'show' => array(),
+                        'edit' => array(),
+                        'delete' => array(),
+                    ),
+                ))
         ;
     }
 
     /**
      * @param FormMapper $formMapper
      */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
+    protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-            ->add('nombre')
+                ->add('nombre', null, array(
+                    'label' => 'Año'
+                        )
+                )
+
         ;
     }
 
     /**
      * @param ShowMapper $showMapper
      */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
+    protected function configureShowFields(ShowMapper $showMapper) {
         $showMapper
-            ->add('id')
-            ->add('nombre')
+                ->add('id')
+                ->add('nombre')
         ;
     }
+
 }

@@ -25,14 +25,14 @@ class ConPartidacontableDetalle
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle", type="string", length=200, nullable=false)
+     * @ORM\Column(name="concepto", type="string", length=200, nullable=false)
      */
-    private $detalle;
+    private $concepto;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="debe", type="decimal", precision=12, scale=2, nullable=true)
+     * @ORM\Column(name="debe", type="decimal", precision=12, scale=2, nullable=false)
      */
     private $debe;
 
@@ -42,6 +42,34 @@ class ConPartidacontableDetalle
      * @ORM\Column(name="haber", type="decimal", precision=12, scale=2, nullable=true)
      */
     private $haber;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="created_by", type="integer", nullable=false)
+     */
+    private $createdBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="updated_by", type="integer", nullable=true)
+     */
+    private $updatedBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @var \CtlAnio
@@ -96,27 +124,27 @@ class ConPartidacontableDetalle
     }
 
     /**
-     * Set detalle
+     * Set concepto
      *
-     * @param string $detalle
+     * @param string $concepto
      *
      * @return ConPartidacontableDetalle
      */
-    public function setDetalle($detalle)
+    public function setConcepto($concepto)
     {
-        $this->detalle = $detalle;
+        $this->concepto = $concepto;
 
         return $this;
     }
 
     /**
-     * Get detalle
+     * Get concepto
      *
      * @return string
      */
-    public function getDetalle()
+    public function getConcepto()
     {
-        return $this->detalle;
+        return $this->concepto;
     }
 
     /**
@@ -165,6 +193,102 @@ class ConPartidacontableDetalle
     public function getHaber()
     {
         return $this->haber;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param integer $createdBy
+     *
+     * @return ConPartidacontableDetalle
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return integer
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return ConPartidacontableDetalle
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedBy
+     *
+     * @param integer $updatedBy
+     *
+     * @return ConPartidacontableDetalle
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedBy
+     *
+     * @return integer
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return ConPartidacontableDetalle
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     /**

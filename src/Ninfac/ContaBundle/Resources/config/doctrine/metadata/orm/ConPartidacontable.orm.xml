@@ -2,16 +2,16 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="ConPartidacontable" table="con_partidacontable">
     <indexes>
-      <index name="IDX_49C6AC6DD598460" columns="id_tipopartida"/>
-      <index name="IDX_49C6AC62B2B0C0A" columns="id_formapartida"/>
       <index name="IDX_49C6AC6664AF320" columns="id_empresa"/>
+      <index name="IDX_49C6AC63468F610" columns="id_forma_partida"/>
       <index name="IDX_49C6AC62851975" columns="id_anio"/>
-      <index name="IDX_49C6AC6E6696175" columns="id_periodocontable"/>
+      <index name="IDX_49C6AC699F90CDE" columns="id_tipo_partida"/>
     </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="SEQUENCE"/>
       <sequence-generator sequence-name="con_partidacontable_id_seq" allocation-size="1" initial-value="1"/>
     </id>
+    <field name="fecha" type="datetime" column="fecha" nullable="false"/>
     <field name="numero" type="integer" column="numero" nullable="false">
       <options>
         <option name="unsigned"/>
@@ -33,30 +33,35 @@
         <option name="unsigned"/>
       </options>
     </field>
-    <field name="fecha" type="datetime" column="fecha" nullable="false"/>
     <field name="concepto" type="string" column="concepto" length="150" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="totalDebe" type="decimal" column="total_debe" precision="12" scale="2" nullable="false"/>
-    <field name="totalHaber" type="decimal" column="total_haber" precision="12" scale="2" nullable="false"/>
+    <field name="totalDebe" type="decimal" column="total_debe" precision="12" scale="2" nullable="true"/>
+    <field name="totalHaber" type="decimal" column="total_haber" precision="12" scale="2" nullable="true"/>
     <field name="activo" type="boolean" column="activo" nullable="true"/>
+    <field name="partidaInicial" type="boolean" column="partida_inicial" nullable="true"/>
     <field name="createdBy" type="integer" column="created_by" nullable="false">
       <options>
         <option name="unsigned"/>
       </options>
     </field>
     <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
-    <field name="modifiedBy" type="integer" column="modified_by" nullable="true">
+    <field name="updatedBy" type="integer" column="updated_by" nullable="true">
       <options>
         <option name="unsigned"/>
       </options>
     </field>
-    <field name="modifiedAt" type="datetime" column="modified_at" nullable="true"/>
-    <many-to-one field="idPeriodocontable" target-entity="CtlPeriodocontable" fetch="LAZY">
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
       <join-columns>
-        <join-column name="id_periodocontable" referenced-column-name="id"/>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idFormaPartida" target-entity="CtlFormaPartida" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_forma_partida" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="idAnio" target-entity="CtlAnio" fetch="LAZY">
@@ -64,19 +69,9 @@
         <join-column name="id_anio" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+    <many-to-one field="idTipoPartida" target-entity="CtlTipoPartida" fetch="LAZY">
       <join-columns>
-        <join-column name="id_empresa" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="idFormapartida" target-entity="CtlFormapartida" fetch="LAZY">
-      <join-columns>
-        <join-column name="id_formapartida" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="idTipopartida" target-entity="CtlTipopartida" fetch="LAZY">
-      <join-columns>
-        <join-column name="id_tipopartida" referenced-column-name="id"/>
+        <join-column name="id_tipo_partida" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

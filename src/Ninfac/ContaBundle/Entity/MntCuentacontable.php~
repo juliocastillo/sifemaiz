@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * MntCuentacontable
  *
- * @ORM\Table(name="mnt_cuentacontable", indexes={@ORM\Index(name="IDX_E01D413C2851975", columns={"id_anio"}), @ORM\Index(name="IDX_E01D413C664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_E01D413CD2F96457", columns={"id_tipocuenta_contable"}), @ORM\Index(name="IDX_E01D413C18C9494C", columns={"id_tipocuenta"})})
+ * @ORM\Table(name="mnt_cuentacontable", uniqueConstraints={@ORM\UniqueConstraint(name="uk_cuentacontable", columns={"id_empresa", "id_anio", "cuenta"})}, indexes={@ORM\Index(name="IDX_E01D413C2851975", columns={"id_anio"}), @ORM\Index(name="IDX_E01D413CC6FBE596", columns={"id_cuentacontable_depende"}), @ORM\Index(name="IDX_E01D413C664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_E01D413CF4DAC27E", columns={"id_nivel_cuentacontable"}), @ORM\Index(name="IDX_E01D413C6B63D4CF", columns={"id_tipo_cuentacontable"})})
  * @ORM\Entity
  */
 class MntCuentacontable
@@ -37,37 +37,9 @@ class MntCuentacontable
     private $nombre;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="depende", type="string", length=20, nullable=true)
-     */
-    private $depende;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="nivel", type="integer", nullable=true)
-     */
-    private $nivel;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="niveld", type="integer", nullable=true)
-     */
-    private $niveld;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="cargar", type="integer", nullable=true)
-     */
-    private $cargar;
-
-    /**
      * @var boolean
      *
-     * @ORM\Column(name="subcuenta", type="boolean", nullable=true)
+     * @ORM\Column(name="subcuenta", type="boolean", nullable=false)
      */
     private $subcuenta;
 
@@ -117,6 +89,16 @@ class MntCuentacontable
     private $idAnio;
 
     /**
+     * @var \MntCuentacontable
+     *
+     * @ORM\ManyToOne(targetEntity="MntCuentacontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cuentacontable_depende", referencedColumnName="id")
+     * })
+     */
+    private $idCuentacontableDepende;
+
+    /**
      * @var \CtlEmpresa
      *
      * @ORM\ManyToOne(targetEntity="CtlEmpresa")
@@ -127,24 +109,24 @@ class MntCuentacontable
     private $idEmpresa;
 
     /**
-     * @var \CtlTipocuentaContable
+     * @var \CtlNivelCuentacontable
      *
-     * @ORM\ManyToOne(targetEntity="CtlTipocuentaContable")
+     * @ORM\ManyToOne(targetEntity="CtlNivelCuentacontable")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipocuenta_contable", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_nivel_cuentacontable", referencedColumnName="id")
      * })
      */
-    private $idTipocuentaContable;
+    private $idNivelCuentacontable;
 
     /**
-     * @var \CtlTipocuenta
+     * @var \CtlTipoCuentacontable
      *
-     * @ORM\ManyToOne(targetEntity="CtlTipocuenta")
+     * @ORM\ManyToOne(targetEntity="CtlTipoCuentacontable")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipocuenta", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_tipo_cuentacontable", referencedColumnName="id")
      * })
      */
-    private $idTipocuenta;
+    private $idTipoCuentacontable;
 
 
 }

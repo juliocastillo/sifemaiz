@@ -64,7 +64,7 @@ class CtlEmpresaAdmin extends AbstractAdmin
             ->add('registro')
             ->add('nit')
             ->add('consolidadora', NULL, array(
-                'label' => 'Empresa consolidadora'
+                'label' => 'Consolidadora'
             ))
             ->add('idAnioinicio',null, array(
                 'label' => 'Año de inicio en el sistema'

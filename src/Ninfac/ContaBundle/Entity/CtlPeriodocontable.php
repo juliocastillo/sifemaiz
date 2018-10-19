@@ -1,14 +1,19 @@
 <?php
 
 namespace Ninfac\ContaBundle\Entity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CtlPeriodocontable
  *
- * @ORM\Table(name="ctl_periodocontable", indexes={@ORM\Index(name="IDX_A8B8A7AF2851975", columns={"id_anio"}), @ORM\Index(name="IDX_A8B8A7AFF06CD65F", columns={"id_mes"}), @ORM\Index(name="IDX_A8B8A7AF664AF320", columns={"id_empresa"})})
+ * @ORM\Table(name="ctl_periodocontable", uniqueConstraints={@ORM\UniqueConstraint(name="uk_periodocontable", columns={"id_anio", "id_empresa", "id_mes"})}, indexes={@ORM\Index(name="IDX_A8B8A7AF2851975", columns={"id_anio"}), @ORM\Index(name="IDX_A8B8A7AFF06CD65F", columns={"id_mes"}), @ORM\Index(name="IDX_A8B8A7AF664AF320", columns={"id_empresa"})})
  * @ORM\Entity
+ * @UniqueEntity(
+ *      fields={"idMes", "idAnio", "idEmpresa"},
+ *      message="Ya existe este periodo en la empresa seleccionada."
+ * )
  */
 class CtlPeriodocontable
 {

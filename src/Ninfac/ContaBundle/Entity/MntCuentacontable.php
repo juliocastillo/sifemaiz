@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * MntCuentacontable
  *
- * @ORM\Table(name="mnt_cuentacontable", indexes={@ORM\Index(name="IDX_E01D413C2851975", columns={"id_anio"}), @ORM\Index(name="IDX_E01D413C664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_E01D413CD2F96457", columns={"id_tipocuenta_contable"}), @ORM\Index(name="IDX_E01D413C18C9494C", columns={"id_tipocuenta"})})
+ * @ORM\Table(name="mnt_cuentacontable", uniqueConstraints={@ORM\UniqueConstraint(name="uk_cuentacontable", columns={"id_empresa", "id_anio", "cuenta"})}, indexes={@ORM\Index(name="IDX_E01D413C2851975", columns={"id_anio"}), @ORM\Index(name="IDX_E01D413CC6FBE596", columns={"id_cuentacontable_depende"}), @ORM\Index(name="IDX_E01D413C664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_E01D413CF4DAC27E", columns={"id_nivel_cuentacontable"}), @ORM\Index(name="IDX_E01D413C6B63D4CF", columns={"id_tipo_cuentacontable"})})
  * @ORM\Entity
  */
 class MntCuentacontable
@@ -37,44 +37,9 @@ class MntCuentacontable
     private $nombre;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="depende", type="string", length=20, nullable=true)
-     */
-    private $depende;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="nivel", type="integer", nullable=true)
-     */
-    private $nivel;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="niveld", type="integer", nullable=true)
-     */
-    private $niveld;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="cargar", type="integer", nullable=true)
-     */
-    private $cargar;
-
-    /**
      * @var boolean
      *
-     * @ORM\Column(name="subcuenta", type="boolean", nullable=true)
-     */
-    private $subcuenta;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="activo", type="boolean", nullable=false)
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
      */
     private $activo;
 
@@ -95,16 +60,16 @@ class MntCuentacontable
     /**
      * @var integer
      *
-     * @ORM\Column(name="modified_by", type="integer", nullable=true)
+     * @ORM\Column(name="updated_by", type="integer", nullable=true)
      */
-    private $modifiedBy;
+    private $updatedBy;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="modified_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private $modifiedAt;
+    private $updatedAt;
 
     /**
      * @var \CtlAnio
@@ -117,6 +82,16 @@ class MntCuentacontable
     private $idAnio;
 
     /**
+     * @var \MntCuentacontable
+     *
+     * @ORM\ManyToOne(targetEntity="MntCuentacontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cuentacontable_depende", referencedColumnName="id")
+     * })
+     */
+    private $idCuentacontableDepende;
+
+    /**
      * @var \CtlEmpresa
      *
      * @ORM\ManyToOne(targetEntity="CtlEmpresa")
@@ -127,24 +102,24 @@ class MntCuentacontable
     private $idEmpresa;
 
     /**
-     * @var \CtlTipocuentaContable
+     * @var \CtlNivelCuentacontable
      *
-     * @ORM\ManyToOne(targetEntity="CtlTipocuentaContable")
+     * @ORM\ManyToOne(targetEntity="CtlNivelCuentacontable")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipocuenta_contable", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_nivel_cuentacontable", referencedColumnName="id")
      * })
      */
-    private $idTipocuentaContable;
+    private $idNivelCuentacontable;
 
     /**
-     * @var \CtlTipocuenta
+     * @var \CtlTipoCuentacontable
      *
-     * @ORM\ManyToOne(targetEntity="CtlTipocuenta")
+     * @ORM\ManyToOne(targetEntity="CtlTipoCuentacontable")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipocuenta", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_tipo_cuentacontable", referencedColumnName="id")
      * })
      */
-    private $idTipocuenta;
+    private $idTipoCuentacontable;
 
 
 
@@ -204,126 +179,6 @@ class MntCuentacontable
     public function getNombre()
     {
         return $this->nombre;
-    }
-
-    /**
-     * Set depende
-     *
-     * @param string $depende
-     *
-     * @return MntCuentacontable
-     */
-    public function setDepende($depende)
-    {
-        $this->depende = $depende;
-
-        return $this;
-    }
-
-    /**
-     * Get depende
-     *
-     * @return string
-     */
-    public function getDepende()
-    {
-        return $this->depende;
-    }
-
-    /**
-     * Set nivel
-     *
-     * @param integer $nivel
-     *
-     * @return MntCuentacontable
-     */
-    public function setNivel($nivel)
-    {
-        $this->nivel = $nivel;
-
-        return $this;
-    }
-
-    /**
-     * Get nivel
-     *
-     * @return integer
-     */
-    public function getNivel()
-    {
-        return $this->nivel;
-    }
-
-    /**
-     * Set niveld
-     *
-     * @param integer $niveld
-     *
-     * @return MntCuentacontable
-     */
-    public function setNiveld($niveld)
-    {
-        $this->niveld = $niveld;
-
-        return $this;
-    }
-
-    /**
-     * Get niveld
-     *
-     * @return integer
-     */
-    public function getNiveld()
-    {
-        return $this->niveld;
-    }
-
-    /**
-     * Set cargar
-     *
-     * @param integer $cargar
-     *
-     * @return MntCuentacontable
-     */
-    public function setCargar($cargar)
-    {
-        $this->cargar = $cargar;
-
-        return $this;
-    }
-
-    /**
-     * Get cargar
-     *
-     * @return integer
-     */
-    public function getCargar()
-    {
-        return $this->cargar;
-    }
-
-    /**
-     * Set subcuenta
-     *
-     * @param boolean $subcuenta
-     *
-     * @return MntCuentacontable
-     */
-    public function setSubcuenta($subcuenta)
-    {
-        $this->subcuenta = $subcuenta;
-
-        return $this;
-    }
-
-    /**
-     * Get subcuenta
-     *
-     * @return boolean
-     */
-    public function getSubcuenta()
-    {
-        return $this->subcuenta;
     }
 
     /**
@@ -399,51 +254,51 @@ class MntCuentacontable
     }
 
     /**
-     * Set modifiedBy
+     * Set updatedBy
      *
-     * @param integer $modifiedBy
+     * @param integer $updatedBy
      *
      * @return MntCuentacontable
      */
-    public function setModifiedBy($modifiedBy)
+    public function setUpdatedBy($updatedBy)
     {
-        $this->modifiedBy = $modifiedBy;
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }
 
     /**
-     * Get modifiedBy
+     * Get updatedBy
      *
      * @return integer
      */
-    public function getModifiedBy()
+    public function getUpdatedBy()
     {
-        return $this->modifiedBy;
+        return $this->updatedBy;
     }
 
     /**
-     * Set modifiedAt
+     * Set updatedAt
      *
-     * @param \DateTime $modifiedAt
+     * @param \DateTime $updatedAt
      *
      * @return MntCuentacontable
      */
-    public function setModifiedAt($modifiedAt)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->modifiedAt = $modifiedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get modifiedAt
+     * Get updatedAt
      *
      * @return \DateTime
      */
-    public function getModifiedAt()
+    public function getUpdatedAt()
     {
-        return $this->modifiedAt;
+        return $this->updatedAt;
     }
 
     /**
@@ -471,6 +326,30 @@ class MntCuentacontable
     }
 
     /**
+     * Set idCuentacontableDepende
+     *
+     * @param \Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontableDepende
+     *
+     * @return MntCuentacontable
+     */
+    public function setIdCuentacontableDepende(\Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontableDepende = null)
+    {
+        $this->idCuentacontableDepende = $idCuentacontableDepende;
+
+        return $this;
+    }
+
+    /**
+     * Get idCuentacontableDepende
+     *
+     * @return \Ninfac\ContaBundle\Entity\MntCuentacontable
+     */
+    public function getIdCuentacontableDepende()
+    {
+        return $this->idCuentacontableDepende;
+    }
+
+    /**
      * Set idEmpresa
      *
      * @param \Ninfac\ContaBundle\Entity\CtlEmpresa $idEmpresa
@@ -495,50 +374,54 @@ class MntCuentacontable
     }
 
     /**
-     * Set idTipocuentaContable
+     * Set idNivelCuentacontable
      *
-     * @param \Ninfac\ContaBundle\Entity\CtlTipocuentaContable $idTipocuentaContable
+     * @param \Ninfac\ContaBundle\Entity\CtlNivelCuentacontable $idNivelCuentacontable
      *
      * @return MntCuentacontable
      */
-    public function setIdTipocuentaContable(\Ninfac\ContaBundle\Entity\CtlTipocuentaContable $idTipocuentaContable = null)
+    public function setIdNivelCuentacontable(\Ninfac\ContaBundle\Entity\CtlNivelCuentacontable $idNivelCuentacontable = null)
     {
-        $this->idTipocuentaContable = $idTipocuentaContable;
+        $this->idNivelCuentacontable = $idNivelCuentacontable;
 
         return $this;
     }
 
     /**
-     * Get idTipocuentaContable
+     * Get idNivelCuentacontable
      *
-     * @return \Ninfac\ContaBundle\Entity\CtlTipocuentaContable
+     * @return \Ninfac\ContaBundle\Entity\CtlNivelCuentacontable
      */
-    public function getIdTipocuentaContable()
+    public function getIdNivelCuentacontable()
     {
-        return $this->idTipocuentaContable;
+        return $this->idNivelCuentacontable;
     }
 
     /**
-     * Set idTipocuenta
+     * Set idTipoCuentacontable
      *
-     * @param \Ninfac\ContaBundle\Entity\CtlTipocuenta $idTipocuenta
+     * @param \Ninfac\ContaBundle\Entity\CtlTipoCuentacontable $idTipoCuentacontable
      *
      * @return MntCuentacontable
      */
-    public function setIdTipocuenta(\Ninfac\ContaBundle\Entity\CtlTipocuenta $idTipocuenta = null)
+    public function setIdTipoCuentacontable(\Ninfac\ContaBundle\Entity\CtlTipoCuentacontable $idTipoCuentacontable = null)
     {
-        $this->idTipocuenta = $idTipocuenta;
+        $this->idTipoCuentacontable = $idTipoCuentacontable;
 
         return $this;
     }
 
     /**
-     * Get idTipocuenta
+     * Get idTipoCuentacontable
      *
-     * @return \Ninfac\ContaBundle\Entity\CtlTipocuenta
+     * @return \Ninfac\ContaBundle\Entity\CtlTipoCuentacontable
      */
-    public function getIdTipocuenta()
+    public function getIdTipoCuentacontable()
     {
-        return $this->idTipocuenta;
+        return $this->idTipoCuentacontable;
+    }
+    
+    public function __toString() {
+        return (string)$this->cuenta.' '.$this->nombre;
     }
 }

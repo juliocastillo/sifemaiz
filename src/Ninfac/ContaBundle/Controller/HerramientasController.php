@@ -17,46 +17,6 @@ class HerramientasController extends Controller
      * analista programador
      */
     /**
-     * @Route("/conta/empresa/open", name="conta_empresa_open", options={"expose"=true})
-     * @Method("GET")
-     */
-    public function contaEmpresaOpenAction()
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-        $empresas = $em->getRepository('NinfacContaBundle:CtlEmpresa')->findBy(array('activo'=>true));
-        return $this->render('NinfacContaBundle:Herramientas:empresa_abrir.html.twig', array(
-            'empresas' => $empresas
-        ));
-    }
-
-
-    /**
-     *
-     * @author julio castillo
-     * analista programador
-     */
-    /**
-     * @Route("/conta/periodo/select", name="conta_periodo_select", options={"expose"=true})
-     * @Method("GET")
-     */
-    public function contaPeriodoSelectAction()
-    {
-        $empresaId = $this->get('session')->get('empresaId');
-        // var_dump($empresaId); exit();
-        $em = $this->getDoctrine()->getEntityManager();
-        $periodos = $em->getRepository('NinfacContaBundle:CtlPeriodocontable')->findBy(array('idEmpresa'=>$empresaId, 'activo'=>true));
-        return $this->render('NinfacContaBundle:Herramientas:periodo_seleccionar.html.twig', array(
-            'periodos' => $periodos
-        ));
-    }
-
-
-    /**
-     *
-     * @author julio castillo
-     * analista programador
-     */
-    /**
      * @Route("/user/password/change", name="user_password_change", options={"expose"=true})
      * @Method({"GET"})
      */

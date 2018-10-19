@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ConPartidacontable
  *
- * @ORM\Table(name="con_partidacontable", indexes={@ORM\Index(name="IDX_49C6AC6DD598460", columns={"id_tipopartida"}), @ORM\Index(name="IDX_49C6AC62B2B0C0A", columns={"id_formapartida"}), @ORM\Index(name="IDX_49C6AC6664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_49C6AC62851975", columns={"id_anio"}), @ORM\Index(name="IDX_49C6AC6E6696175", columns={"id_periodocontable"})})
+ * @ORM\Table(name="con_partidacontable", indexes={@ORM\Index(name="IDX_49C6AC6664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_49C6AC63468F610", columns={"id_forma_partida"}), @ORM\Index(name="IDX_49C6AC62851975", columns={"id_anio"}), @ORM\Index(name="IDX_49C6AC699F90CDE", columns={"id_tipo_partida"})})
  * @ORM\Entity
  */
 class ConPartidacontable
@@ -21,6 +21,13 @@ class ConPartidacontable
      * @ORM\SequenceGenerator(sequenceName="con_partidacontable_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     */
+    private $fecha;
 
     /**
      * @var integer
@@ -51,13 +58,6 @@ class ConPartidacontable
     private $corrTipo;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fecha", type="datetime", nullable=false)
-     */
-    private $fecha;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="concepto", type="string", length=150, nullable=false)
@@ -67,14 +67,14 @@ class ConPartidacontable
     /**
      * @var string
      *
-     * @ORM\Column(name="total_debe", type="decimal", precision=12, scale=2, nullable=false)
+     * @ORM\Column(name="total_debe", type="decimal", precision=12, scale=2, nullable=true)
      */
     private $totalDebe;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="total_haber", type="decimal", precision=12, scale=2, nullable=false)
+     * @ORM\Column(name="total_haber", type="decimal", precision=12, scale=2, nullable=true)
      */
     private $totalHaber;
 
@@ -84,6 +84,13 @@ class ConPartidacontable
      * @ORM\Column(name="activo", type="boolean", nullable=true)
      */
     private $activo;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="partida_inicial", type="boolean", nullable=true)
+     */
+    private $partidaInicial;
 
     /**
      * @var integer
@@ -102,36 +109,16 @@ class ConPartidacontable
     /**
      * @var integer
      *
-     * @ORM\Column(name="modified_by", type="integer", nullable=true)
+     * @ORM\Column(name="updated_by", type="integer", nullable=true)
      */
-    private $modifiedBy;
+    private $updatedBy;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="modified_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private $modifiedAt;
-
-    /**
-     * @var \CtlTipopartida
-     *
-     * @ORM\ManyToOne(targetEntity="CtlTipopartida")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipopartida", referencedColumnName="id")
-     * })
-     */
-    private $idTipopartida;
-
-    /**
-     * @var \CtlFormapartida
-     *
-     * @ORM\ManyToOne(targetEntity="CtlFormapartida")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_formapartida", referencedColumnName="id")
-     * })
-     */
-    private $idFormapartida;
+    private $updatedAt;
 
     /**
      * @var \CtlEmpresa
@@ -144,6 +131,16 @@ class ConPartidacontable
     private $idEmpresa;
 
     /**
+     * @var \CtlFormaPartida
+     *
+     * @ORM\ManyToOne(targetEntity="CtlFormaPartida")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_forma_partida", referencedColumnName="id")
+     * })
+     */
+    private $idFormaPartida;
+
+    /**
      * @var \CtlAnio
      *
      * @ORM\ManyToOne(targetEntity="CtlAnio")
@@ -152,6 +149,17 @@ class ConPartidacontable
      * })
      */
     private $idAnio;
+
+    /**
+     * @var \CtlTipoPartida
+     *
+     * @ORM\ManyToOne(targetEntity="CtlTipoPartida")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipo_partida", referencedColumnName="id")
+     * })
+     */
+    private $idTipoPartida;
+
 
 
     /**
@@ -162,6 +170,30 @@ class ConPartidacontable
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     *
+     * @return ConPartidacontable
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
     }
 
     /**
@@ -261,30 +293,6 @@ class ConPartidacontable
     }
 
     /**
-     * Set fecha
-     *
-     * @param \DateTime $fecha
-     *
-     * @return ConPartidacontable
-     */
-    public function setFecha($fecha)
-    {
-        $this->fecha = $fecha;
-
-        return $this;
-    }
-
-    /**
-     * Get fecha
-     *
-     * @return \DateTime
-     */
-    public function getFecha()
-    {
-        return $this->fecha;
-    }
-
-    /**
      * Set concepto
      *
      * @param string $concepto
@@ -381,6 +389,30 @@ class ConPartidacontable
     }
 
     /**
+     * Set partidaInicial
+     *
+     * @param boolean $partidaInicial
+     *
+     * @return ConPartidacontable
+     */
+    public function setPartidaInicial($partidaInicial)
+    {
+        $this->partidaInicial = $partidaInicial;
+
+        return $this;
+    }
+
+    /**
+     * Get partidaInicial
+     *
+     * @return boolean
+     */
+    public function getPartidaInicial()
+    {
+        return $this->partidaInicial;
+    }
+
+    /**
      * Set createdBy
      *
      * @param integer $createdBy
@@ -429,99 +461,51 @@ class ConPartidacontable
     }
 
     /**
-     * Set modifiedBy
+     * Set updatedBy
      *
-     * @param integer $modifiedBy
+     * @param integer $updatedBy
      *
      * @return ConPartidacontable
      */
-    public function setModifiedBy($modifiedBy)
+    public function setUpdatedBy($updatedBy)
     {
-        $this->modifiedBy = $modifiedBy;
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }
 
     /**
-     * Get modifiedBy
+     * Get updatedBy
      *
      * @return integer
      */
-    public function getModifiedBy()
+    public function getUpdatedBy()
     {
-        return $this->modifiedBy;
+        return $this->updatedBy;
     }
 
     /**
-     * Set modifiedAt
+     * Set updatedAt
      *
-     * @param \DateTime $modifiedAt
+     * @param \DateTime $updatedAt
      *
      * @return ConPartidacontable
      */
-    public function setModifiedAt($modifiedAt)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->modifiedAt = $modifiedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get modifiedAt
+     * Get updatedAt
      *
      * @return \DateTime
      */
-    public function getModifiedAt()
+    public function getUpdatedAt()
     {
-        return $this->modifiedAt;
-    }
-
-    /**
-     * Set idTipopartida
-     *
-     * @param \Ninfac\ContaBundle\Entity\CtlTipopartida $idTipopartida
-     *
-     * @return ConPartidacontable
-     */
-    public function setIdTipopartida(\Ninfac\ContaBundle\Entity\CtlTipopartida $idTipopartida = null)
-    {
-        $this->idTipopartida = $idTipopartida;
-
-        return $this;
-    }
-
-    /**
-     * Get idTipopartida
-     *
-     * @return \Ninfac\ContaBundle\Entity\CtlTipopartida
-     */
-    public function getIdTipopartida()
-    {
-        return $this->idTipopartida;
-    }
-
-    /**
-     * Set idFormapartida
-     *
-     * @param \Ninfac\ContaBundle\Entity\CtlFormapartida $idFormapartida
-     *
-     * @return ConPartidacontable
-     */
-    public function setIdFormapartida(\Ninfac\ContaBundle\Entity\CtlFormapartida $idFormapartida = null)
-    {
-        $this->idFormapartida = $idFormapartida;
-
-        return $this;
-    }
-
-    /**
-     * Get idFormapartida
-     *
-     * @return \Ninfac\ContaBundle\Entity\CtlFormapartida
-     */
-    public function getIdFormapartida()
-    {
-        return $this->idFormapartida;
+        return $this->updatedAt;
     }
 
     /**
@@ -549,6 +533,30 @@ class ConPartidacontable
     }
 
     /**
+     * Set idFormaPartida
+     *
+     * @param \Ninfac\ContaBundle\Entity\CtlFormaPartida $idFormaPartida
+     *
+     * @return ConPartidacontable
+     */
+    public function setIdFormaPartida(\Ninfac\ContaBundle\Entity\CtlFormaPartida $idFormaPartida = null)
+    {
+        $this->idFormaPartida = $idFormaPartida;
+
+        return $this;
+    }
+
+    /**
+     * Get idFormaPartida
+     *
+     * @return \Ninfac\ContaBundle\Entity\CtlFormaPartida
+     */
+    public function getIdFormaPartida()
+    {
+        return $this->idFormaPartida;
+    }
+
+    /**
      * Set idAnio
      *
      * @param \Ninfac\ContaBundle\Entity\CtlAnio $idAnio
@@ -570,5 +578,29 @@ class ConPartidacontable
     public function getIdAnio()
     {
         return $this->idAnio;
+    }
+
+    /**
+     * Set idTipoPartida
+     *
+     * @param \Ninfac\ContaBundle\Entity\CtlTipoPartida $idTipoPartida
+     *
+     * @return ConPartidacontable
+     */
+    public function setIdTipoPartida(\Ninfac\ContaBundle\Entity\CtlTipoPartida $idTipoPartida = null)
+    {
+        $this->idTipoPartida = $idTipoPartida;
+
+        return $this;
+    }
+
+    /**
+     * Get idTipoPartida
+     *
+     * @return \Ninfac\ContaBundle\Entity\CtlTipoPartida
+     */
+    public function getIdTipoPartida()
+    {
+        return $this->idTipoPartida;
     }
 }

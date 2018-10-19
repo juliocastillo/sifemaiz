@@ -1,6 +1,7 @@
 <?php
 
 namespace Ninfac\ContaBundle\Entity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -9,6 +10,16 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ctl_empresa", indexes={@ORM\Index(name="IDX_4EF972C332AAAC2C", columns={"id_anioinicio"})})
  * @ORM\Entity
+ * @UniqueEntity(
+ *      fields={"nombre"},
+ *      message="Ya existe este nombre de empresa."
+ * )
+ * @UniqueEntity(
+ *      fields={"consolidadora"},
+ *      message="Ya existe una empresa consolidadora."
+ * ) 
+
+ *  
  */
 class CtlEmpresa
 {

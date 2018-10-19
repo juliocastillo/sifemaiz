@@ -6,14 +6,17 @@
       <index name="IDX_A8B8A7AFF06CD65F" columns="id_mes"/>
       <index name="IDX_A8B8A7AF664AF320" columns="id_empresa"/>
     </indexes>
+    <unique-constraints>
+      <unique-constraint name="uk_periodocontable" columns="id_anio,id_empresa,id_mes"/>
+    </unique-constraints>
     <id name="id" type="integer" column="id">
       <generator strategy="SEQUENCE"/>
       <sequence-generator sequence-name="ctl_periodocontable_id_seq" allocation-size="1" initial-value="1"/>
     </id>
     <field name="activo" type="boolean" column="activo" nullable="true"/>
-    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+    <many-to-one field="idAnio" target-entity="CtlAnio" fetch="LAZY">
       <join-columns>
-        <join-column name="id_empresa" referenced-column-name="id"/>
+        <join-column name="id_anio" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="idMes" target-entity="CtlMes" fetch="LAZY">
@@ -21,9 +24,9 @@
         <join-column name="id_mes" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idAnio" target-entity="CtlAnio" fetch="LAZY">
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
       <join-columns>
-        <join-column name="id_anio" referenced-column-name="id"/>
+        <join-column name="id_empresa" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

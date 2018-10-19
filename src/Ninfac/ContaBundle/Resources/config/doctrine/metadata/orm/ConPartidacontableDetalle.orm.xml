@@ -11,21 +11,28 @@
       <generator strategy="SEQUENCE"/>
       <sequence-generator sequence-name="con_partidacontable_detalle_id_seq" allocation-size="1" initial-value="1"/>
     </id>
-    <field name="detalle" type="string" column="detalle" length="200" nullable="false">
+    <field name="concepto" type="string" column="concepto" length="200" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="debe" type="decimal" column="debe" precision="12" scale="2" nullable="true"/>
+    <field name="debe" type="decimal" column="debe" precision="12" scale="2" nullable="false"/>
     <field name="haber" type="decimal" column="haber" precision="12" scale="2" nullable="true"/>
-    <many-to-one field="idPartidacontable" target-entity="ConPartidacontable" fetch="LAZY">
+    <field name="createdBy" type="integer" column="created_by" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
+    <field name="updatedBy" type="integer" column="updated_by" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <many-to-one field="idAnio" target-entity="CtlAnio" fetch="LAZY">
       <join-columns>
-        <join-column name="id_partidacontable" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
-      <join-columns>
-        <join-column name="id_empresa" referenced-column-name="id"/>
+        <join-column name="id_anio" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="idCuentacontable" target-entity="MntCuentacontable" fetch="LAZY">
@@ -33,9 +40,14 @@
         <join-column name="id_cuentacontable" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idAnio" target-entity="CtlAnio" fetch="LAZY">
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
       <join-columns>
-        <join-column name="id_anio" referenced-column-name="id"/>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idPartidacontable" target-entity="ConPartidacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_partidacontable" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

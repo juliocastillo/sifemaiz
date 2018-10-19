@@ -20,8 +20,51 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: CtlPeriodocontable }
 
+    ninfac_conta.admin.ctl_tipo_cuentacontable:
+        class: Ninfac\ContaBundle\Admin\CtlTipoCuentacontableAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoCuentacontable, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CtlTipoCuentacontable }
+        public: true
+
+    ninfac_conta.admin.ctl_nivel_cuentacontable:
+        class: Ninfac\ContaBundle\Admin\CtlNivelCuentacontableAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlNivelCuentacontable, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CtlNivelCuentacontable }
+        public: true
+
     ninfac_conta.admin.mnt_cuentacontable:
         class: Ninfac\ContaBundle\Admin\MntCuentacontableAdmin
-        arguments: [~, Ninfac\ContaBundle\Entity\MntCuentacontable, NinfacContaBundle:MntCuentacontableAdmin]
+        arguments: [~, Ninfac\ContaBundle\Entity\MntCuentacontable, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: MntCuentacontable }
+        public: true
+
+    ninfac_conta.admin.ctl_tipo_partida:
+        class: Ninfac\ContaBundle\Admin\CtlTipoPartidaAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoPartida, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CtlTipoPartida }
+        public: true
+
+    ninfac_conta.admin.ctl_forma_partida:
+        class: Ninfac\ContaBundle\Admin\CtlFormaPartidaAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlFormaPartida, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CtlFormaPartida }
+        public: true
+
+    ninfac_conta.admin.con_partidacontable:
+        class: Ninfac\ContaBundle\Admin\ConPartidacontableAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\ConPartidacontable, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ConPartidacontable }
+        public: true
+
+    ninfac_conta.admin.con_partidacontable_detalle:
+        class: Ninfac\ContaBundle\Admin\ConPartidacontableDetalleAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\ConPartidacontableDetalle, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ConPartidacontableDetalle }
+        public: true

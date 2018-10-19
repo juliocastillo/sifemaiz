@@ -4,66 +4,75 @@ namespace Ninfac\ContaBundle\Controller;
 
 use Ninfac\ContaBundle\Service\ConsultaCatalogos;
 use Ninfac\ContaBundle\Entity\ConPartidacontable;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ContaController extends Controller
-{
+class ContaController extends Controller {
     /**
      *
      * @author julio castillo
      * analista programador
      */
+
     /**
      * @Route("/conta/partidacontable/create", name="conta_partidacontable_create", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function contaPartidacontableCreateAction(Request $request)
-    {
+    public function contaPartidacontableCreateAction(Request $request) {
         //instanciando Service
         $consultaCatalogos = $this->container->get('conta.consulta_catalogos');
 
         /*
-        * instanciar variables y objetos de la tabla principal
-        */
-        $empresaId      = $this->get('session')->get('empresaId');
-        $tipoPartidaId  = 1;
+         * instanciar variables y objetos de la tabla principal
+         */
+        if ($this->get('session')->get('empresaId')) {
+            $empresaId = $this->get('session')->get('empresaId');
+        } else {
+            return $this->render('NinfacContaBundle:Default:warning.html.twig', array(
+                        'mensaje' => 'No hay contabilidad abierta ...'
+            ));
+        }
+        if ($this->get('session')->get('anioId')) {
+            $anioId = $this->get('session')->get('anioId')->getId();
+        } else {
+            return $this->render('NinfacContaBundle:Default:warning.html.twig', array(
+                        'mensaje' => 'No hay periodo abierto ...'
+            ));
+        }
+        
+        $tipoPartidaId = 1;
         $formapartidaId = 1;
-        $anioId         = $this->get('session')->get('anioId')->getId();
-        $userId         = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
+        
+        
+        $userId = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
 
-        $ultimaPartida  = $consultaCatalogos->getNumeroPartida($empresaId,$anioId,$tipoPartidaId);
+        $ultimaPartida = $consultaCatalogos->getNumeroPartida($empresaId, $anioId, $tipoPartidaId);
 
-        $empresa        = $consultaCatalogos->getEmpresa($empresaId);
-        $formapartida   = $consultaCatalogos->getFormapartida($formapartidaId);
-        $anio           = $consultaCatalogos->getAnio($anioId);
-        $tipopartida    = $consultaCatalogos->getTipopartida($tipoPartidaId);
-
-        if($ultimaPartida) //evaluar si hay una partida similar para determinar correlativos
-        {
-            $corrAnual      = $ultimaPartida[0]->getCorrAnual()+1;
-            $corrMensual    = $ultimaPartida[0]->getCorrMensual()+1;
-            $corrTipo       = $ultimaPartida[0]->getCorrTipo()+1;
+        $empresa = $consultaCatalogos->getEmpresa($empresaId);
+        $formapartida = $consultaCatalogos->getFormapartida($formapartidaId);
+        $anio = $consultaCatalogos->getAnio($anioId);
+        $tipopartida = $consultaCatalogos->getTipopartida($tipoPartidaId);
+        if ($ultimaPartida) { //evaluar si hay una partida similar para determinar correlativos
+            $corrAnual = $ultimaPartida[0]->getCorrAnual() + 1;
+            $corrMensual = $ultimaPartida[0]->getCorrMensual() + 1;
+            $corrTipo = $ultimaPartida[0]->getCorrTipo() + 1;
         } else { // todos inician con 1 nuevo correlativo
-            $corrAnual      = 1;
-            $corrMensual    = 1;
-            $corrTipo       = 1;
+            $corrAnual = 1;
+            $corrMensual = 1;
+            $corrTipo = 1;
         }
 
         // asignar valores por defecto;
         $classForm = new ConPartidacontable();
         $classForm->setIdEmpresa($empresa);
-        $classForm->setIdFormapartida($formapartida);
         $classForm->setIdAnio($anio);
         $classForm->setNumero(0);
         $classForm->setCorrAnual($corrAnual);
@@ -78,43 +87,43 @@ class ContaController extends Controller
         $classForm->setCreatedAt(new \DateTime());
 
         $form = $this->createFormBuilder($classForm)
-            ->add('corrAnual', IntegerType::class, array(
-                'read_only' => TRUE,
-                'label'     => 'Correlativo anual',
-                'attr'      => array(
+                ->add('corrAnual', IntegerType::class, array(
+                    'read_only' => TRUE,
+                    'label' => 'Correlativo anual',
+                    'attr' => array(
                         'style' => 'width:100px'
             )))
-            ->add('corrMensual', IntegerType::class, array(
-                'read_only' =>TRUE,
-                'label'     => 'Correlativo mensual',
-                'attr'      => array(
+                ->add('corrMensual', IntegerType::class, array(
+                    'read_only' => TRUE,
+                    'label' => 'Correlativo mensual',
+                    'attr' => array(
                         'style' => 'width:100px'
             )))
-            ->add('corrTipo', IntegerType::class, array(
-                'read_only' =>TRUE,
-                'label'     => 'Correlativo tipo',
-                'attr'      => array(
+                ->add('corrTipo', IntegerType::class, array(
+                    'read_only' => TRUE,
+                    'label' => 'Correlativo tipo',
+                    'attr' => array(
                         'style' => 'width:100px'
             )))
-            ->add('idTipopartida', 'entity', array(
-                'class'     => 'NinfacContaBundle:CtlTipopartida',
-                'property'  => 'nombre',
-                'label'     => 'Tipo partida',
-                'attr'      => array(
+                ->add('idTipopartida', 'entity', array(
+                    'class' => 'NinfacContaBundle:CtlTipopartida',
+                    'property' => 'nombre',
+                    'label' => 'Tipo partida',
+                    'attr' => array(
                         'style' => 'width:200px'
             )))
-            ->add('fecha', DateType::class)
-            ->add('concepto', TextType::class,array(
-                'attr'=> array(
-                    'style' => 'width:350px'
+                ->add('fecha', DateType::class)
+                ->add('concepto', TextType::class, array(
+                    'attr' => array(
+                        'style' => 'width:350px'
             )))
-            ->add('save', SubmitType::class, array(
-                'label'     => 'Guardar',
-                'attr'      => array(
-                    'class'     => 'btn btn-success btn-block',
-                    'style'     => 'width:200px'
+                ->add('save', SubmitType::class, array(
+                    'label' => 'Guardar',
+                    'attr' => array(
+                        'class' => 'btn btn-success btn-block',
+                        'style' => 'width:200px'
             )))
-            ->getForm();
+                ->getForm();
 
         $form->handleRequest($request);
 
@@ -136,54 +145,51 @@ class ContaController extends Controller
         }
 
         return $this->render('NinfacContaBundle:Conta:partidacontable_edit.html.twig', array(
-            'form' => $form->createView(),
-            'titulo' => 'Partida contable',
-            'icon'   => 'fa fa-list-alt',
-            'with'   => '860px'
-
+                    'form' => $form->createView(),
+                    'titulo' => 'Partida contable',
+                    'icon' => 'fa fa-list-alt',
+                    'with' => '860px'
         ));
     }
-
 
     /**
      *
      * @author julio castillo
      * analista programador
      */
+
     /**
      * @Route("/conta/partidacontable/edit", name="conta_partidacontable_edit", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function contaPartidacontableEditAction(Request $request)
-    {
+    public function contaPartidacontableEditAction(Request $request) {
         //instanciando Service
         $consultaCatalogos = $this->container->get('conta.consulta_catalogos');
 
         /*
-        * instanciar variables y objetos de la tabla principal
-        */
-        $empresaId      = $this->get('session')->get('empresaId');
-        $tipoPartidaId  = 1;
+         * instanciar variables y objetos de la tabla principal
+         */
+        $empresaId = $this->get('session')->get('empresaId');
+        $tipoPartidaId = 1;
         $formapartidaId = 1;
-        $anioId         = $this->get('session')->get('anioId')->getId();
-        $userId         = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
+        $anioId = $this->get('session')->get('anioId')->getId();
+        $userId = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
 
-        $ultimaPartida  = $consultaCatalogos->getNumeroPartida($empresaId,$anioId,$tipoPartidaId);
+        $ultimaPartida = $consultaCatalogos->getNumeroPartida($empresaId, $anioId, $tipoPartidaId);
 
-        $empresa        = $consultaCatalogos->getEmpresa($empresaId);
-        $formapartida   = $consultaCatalogos->getFormapartida($formapartidaId);
-        $anio           = $consultaCatalogos->getAnio($anioId);
-        $tipopartida    = $consultaCatalogos->getTipopartida($tipoPartidaId);
+        $empresa = $consultaCatalogos->getEmpresa($empresaId);
+        $formapartida = $consultaCatalogos->getFormapartida($formapartidaId);
+        $anio = $consultaCatalogos->getAnio($anioId);
+        $tipopartida = $consultaCatalogos->getTipopartida($tipoPartidaId);
 
-        if($ultimaPartida) //evaluar si hay una partida similar para determinar correlativos
-        {
-            $corrAnual      = $ultimaPartida[0]->getCorrAnual()+1;
-            $corrMensual    = $ultimaPartida[0]->getCorrMensual()+1;
-            $corrTipo       = $ultimaPartida[0]->getCorrTipo()+1;
+        if ($ultimaPartida) { //evaluar si hay una partida similar para determinar correlativos
+            $corrAnual = $ultimaPartida[0]->getCorrAnual() + 1;
+            $corrMensual = $ultimaPartida[0]->getCorrMensual() + 1;
+            $corrTipo = $ultimaPartida[0]->getCorrTipo() + 1;
         } else { // todos inician con 1 nuevo correlativo
-            $corrAnual      = 1;
-            $corrMensual    = 1;
-            $corrTipo       = 1;
+            $corrAnual = 1;
+            $corrMensual = 1;
+            $corrTipo = 1;
         }
 
         // asignar valores por defecto;
@@ -204,43 +210,43 @@ class ContaController extends Controller
         $classForm->setCreatedAt(new \DateTime());
 
         $form = $this->createFormBuilder($classForm)
-            ->add('corrAnual', IntegerType::class, array(
-                'read_only' => TRUE,
-                'label'     => 'Correlativo anual',
-                'attr'      => array(
+                ->add('corrAnual', IntegerType::class, array(
+                    'read_only' => TRUE,
+                    'label' => 'Correlativo anual',
+                    'attr' => array(
                         'style' => 'width:100px'
             )))
-            ->add('corrMensual', IntegerType::class, array(
-                'read_only' =>TRUE,
-                'label'     => 'Correlativo mensual',
-                'attr'      => array(
+                ->add('corrMensual', IntegerType::class, array(
+                    'read_only' => TRUE,
+                    'label' => 'Correlativo mensual',
+                    'attr' => array(
                         'style' => 'width:100px'
             )))
-            ->add('corrTipo', IntegerType::class, array(
-                'read_only' =>TRUE,
-                'label'     => 'Correlativo tipo',
-                'attr'      => array(
+                ->add('corrTipo', IntegerType::class, array(
+                    'read_only' => TRUE,
+                    'label' => 'Correlativo tipo',
+                    'attr' => array(
                         'style' => 'width:100px'
             )))
-            ->add('idTipopartida', 'entity', array(
-                'class'     => 'NinfacContaBundle:CtlTipopartida',
-                'property'  => 'nombre',
-                'label'     => 'Tipo partida',
-                'attr'      => array(
+                ->add('idTipopartida', 'entity', array(
+                    'class' => 'NinfacContaBundle:CtlTipopartida',
+                    'property' => 'nombre',
+                    'label' => 'Tipo partida',
+                    'attr' => array(
                         'style' => 'width:200px'
             )))
-            ->add('fecha', DateType::class)
-            ->add('concepto', TextType::class,array(
-                'attr'=> array(
-                    'style' => 'width:350px'
+                ->add('fecha', DateType::class)
+                ->add('concepto', TextType::class, array(
+                    'attr' => array(
+                        'style' => 'width:350px'
             )))
-            ->add('save', SubmitType::class, array(
-                'label'     => 'Guardar',
-                'attr'      => array(
-                    'class'     => 'btn btn-success btn-block',
-                    'style'     => 'width:200px'
+                ->add('save', SubmitType::class, array(
+                    'label' => 'Guardar',
+                    'attr' => array(
+                        'class' => 'btn btn-success btn-block',
+                        'style' => 'width:200px'
             )))
-            ->getForm();
+                ->getForm();
 
         $form->handleRequest($request);
 
@@ -262,11 +268,10 @@ class ContaController extends Controller
         }
 
         return $this->render('NinfacContaBundle:Conta:partidacontable_edit.html.twig', array(
-            'form' => $form->createView(),
-            'titulo' => 'Partida contable',
-            'icon'   => 'fa fa-list-alt',
-            'with'   => '860px'
-
+                    'form' => $form->createView(),
+                    'titulo' => 'Partida contable',
+                    'icon' => 'fa fa-list-alt',
+                    'with' => '860px'
         ));
 
         // $em = $this->getDoctrine()->getEntityManager();
@@ -276,6 +281,54 @@ class ContaController extends Controller
         //     'icon'   => 'glyphicon glyphicon-usd',
         //     'with'   => '860px'
         // ));
+    }
+
+    /**
+     *
+     * @author julio castillo
+     * analista programador
+     */
+
+    /**
+     * @Route("/conta/periodo/select", name="conta_periodo_select", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function contaPeriodoSelectAction() {
+        $empresaId = $this->get('session')->get('empresaId');
+        // var_dump($empresaId); exit();
+        $em = $this->getDoctrine()->getEntityManager();
+        $periodos = $em->getRepository('NinfacContaBundle:CtlPeriodocontable')->findBy(array('idEmpresa' => $empresaId, 'activo' => true));
+        return $this->render('NinfacContaBundle:Herramientas:periodo_seleccionar.html.twig', array(
+                    'periodos' => $periodos
+        ));
+    }
+
+    /**
+     *
+     * @author julio castillo
+     * analista programador
+     */
+
+    /**
+     * @Route("/conta/empresa/open", name="conta_empresa_open", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function contaEmpresaOpenAction() {
+        $em = $this->getDoctrine()->getEntityManager();
+        $empresas = $em->getRepository('NinfacContaBundle:CtlEmpresa')->findBy(array('activo' => true));
+        return $this->render('NinfacContaBundle:Herramientas:empresa_abrir.html.twig', array(
+                    'empresas' => $empresas
+        ));
+    }
+
+    /*
+     * funcion para enviar mensaje de alerta
+     */
+
+    function warning($mensaje) {
+        return $this->render('NinfacContaBundle:Default:warning.html.twig', array(
+                    'mensaje' => $mensaje
+        ));
     }
 
 }

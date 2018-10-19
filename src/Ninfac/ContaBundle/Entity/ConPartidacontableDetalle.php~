@@ -25,14 +25,14 @@ class ConPartidacontableDetalle
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle", type="string", length=200, nullable=false)
+     * @ORM\Column(name="concepto", type="string", length=200, nullable=false)
      */
-    private $detalle;
+    private $concepto;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="debe", type="decimal", precision=12, scale=2, nullable=true)
+     * @ORM\Column(name="debe", type="decimal", precision=12, scale=2, nullable=false)
      */
     private $debe;
 
@@ -42,6 +42,34 @@ class ConPartidacontableDetalle
      * @ORM\Column(name="haber", type="decimal", precision=12, scale=2, nullable=true)
      */
     private $haber;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="created_by", type="integer", nullable=false)
+     */
+    private $createdBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="updated_by", type="integer", nullable=true)
+     */
+    private $updatedBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @var \CtlAnio

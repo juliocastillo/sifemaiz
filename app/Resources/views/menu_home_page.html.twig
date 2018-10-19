@@ -18,15 +18,12 @@
                 <!-- Contabildad -->
                 {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_CONTA_MENU')) %}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conta <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contabilidad <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="{{ path('conta_empresa_open') }}">Abrir</a></li>
+                        <li><a href="{{ path('conta_periodo_select') }}">Periodo</a></li>
+                        <li role="separator" class="divider"></li>
                         <li><a href="{{ path('conta_partidacontable_create') }}">Partida contable</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
                 {% endif %}
@@ -132,13 +129,10 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> Herramientas <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ path('conta_periodo_select') }}">Seleccionar periodo contable</a></li>
-                        <li><a href="{{ path('conta_empresa_open') }}">Abrir Empresa</a></li>
-                        <li role="separator" class="divider"></li>
                         <li><a href="{{ path('user_password_change') }}">Cambiar su Password</a></li>
                         {% if (is_granted('ROLE_ADMIN')) %}
                         <li role="separator" class="divider"></li>
-                        <li><a href="{{ path('sonata_admin_redirect') }}">Administración del sistema</a></li>
+                        <li><a target="_blank" href="{{ path('sonata_admin_redirect') }}">Administración del sistema</a></li>
                         {% endif %}
                     </ul>
 
