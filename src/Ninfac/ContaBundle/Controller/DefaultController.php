@@ -35,6 +35,7 @@ class DefaultController extends Controller
               $this->get('session')->set('empresaId', NULL);
               $this->get('session')->set('empresaNombre', 'Sin nombre');
             }
+            return $this->redirectToRoute('conta_periodo_select');
         }
         else
         { // abrir la empresa solicitada
