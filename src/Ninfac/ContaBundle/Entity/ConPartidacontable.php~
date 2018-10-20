@@ -160,6 +160,452 @@ class ConPartidacontable
      */
     private $idTipoPartida;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="ConPartidacontableDetalle", mappedBy="idPartidacontable", cascade={"all"}, orphanRemoval=true)
+     *
+     */
+    private $conPartidacontableDetalle;
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     *
+     * @return ConPartidacontable
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param integer $numero
+     *
+     * @return ConPartidacontable
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return integer
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * Set corrAnual
+     *
+     * @param integer $corrAnual
+     *
+     * @return ConPartidacontable
+     */
+    public function setCorrAnual($corrAnual)
+    {
+        $this->corrAnual = $corrAnual;
+
+        return $this;
+    }
+
+    /**
+     * Get corrAnual
+     *
+     * @return integer
+     */
+    public function getCorrAnual()
+    {
+        return $this->corrAnual;
+    }
+
+    /**
+     * Set corrMensual
+     *
+     * @param integer $corrMensual
+     *
+     * @return ConPartidacontable
+     */
+    public function setCorrMensual($corrMensual)
+    {
+        $this->corrMensual = $corrMensual;
+
+        return $this;
+    }
+
+    /**
+     * Get corrMensual
+     *
+     * @return integer
+     */
+    public function getCorrMensual()
+    {
+        return $this->corrMensual;
+    }
+
+    /**
+     * Set corrTipo
+     *
+     * @param integer $corrTipo
+     *
+     * @return ConPartidacontable
+     */
+    public function setCorrTipo($corrTipo)
+    {
+        $this->corrTipo = $corrTipo;
+
+        return $this;
+    }
+
+    /**
+     * Get corrTipo
+     *
+     * @return integer
+     */
+    public function getCorrTipo()
+    {
+        return $this->corrTipo;
+    }
+
+    /**
+     * Set concepto
+     *
+     * @param string $concepto
+     *
+     * @return ConPartidacontable
+     */
+    public function setConcepto($concepto)
+    {
+        $this->concepto = $concepto;
+
+        return $this;
+    }
+
+    /**
+     * Get concepto
+     *
+     * @return string
+     */
+    public function getConcepto()
+    {
+        return $this->concepto;
+    }
+
+    /**
+     * Set totalDebe
+     *
+     * @param string $totalDebe
+     *
+     * @return ConPartidacontable
+     */
+    public function setTotalDebe($totalDebe)
+    {
+        $this->totalDebe = $totalDebe;
+
+        return $this;
+    }
+
+    /**
+     * Get totalDebe
+     *
+     * @return string
+     */
+    public function getTotalDebe()
+    {
+        return $this->totalDebe;
+    }
+
+    /**
+     * Set totalHaber
+     *
+     * @param string $totalHaber
+     *
+     * @return ConPartidacontable
+     */
+    public function setTotalHaber($totalHaber)
+    {
+        $this->totalHaber = $totalHaber;
+
+        return $this;
+    }
+
+    /**
+     * Get totalHaber
+     *
+     * @return string
+     */
+    public function getTotalHaber()
+    {
+        return $this->totalHaber;
+    }
+
+    /**
+     * Set activo
+     *
+     * @param boolean $activo
+     *
+     * @return ConPartidacontable
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean
+     */
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * Set partidaInicial
+     *
+     * @param boolean $partidaInicial
+     *
+     * @return ConPartidacontable
+     */
+    public function setPartidaInicial($partidaInicial)
+    {
+        $this->partidaInicial = $partidaInicial;
+
+        return $this;
+    }
+
+    /**
+     * Get partidaInicial
+     *
+     * @return boolean
+     */
+    public function getPartidaInicial()
+    {
+        return $this->partidaInicial;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param integer $createdBy
+     *
+     * @return ConPartidacontable
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return integer
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return ConPartidacontable
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedBy
+     *
+     * @param integer $updatedBy
+     *
+     * @return ConPartidacontable
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedBy
+     *
+     * @return integer
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return ConPartidacontable
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set idEmpresa
+     *
+     * @param \Ninfac\ContaBundle\Entity\CtlEmpresa $idEmpresa
+     *
+     * @return ConPartidacontable
+     */
+    public function setIdEmpresa(\Ninfac\ContaBundle\Entity\CtlEmpresa $idEmpresa = null)
+    {
+        $this->idEmpresa = $idEmpresa;
+
+        return $this;
+    }
+
+    /**
+     * Get idEmpresa
+     *
+     * @return \Ninfac\ContaBundle\Entity\CtlEmpresa
+     */
+    public function getIdEmpresa()
+    {
+        return $this->idEmpresa;
+    }
+
+    /**
+     * Set idFormaPartida
+     *
+     * @param \Ninfac\ContaBundle\Entity\CtlFormaPartida $idFormaPartida
+     *
+     * @return ConPartidacontable
+     */
+    public function setIdFormaPartida(\Ninfac\ContaBundle\Entity\CtlFormaPartida $idFormaPartida = null)
+    {
+        $this->idFormaPartida = $idFormaPartida;
+
+        return $this;
+    }
+
+    /**
+     * Get idFormaPartida
+     *
+     * @return \Ninfac\ContaBundle\Entity\CtlFormaPartida
+     */
+    public function getIdFormaPartida()
+    {
+        return $this->idFormaPartida;
+    }
+
+    /**
+     * Set idAnio
+     *
+     * @param \Ninfac\ContaBundle\Entity\CtlAnio $idAnio
+     *
+     * @return ConPartidacontable
+     */
+    public function setIdAnio(\Ninfac\ContaBundle\Entity\CtlAnio $idAnio = null)
+    {
+        $this->idAnio = $idAnio;
+
+        return $this;
+    }
+
+    /**
+     * Get idAnio
+     *
+     * @return \Ninfac\ContaBundle\Entity\CtlAnio
+     */
+    public function getIdAnio()
+    {
+        return $this->idAnio;
+    }
+
+    /**
+     * Set idTipoPartida
+     *
+     * @param \Ninfac\ContaBundle\Entity\CtlTipoPartida $idTipoPartida
+     *
+     * @return ConPartidacontable
+     */
+    public function setIdTipoPartida(\Ninfac\ContaBundle\Entity\CtlTipoPartida $idTipoPartida = null)
+    {
+        $this->idTipoPartida = $idTipoPartida;
+
+        return $this;
+    }
+
+    /**
+     * Get idTipoPartida
+     *
+     * @return \Ninfac\ContaBundle\Entity\CtlTipoPartida
+     */
+    public function getIdTipoPartida()
+    {
+        return $this->idTipoPartida;
+    }
 }
-

@@ -53,7 +53,7 @@ class DefaultController extends Controller
                 $periodo = $em->getRepository('NinfacContaBundle:CtlPeriodocontable')
                               ->find($periodoId);
                 $anioId  = $periodo->getIdAnio();
-                $mesId  = $periodo->getIdMes();
+                $mesId  = $periodo->getIdMes()->getId();
                 $this->get('session')->set('periodoId', (int) $periodoId);
                 $this->get('session')->set('anioId', $anioId);
                 $this->get('session')->set('mesId', $mesId);

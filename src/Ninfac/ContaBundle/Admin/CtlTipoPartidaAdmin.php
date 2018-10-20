@@ -21,6 +21,7 @@ class CtlTipoPartidaAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('nombre')
+            ->add('idFormaPartida')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -35,6 +36,7 @@ class CtlTipoPartidaAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('nombre')
+            ->add('idFormaPartida')
         ;
     }
 

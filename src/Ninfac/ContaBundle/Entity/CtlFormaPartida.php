@@ -29,8 +29,6 @@ class CtlFormaPartida
      */
     private $nombre;
 
-
-
     /**
      * Get id
      *
@@ -64,4 +62,10 @@ class CtlFormaPartida
     {
         return $this->nombre;
     }
+    
+    public function __toString() {
+        return (string)$this->nombre;
+    }
+
+    
 }

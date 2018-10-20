@@ -32,7 +32,7 @@ class ConPartidacontableDetalle
     /**
      * @var string
      *
-     * @ORM\Column(name="debe", type="decimal", precision=12, scale=2, nullable=false)
+     * @ORM\Column(name="debe", type="decimal", precision=12, scale=2, nullable=true)
      */
     private $debe;
 
@@ -86,7 +86,7 @@ class ConPartidacontableDetalle
      *
      * @ORM\ManyToOne(targetEntity="MntCuentacontable")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_cuentacontable", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_cuentacontable", referencedColumnName="id", nullable=false)
      * })
      */
     private $idCuentacontable;
@@ -104,7 +104,7 @@ class ConPartidacontableDetalle
     /**
      * @var \ConPartidacontable
      *
-     * @ORM\ManyToOne(targetEntity="ConPartidacontable")
+     * @ORM\ManyToOne(targetEntity="ConPartidacontable", inversedBy="ConPartidacontableDetalle")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_partidacontable", referencedColumnName="id")
      * })

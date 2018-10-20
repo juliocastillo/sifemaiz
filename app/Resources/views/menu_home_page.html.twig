@@ -132,7 +132,7 @@
                         <li><a href="{{ path('user_password_change') }}">Cambiar su Password</a></li>
                         {% if (is_granted('ROLE_ADMIN')) %}
                         <li role="separator" class="divider"></li>
-                        <li><a target="_blank" href="{{ path('sonata_admin_redirect') }}">Administración del sistema</a></li>
+                        <li><a href="{{ path('sonata_admin_redirect') }}">Administración del sistema</a></li>
                         {% endif %}
                     </ul>
 

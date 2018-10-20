@@ -81,6 +81,8 @@ class MntCuentacontableAdmin extends AbstractAdmin {
      */
 
     public function prePersist($val) {
+        //Guardar variables de sessión empresa
+        // y año contable
         $empresaId = $this->getConfigurationPool()->getContainer()->get('session')->get('empresaId');
         $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getEntityManager();
         $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
@@ -88,15 +90,15 @@ class MntCuentacontableAdmin extends AbstractAdmin {
         $anioId = $this->getConfigurationPool()->getContainer()->get('session')->get('anioId')->getId();
         $anio = $em->getRepository('NinfacContaBundle:CtlAnio')
                 ->findOneById($anioId);
-
+        $val->setIdEmpresa($empresa);
+        $val->setIdAnio($anio);
+        //Guardar datos de auditoria
         $userId = $this->getConfigurationPool()
                 ->getContainer()->get('security.token_storage')
                 ->getToken()->getUser()
                 ->getId();
         $val->setCreatedBy($userId);
         $val->setCreatedAt(new \DateTime());
-        $val->setIdEmpresa($empresa);
-        $val->setIdAnio($anio);
     }
 
     /*

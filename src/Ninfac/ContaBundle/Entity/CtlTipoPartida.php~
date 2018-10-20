@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlTipoPartida
  *
- * @ORM\Table(name="ctl_tipo_partida")
+ * @ORM\Table(name="ctl_tipo_partida", indexes={@ORM\Index(name="IDX_392D8E6C3468F610", columns={"id_forma_partida"})})
  * @ORM\Entity
  */
 class CtlTipoPartida
@@ -28,6 +28,16 @@ class CtlTipoPartida
      * @ORM\Column(name="nombre", type="string", length=40, nullable=true)
      */
     private $nombre;
+
+    /**
+     * @var \CtlFormaPartida
+     *
+     * @ORM\ManyToOne(targetEntity="CtlFormaPartida")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_forma_partida", referencedColumnName="id")
+     * })
+     */
+    private $idFormaPartida;
 
 
 }

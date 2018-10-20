@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ConPartidacontable
  *
- * @ORM\Table(name="con_partidacontable", indexes={@ORM\Index(name="IDX_49C6AC6664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_49C6AC63468F610", columns={"id_forma_partida"}), @ORM\Index(name="IDX_49C6AC62851975", columns={"id_anio"}), @ORM\Index(name="IDX_49C6AC699F90CDE", columns={"id_tipo_partida"})})
- * @ORM\Entity
+ * @ORM\Table(name="con_partidacontable", indexes={@ORM\Index(name="IDX_49C6AC6664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_49C6AC62851975", columns={"id_anio"}), @ORM\Index(name="IDX_49C6AC699F90CDE", columns={"id_tipo_partida"})})
+ * @ORM\Entity(repositoryClass="Ninfac\ContaBundle\Repository\ConPartidacontableRepository")
  */
 class ConPartidacontable
 {
@@ -23,37 +23,37 @@ class ConPartidacontable
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     * @ORM\Column(name="fecha", type="date", nullable=false)
      */
     private $fecha;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="numero", type="integer", nullable=false)
+     * @ORM\Column(name="numero", type="integer", nullable=true)
      */
     private $numero;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="corr_anual", type="integer", nullable=false)
+     * @ORM\Column(name="corr_anual", type="integer", nullable=true)
      */
     private $corrAnual;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="corr_mensual", type="integer", nullable=false)
+     * @ORM\Column(name="corr_mensual", type="integer", nullable=true)
      */
     private $corrMensual;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="corr_tipo", type="integer", nullable=false)
+     * @ORM\Column(name="corr_tipo", type="integer", nullable=true)
      */
     private $corrTipo;
 
@@ -131,16 +131,6 @@ class ConPartidacontable
     private $idEmpresa;
 
     /**
-     * @var \CtlFormaPartida
-     *
-     * @ORM\ManyToOne(targetEntity="CtlFormaPartida")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_forma_partida", referencedColumnName="id")
-     * })
-     */
-    private $idFormaPartida;
-
-    /**
      * @var \CtlAnio
      *
      * @ORM\ManyToOne(targetEntity="CtlAnio")
@@ -155,12 +145,17 @@ class ConPartidacontable
      *
      * @ORM\ManyToOne(targetEntity="CtlTipoPartida")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipo_partida", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_tipo_partida", referencedColumnName="id", nullable=false)
      * })
      */
     private $idTipoPartida;
 
-
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="ConPartidacontableDetalle", mappedBy="idPartidacontable", cascade={"all"}, orphanRemoval=true)
+     *
+     */
+    private $conPartidacontableDetalle;
 
     /**
      * Get id
@@ -533,30 +528,6 @@ class ConPartidacontable
     }
 
     /**
-     * Set idFormaPartida
-     *
-     * @param \Ninfac\ContaBundle\Entity\CtlFormaPartida $idFormaPartida
-     *
-     * @return ConPartidacontable
-     */
-    public function setIdFormaPartida(\Ninfac\ContaBundle\Entity\CtlFormaPartida $idFormaPartida = null)
-    {
-        $this->idFormaPartida = $idFormaPartida;
-
-        return $this;
-    }
-
-    /**
-     * Get idFormaPartida
-     *
-     * @return \Ninfac\ContaBundle\Entity\CtlFormaPartida
-     */
-    public function getIdFormaPartida()
-    {
-        return $this->idFormaPartida;
-    }
-
-    /**
      * Set idAnio
      *
      * @param \Ninfac\ContaBundle\Entity\CtlAnio $idAnio
@@ -602,5 +573,46 @@ class ConPartidacontable
     public function getIdTipoPartida()
     {
         return $this->idTipoPartida;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->conPartidacontableDetalle = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add conPartidacontableDetalle
+     *
+     * @param \Ninfac\ContaBundle\Entity\ConPartidacontableDetalle $conPartidacontableDetalle
+     *
+     * @return ConPartidacontable
+     */
+    public function addConPartidacontableDetalle(\Ninfac\ContaBundle\Entity\ConPartidacontableDetalle $conPartidacontableDetalle)
+    {
+        $this->conPartidacontableDetalle[] = $conPartidacontableDetalle;
+
+        return $this;
+    }
+
+    /**
+     * Remove conPartidacontableDetalle
+     *
+     * @param \Ninfac\ContaBundle\Entity\ConPartidacontableDetalle $conPartidacontableDetalle
+     */
+    public function removeConPartidacontableDetalle(\Ninfac\ContaBundle\Entity\ConPartidacontableDetalle $conPartidacontableDetalle)
+    {
+        $this->conPartidacontableDetalle->removeElement($conPartidacontableDetalle);
+    }
+
+    /**
+     * Get conPartidacontableDetalle
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getConPartidacontableDetalle()
+    {
+        return $this->conPartidacontableDetalle;
     }
 }

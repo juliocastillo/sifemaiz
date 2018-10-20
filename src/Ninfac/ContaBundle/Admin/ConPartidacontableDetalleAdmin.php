@@ -12,45 +12,38 @@ class ConPartidacontableDetalleAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper
-            ->add('concepto')
-            ->add('debe')
-            ->add('haber')
-        ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper
-            ->add('concepto')
-            ->add('debe')
-            ->add('haber')
-            ->add('_action', null, [
-                'actions' => [
-                    'show' => [],
-                    'edit' => [],
-                    'delete' => [],
-                ],
-            ])
-        ;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('concepto')
-            ->add('debe')
-            ->add('haber')
+            ->add('idCuentacontable', NULL, array(
+                    'empty_value' => '...Seleccione...',
+                    'label' => 'Cuenta',
+                    'attr' => array('style'=>'width:300px'),
+                ))
+            ->add('concepto', 'text', array(
+                            'attr' => array(
+                                'style' => 'width:400px', 
+                                'maxlength' => '25')))
+            ->add('debe', null, array(
+                            'attr' => array(
+                                'style' => 'width:100px', 
+                                'maxlength' => '25'
+                                )))
+            ->add('haber', null, array(
+                            'attr' => array(
+                                'style' => 'width:100px', 
+                                'maxlength' => '25'
+                                )))
         ;
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $showMapper
-            ->add('id')
-            ->add('concepto')
-            ->add('debe')
-            ->add('haber')
-        ;
     }
 }

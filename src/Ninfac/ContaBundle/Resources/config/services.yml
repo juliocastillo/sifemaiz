@@ -66,5 +66,5 @@ services:
         class: Ninfac\ContaBundle\Admin\ConPartidacontableDetalleAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\ConPartidacontableDetalle, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: ConPartidacontableDetalle }
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
         public: true
