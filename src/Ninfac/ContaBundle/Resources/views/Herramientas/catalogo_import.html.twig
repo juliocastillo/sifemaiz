@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+
+{% block head %}
+    <title>{{app.session.get('empresaNombre')}}</title>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/jquery.dataTables.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock %} {% block body %} {{ parent() }} 
+    <div class="panel panel-primary box box-info center-block" style="width: 650px;">
+        <div class="panel-heading box-header with-border">
+            <text class="box-title"><span class="glyphicon glyphicon-folder-open"></span> Importar catalogo</text>
+        </div>
+        <form action="{{ path('conta_catalogo_import_open') }}" class="form-horizontal" method="get">
+            <div class="panel-body box-body">
+                <label><u>Empresa abierta</u></label><br>
+                <label>Nombre:</label> {{app.session.get('empresaNombre')}}<br>
+                <label>Ejercicio contable:</label> {{app.session.get('anioNombre')}}<br>
+            </div>
+            <br>
+            <div class="panel-body box-body">
+                <label><u>Empresa origen</u></label><br>
+                <table>
+                    <tr>
+                        <td><label>Nombre</label></td>
+                        <td>
+                            <select name="empresaOrigenId">
+                                {% for empresa in empresas %}
+                                    <option value="{{empresa.id}}">{{empresa.nombre}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    <tr>
+                        <td><label>Ejercicio contable</label></td> 
+                        <td>
+                            <select name="anioOrigenId">
+                                {% for anio in anios %}
+                                    <option value="{{anio.id}}">{{anio.nombre}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    <tr>
+                        <td><label>Hasta que nivel desea importar?</label></td>
+                        <td>
+                            <select name="nivelCuentaId">
+                                {% for nivel in niveles %}
+                                    <option value="{{nivel.id}}">{{nivel.nombre}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                </table>
+            </div>
+            <div class="panel-body box-body">
+                <button type="submit" class="btn btn-danger">Importar ahora</button>
+                <a href="{{ path('index') }}" class="btn btn-success">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

@@ -8,21 +8,7 @@ services:
         class: Ninfac\ContaBundle\Admin\ConPartidacontableAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\ConPartidacontable, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Partidas, label: Partida contable }
-        public: true
-
-    ninfac_conta.admin.ctl_tipo_partida:
-        class: Ninfac\ContaBundle\Admin\CtlTipoPartidaAdmin
-        arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoPartida, Sonata\AdminBundle\Controller\CRUDController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: Partidas, label: Tipo partida }
-        public: true
-
-    ninfac_conta.admin.ctl_forma_partida:
-        class: Ninfac\ContaBundle\Admin\CtlFormaPartidaAdmin
-        arguments: [~, Ninfac\ContaBundle\Entity\CtlFormaPartida, Sonata\AdminBundle\Controller\CRUDController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: Partidas, label: Forma partida }
+            - { name: sonata.admin, manager_type: orm, group: Contabilidad, label: Partidas contables }
         public: true
 
     ninfac_conta.admin.con_partidacontable_detalle:
@@ -43,7 +29,7 @@ services:
         class: Ninfac\ContaBundle\Admin\CtlAnioAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\CtlAnio, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Anio contable }
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Ejercicio contable }
 
     ninfac_conta.admin.ctl_periodocontable:
         class: Ninfac\ContaBundle\Admin\CtlPeriodocontableAdmin
@@ -69,6 +55,20 @@ services:
         class: Ninfac\ContaBundle\Admin\MntCuentacontableAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\MntCuentacontable, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Cuenta contable }
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Catalogos de cuenta }
+        public: true
+
+    ninfac_conta.admin.ctl_tipo_partida:
+        class: Ninfac\ContaBundle\Admin\CtlTipoPartidaAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoPartida, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Tipo partida }
+        public: true
+
+    ninfac_conta.admin.ctl_forma_partida:
+        class: Ninfac\ContaBundle\Admin\CtlFormaPartidaAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlFormaPartida, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Forma partida }
         public: true
 

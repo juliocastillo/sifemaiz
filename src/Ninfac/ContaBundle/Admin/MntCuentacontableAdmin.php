@@ -22,6 +22,9 @@ class MntCuentacontableAdmin extends AbstractAdmin {
         $listMapper
                 ->add('cuenta')
                 ->add('nombre')
+                ->add('idCuentacontableDepende', NULL, array(
+                    'label' => 'Cuenta de la que depende'
+                ))
                 ->add('activo')
                 ->add('_action', null, [
                     'actions' => [

@@ -44,7 +44,7 @@
                 <tr>
                 <td style="padding:2px;">{{ periodo.idmes }}</td>
                 <td style="padding:2px;">{{ periodo.idanio }}</td>
-                <td style="padding:2px;"><a href="{{ path('index', {'empresaId': app.session.get('empresaId'), 'periodoId': periodo.id }) }}" class="btn btn-success">Abrir</a></td>
+                <td style="padding:2px;"><a href="{{ path('conta_periodo_open', {'empresaId': app.session.get('empresaId'), 'periodoId': periodo.id }) }}" class="btn btn-success">Abrir</a></td>
                 </tr>
                 {% set i = i + 1 %}
                 {% endfor %}

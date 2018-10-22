@@ -23,10 +23,10 @@ class ContaController extends Controller {
      */
 
     /**
-     * @Route("/conta/partidacontable/create", name="conta_partidacontable_create", options={"expose"=true})
+     * @Route("/conta/partidacontable/admin", name="conta_partidacontable_admin", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function contaPartidacontableCreateAction(Request $request) {
+    public function contaPartidacontableAdminAction(Request $request) {
         //instanciando Service
         $consultaCatalogos = $this->container->get('conta.consulta_catalogos');
 
@@ -311,10 +311,10 @@ class ContaController extends Controller {
      */
 
     /**
-     * @Route("/conta/empresa/open", name="conta_empresa_open", options={"expose"=true})
+     * @Route("/conta/empresa/select", name="conta_empresa_select", options={"expose"=true})
      * @Method("GET")
      */
-    public function contaEmpresaOpenAction() {
+    public function contaEmpresaSelectAction() {
         $em = $this->getDoctrine()->getEntityManager();
         $empresas = $em->getRepository('NinfacContaBundle:CtlEmpresa')->findBy(array('activo' => true));
         return $this->render('NinfacContaBundle:Herramientas:empresa_abrir.html.twig', array(
@@ -322,14 +322,35 @@ class ContaController extends Controller {
         ));
     }
 
-    /*
-     * funcion para enviar mensaje de alerta
+    /**
+     *
+     * @author julio castillo
+     * analista programador
      */
 
-    function warning($mensaje) {
-        return $this->render('NinfacContaBundle:Default:warning.html.twig', array(
-                    'mensaje' => $mensaje
+    /**
+     * @Route("/conta/catalogo/import/select", name="conta_catalogo_import_select", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function contaCatalogoImportSelectAction() {
+        if ($this->get('session')->get('anioId')) {
+            $anioId = $this->get('session')->get('anioId')->getId();
+        } else {
+            return $this->render('NinfacContaBundle:Default:warning.html.twig', array(
+                        'mensaje' => 'No hay periodo contable abierto ...'
+            ));
+        }
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $empresas   = $em->getRepository('NinfacContaBundle:CtlEmpresa')->findAll();
+        $niveles    = $em->getRepository('NinfacContaBundle:CtlNivelCuentacontable')->findBy(array('activo' => true));
+        $anios      = $em->getRepository('NinfacContaBundle:CtlAnio')->findAll();
+        return $this->render('NinfacContaBundle:Herramientas:catalogo_import.html.twig', array(
+                    'empresas'  => $empresas,
+                    'niveles'   => $niveles,
+                    'anios'     => $anios
         ));
     }
 
+ 
 }

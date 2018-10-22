@@ -18,12 +18,13 @@
                 <!-- Contabildad -->
                 {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_CONTA_MENU')) %}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contabilidad <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Empresa <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ path('conta_empresa_open') }}">Abrir</a></li>
-                        <li><a href="{{ path('conta_periodo_select') }}">Periodo</a></li>
+                        <li><a href="{{ path('conta_empresa_select') }}">Abrir empresa</a></li>
+                        <li><a href="{{ path('conta_periodo_select') }}">Seleccionar periodo</a></li>
+                        <li><a href="{{ path('conta_catalogo_import_select') }}">Importar catálogo</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="{{ path('conta_partidacontable_create') }}">Administrar</a></li>
+                        <li><a href="{{ path('conta_partidacontable_admin') }}">Administrador partidas</a></li>
 {#                        <li><a href="{{ path('sonata_admin_redirect') }}">Administrar</a></li>#}
                     </ul>
                 </li>
