@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-    {% block head %}<title>{{app.session.get('empresaNombre')}}</title>{% endblock %}
+    {% block head %}<title>{{app.session.get('empresaOrigen')}} - {{app.session.get('anioId')}}</title>{% endblock %}
 
     {% block stylesheets %}
         {{ parent() }}

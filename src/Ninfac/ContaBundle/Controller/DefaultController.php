@@ -19,42 +19,29 @@ class DefaultController extends Controller {
      *
      */
     public function indexAction(Request $request) {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $empresaId = $request->get('empresaId') ? $request->get('empresaId') : $this->get('session')->get('empresaId');
         if ($this->get('session')->get('empresaId') == NULL) { //abrir 
-            if ($empresaId == NULL) { // entrar por primera vez
-                // abrir empresa consolidadora por default
-                $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
-                        ->findOneBy(array('consolidadora' => TRUE));
-                if ($empresa) { //si la consulta retorna una empresa consolidadora
-                    $this->get('session')->set('empresaId', $empresa->getId());
-                    $this->get('session')->set('empresaNombre', $empresa->getNombre());
-                    return $this->redirectToRoute('conta_periodo_select');
-                } else { //si la consulta no retorne ninguna empresa.
-                    $this->get('session')->set('empresaId', NULL);
-                    $this->get('session')->set('empresaNombre', 'Sin nombre');
-                    return $this->redirectToRoute('conta_empresa_open');
-                }
-            } else { // abrir la empresa solicitada manualmente
-                $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
-                        ->find($empresaId);
-                $this->get('session')->set('empresaId', $empresa->getId());
-                $this->get('session')->set('empresaNombre', $empresa->getNombre());
-            }
-        } else {
-            $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
-                    ->find($empresaId);
-            $this->get('session')->set('empresaId', $empresa->getId());
-            $this->get('session')->set('empresaNombre', $empresa->getNombre());
-            $this->get('session')->set('periodoId', NULL);
-            $this->get('session')->set('anioId', NULL);
-            $this->get('session')->set('mesId', NULL);
-            $this->get('session')->set('anioNombre', NULL);
-
-            return $this->redirectToRoute('conta_periodo_select');
+            return $this->redirectToRoute('conta_empresa_select');
         }
         return $this->render('NinfacContaBundle:Default:index.html.twig');
+    }
+
+    /**
+     * @Route("/conta/empresa/open", name="conta_empresa_open", options={"expose"=true})
+     * @Method("GET")
+     */
+    /* utilizado desplegar nombre de la empresa.
+     *
+     */
+    public function contaEmpresaOpenAction(Request $request) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $empresaId = $request->get('empresaId');
+        // abrir la empresa solicitada manualmente
+        $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
+                ->find($empresaId);
+        $this->get('session')->set('empresaId', $empresa->getId());
+        $this->get('session')->set('empresaNombre', $empresa->getNombre());
+        $this->get('session')->set('empresaOrigen', $empresa->getOrigen());
+        return $this->redirectToRoute('conta_periodo_select');
     }
 
     /**
@@ -94,7 +81,7 @@ class DefaultController extends Controller {
         //-----
         $anioAbiertoId = $this->get('session')->get('anioId')->getId();
         $empresaAbiertoId = $this->get('session')->get('empresaId');
-        
+
         $em->getRepository('NinfacContaBundle:ConPartidacontable')
                 ->importCatalogo($empresaAbiertoId, $anioAbiertoId, $empresaOrigenId, $anioOrigenId, $nivelCuentaId);
 
