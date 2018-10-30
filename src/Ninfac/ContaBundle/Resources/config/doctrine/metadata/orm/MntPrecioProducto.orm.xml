@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="MntPrecioProducto" table="mnt_precio_producto">
+    <indexes>
+      <index name="IDX_C0C853DF760EA80" columns="id_producto"/>
+      <index name="IDX_C0C853D9B02FA4D" columns="id_tipo_precio"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_precio_producto_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="idEmpresa" type="integer" column="id_empresa" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="precio" type="decimal" column="precio" precision="10" scale="4" nullable="false"/>
+    <field name="createdBy" type="integer" column="created_by" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
+    <field name="updatedBy" type="integer" column="updated_by" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <many-to-one field="idProducto" target-entity="MntProducto" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_producto" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipoPrecio" target-entity="CtlTipoPrecio" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipo_precio" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

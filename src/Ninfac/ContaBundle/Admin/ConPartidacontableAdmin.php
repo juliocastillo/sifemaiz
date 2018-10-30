@@ -12,7 +12,6 @@ class ConPartidacontableAdmin extends AbstractAdmin {
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
         $datagridMapper
-                ->add('id')
                 ->add('fecha')
                 ->add('numero')
                 ->add('corrAnual')

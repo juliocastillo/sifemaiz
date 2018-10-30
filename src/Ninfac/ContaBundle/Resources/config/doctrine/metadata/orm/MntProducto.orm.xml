@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="MntProducto" table="mnt_producto">
+    <indexes>
+      <index name="IDX_5F5A648EF448B73" columns="id_editorial"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_producto_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="idEmpresa" type="integer" column="id_empresa" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idPresentacion" type="integer" column="id_presentacion" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idSubgrupo" type="integer" column="id_subgrupo" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idMarca" type="integer" column="id_marca" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="codigo" type="string" column="codigo" length="25" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Codigo de producto ejemplo 9780973576627</option>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="nombre" length="80" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="exento" type="boolean" column="exento" nullable="false">
+      <options>
+        <option name="comment">Especifica si es un producto excento de IVA</option>
+      </options>
+    </field>
+    <field name="minimo" type="decimal" column="minimo" precision="10" scale="0" nullable="false">
+      <options>
+        <option name="comment">Especifica la cantidad minima en existencia, para generar reporte</option>
+      </options>
+    </field>
+    <field name="maximo" type="decimal" column="maximo" precision="10" scale="0" nullable="false">
+      <options>
+        <option name="comment">Especifica la cantidad maxima en existencia, para generar reporte</option>
+      </options>
+    </field>
+    <field name="enPromocion" type="boolean" column="en_promocion" nullable="false">
+      <options>
+        <option name="comment">Especifica si el producto está en promoción, permite vendere abajo del costo.</option>
+      </options>
+    </field>
+    <field name="pistola" type="boolean" column="pistola" nullable="false"/>
+    <field name="foto" type="string" column="foto" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="activo" nullable="true"/>
+    <field name="createdBy" type="integer" column="created_by" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
+    <field name="updatedBy" type="integer" column="updated_by" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <many-to-one field="idEditorial" target-entity="CtlEditorialProducto" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_editorial" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

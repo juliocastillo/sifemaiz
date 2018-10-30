@@ -51,13 +51,6 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Nivel Cuenta contable }
         public: true
 
-    ninfac_conta.admin.mnt_cuentacontable:
-        class: Ninfac\ContaBundle\Admin\MntCuentacontableAdmin
-        arguments: [~, Ninfac\ContaBundle\Entity\MntCuentacontable, Sonata\AdminBundle\Controller\CRUDController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Catalogos de cuenta }
-        public: true
-
     ninfac_conta.admin.ctl_tipo_partida:
         class: Ninfac\ContaBundle\Admin\CtlTipoPartidaAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoPartida, Sonata\AdminBundle\Controller\CRUDController]
@@ -72,3 +65,68 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Forma partida }
         public: true
 
+
+    #INVENTARIOS
+    ninfac_conta.admin.ctl_marca_producto:
+        class: Ninfac\ContaBundle\Admin\CtlMarcaProductoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlMarcaProducto, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, show_in_dashboard: false }
+        public: true
+
+    ninfac_conta.admin.ctl_grupo_producto:
+        class: Ninfac\ContaBundle\Admin\CtlGrupoProductoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlGrupoProducto, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Grupo de productos }
+        public: true
+
+    ninfac_conta.admin.ctl_subgrupo_producto:
+        class: Ninfac\ContaBundle\Admin\CtlSubgrupoProductoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlSubgrupoProducto, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, show_in_dashboard: false }
+        public: true
+
+    #MANTENIMIENTOS
+    ninfac_conta.admin.mnt_cuentacontable:
+        class: Ninfac\ContaBundle\Admin\MntCuentacontableAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\MntCuentacontable, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Mantenimientos, label: Catalogos de cuenta }
+        public: true
+
+    ninfac_conta.admin.mnt_producto:
+        class: Ninfac\ContaBundle\Admin\MntProductoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\MntProducto, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Mantenimientos, label: Productos }
+        public: true
+
+    ninfac_conta.admin.ctl_editorial_producto:
+        class: Ninfac\ContaBundle\Admin\CtlEditorialProductoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlEditorialProducto, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, show_in_dashboard: false }
+        public: true
+
+    ninfac_conta.admin.ctl_tipo_precio:
+        class: Ninfac\ContaBundle\Admin\CtlTipoPrecioAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoPrecio, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Tipo precio }
+        public: true
+
+    ninfac_conta.admin.mnt_precio_producto:
+        class: Ninfac\ContaBundle\Admin\MntPrecioProductoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\MntPrecioProducto, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false }
+        public: true
+
+    ninfac_conta.admin.ctl_presentacion_producto:
+        class: Ninfac\ContaBundle\Admin\CtlPresentacionProductoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlPresentacionProducto, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false }
+        public: true
