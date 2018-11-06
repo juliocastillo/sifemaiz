@@ -9,3 +9,10 @@ truncate ctl_anio cascade;
 --REINICIAR SECUENCIA DE LAS TABLAS
 ALTER SEQUENCE con_partidacontable_detalle_id_seq RESTART WITH 1;
 UPDATE con_partidacontable SET id=nextval('con_partidacontable_detalle_id_seq');
+
+
+ALTER SEQUENCE mnt_precio_producto_id_seq RESTART WITH 1;
+UPDATE mnt_precio_producto SET id=nextval('mnt_precio_producto_id_seq');
+
+
+ALTER TABLE mnt_producto ADD COLUMN precio_publico numeric(10, 4) NOT NULL;

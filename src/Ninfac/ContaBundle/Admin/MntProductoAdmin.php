@@ -56,11 +56,19 @@ class MntProductoAdmin extends AbstractAdmin {
                 ->with('Generalidades')
                 ->add('codigo')
                 ->add('nombre')
-                ->add('exento')
-                ->add('enPromocion')
-                ->add('pistola')
+                ->add('idPresentacion', 'sonata_type_model_list', array(// permitir buscar un item de un catalogo
+                    'label' => 'Presentacion',
+                    'btn_add' => 'Agregar',
+                    'btn_list' => 'Buscar',
+                    'btn_delete' => FALSE,
+                    'csrf_token_id' => 'lista.html.twig',
+                    'btn_catalogue' => 'SonataNewBundle'
+                        ), array(
+                    'placeholder' => '*****'
+                ))
                 ->add('minimo')
                 ->add('maximo')
+                ->add('precioVenta')
                 ->end()
         ;
         if ($id) {  // cuando se edite el registro
@@ -79,16 +87,6 @@ class MntProductoAdmin extends AbstractAdmin {
                     ->add('activo', null, array('label' => 'Producto activo', 'required' => FALSE, 'attr' => array('checked' => 'checked')));
         }
         $formMapper
-                ->add('idPresentacion', 'sonata_type_model_list', array(// permitir buscar un item de un catalogo
-                    'label' => 'Presentacion',
-                    'btn_add' => 'Agregar',
-                    'btn_list' => 'Buscar',
-                    'btn_delete' => FALSE,
-                    'csrf_token_id' => 'lista.html.twig',
-                    'btn_catalogue' => 'SonataNewBundle'
-                        ), array(
-                    'placeholder' => '*****'
-                ))
                 ->add('idSubgrupo', 'sonata_type_model_list', array(// permitir buscar un item de un catalogo
                     'label' => 'Sub-grupo',
                     'btn_add' => 'Agregar',
@@ -119,7 +117,11 @@ class MntProductoAdmin extends AbstractAdmin {
                         ), array(
                     'placeholder' => '*****'
                 ))
-                ->add('foto', 'file', array('required' => false))
+                ->add('exento')
+                ->add('enPromocion')
+                ->add('pistola')
+
+//                ->add('foto', 'file', array('required' => false))
                 ->end()
                 ->with('Detalle de precios')
                 ->add('precioProducto', 'sonata_type_collection', array('label' => 'Tipo de precio'), array('edit' => 'inline', 'inline' => 'table'))
@@ -146,8 +148,7 @@ class MntProductoAdmin extends AbstractAdmin {
         ;
     }
 
-    
-        /*
+    /*
      * Metodo que se ejecuta antes de realizar una insercion.
      * Recibe como parametro una entidad;
      * con los valores del formulario.
@@ -171,11 +172,15 @@ class MntProductoAdmin extends AbstractAdmin {
         $val->setCreatedAt(new \DateTime());
 
         //Campos de auditoria de DETALLE
+        $primerPrecioCalculado = (float) $val->getPrecioVenta();
         foreach ($val->getPrecioProducto() as $objDetalle) {
+            //calculo de precio
+            $porcentajeDescuento = (integer) $objDetalle->getIdTipoPrecio()->getPorcentajeDescuento();
+            $nuevoPrecio = $primerPrecioCalculado - ($primerPrecioCalculado * ($porcentajeDescuento / 100));
             // llenando datos de deltalle
-            $val->getId();
             $objDetalle->setIdProducto($val);
             $objDetalle->setIdEmpresa($empresa);
+            $objDetalle->setPrecio($nuevoPrecio);
             //llendando variables de auditoria DETALLE
             $objDetalle->setCreatedBy($userId);
             $objDetalle->setCreatedAt(new \DateTime());
@@ -190,18 +195,16 @@ class MntProductoAdmin extends AbstractAdmin {
      */
 
     public function preUpdate($val) {
-        $debe = $haber = 0;
+//        ini_set('xdebug.var_display_max_depth', -1);
+//        ini_set('xdebug.var_display_max_children', -1);
+//        ini_set('xdebug.var_display_max_data', -1);
         //Guardar variables de sessión empresa
         // y año contable
         $empresaId = $this->getConfigurationPool()->getContainer()->get('session')->get('empresaId');
         $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getEntityManager();
         $empresa = $em->getRepository('NinfacContaBundle:CtlEmpresa')
                 ->findOneById($empresaId);
-        $anioId = $this->getConfigurationPool()->getContainer()->get('session')->get('anioId')->getId();
-        $anio = $em->getRepository('NinfacContaBundle:CtlAnio')
-                ->findOneById($anioId);
         $val->setIdEmpresa($empresa);
-        $val->setIdAnio($anio);
         //Guardar datos de auditoria
         $userId = $this->getConfigurationPool()
                 ->getContainer()->get('security.token_storage')
@@ -209,22 +212,28 @@ class MntProductoAdmin extends AbstractAdmin {
                 ->getId();
         $val->setUpdatedBy($userId);
         $val->setUpdatedAt(new \DateTime());
+
         //Campos de auditoria de DETALLE
-        foreach ($val->getConPartidacontableDetalle() as $objDetalle) {
-            // calculando subtotales
-            $debe = $debe + $objDetalle->getDebe($val);
-            $haber = $haber + $objDetalle->getHaber($val);
+        $primerPrecioCalculado = (float) $val->getPrecioVenta();
+        foreach ($val->getPrecioProducto() as $objDetalle) {
+
+            //calculo de precio
+            $porcentajeDescuento = (integer) $objDetalle->getIdTipoPrecio()->getPorcentajeDescuento();
+            $nuevoPrecio = $primerPrecioCalculado - ($primerPrecioCalculado * ($porcentajeDescuento / 100));
             // llenando datos de deltalle
-            $val->getId();
-            $objDetalle->setIdPartidacontable($val);
+            $objDetalle->setIdProducto($val);
             $objDetalle->setIdEmpresa($empresa);
-            $objDetalle->setIdAnio($anio);
-            //llendando variables de auditoria DETALLE
-            $objDetalle->setCreatedBy($userId);
-            $objDetalle->setCreatedAt(new \DateTime());
+            $objDetalle->setPrecio($nuevoPrecio);
+
+            if ($objDetalle->getId() == NULL) {
+                $objDetalle->setCreatedBy($userId);
+                $objDetalle->setCreatedAt(new \DateTime());
+            } else {
+                //llendando variables de auditoria DETALLE
+                $objDetalle->setUpdatedBy($userId);
+                $objDetalle->setUpdatedAt(new \DateTime());
+            }
         }
-        $val->setTotalDebe($debe);
-        $val->setTotalHaber($haber);
     }
 
 }

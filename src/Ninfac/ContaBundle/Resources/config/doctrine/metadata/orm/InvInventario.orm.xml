@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="InvInventario" table="inv_inventario">
+    <indexes>
+      <index name="IDX_AE87F435AA67C589" columns="id_cliente_origen_traslado"/>
+      <index name="IDX_AE87F435664AF320" columns="id_empresa"/>
+      <index name="IDX_AE87F4357C1986A7" columns="id_inventario_traslado"/>
+      <index name="IDX_AE87F435C0674963" columns="id_motivo_movimiento"/>
+      <index name="IDX_AE87F43596F5D4E9" columns="id_proveedor"/>
+      <index name="IDX_AE87F43569B92C8F" columns="id_tipo_documento"/>
+      <index name="IDX_AE87F43587A87B12" columns="id_cliente_bodega"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="inv_inventario_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="fecha" type="date" column="fecha" nullable="true"/>
+    <field name="numeroDocumento" type="string" column="numero_documento" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="comentario" type="string" column="comentario" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="createdBy" type="integer" column="created_by" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
+    <field name="updatedBy" type="integer" column="updated_by" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <many-to-one field="idClienteOrigenTraslado" target-entity="MntCliente" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cliente_origen_traslado" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idInventarioTraslado" target-entity="InvInventario" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_inventario_traslado" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idMotivoMovimiento" target-entity="CtlMotivoMovimiento" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_motivo_movimiento" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idProveedor" target-entity="MntProveedor" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_proveedor" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipoDocumento" target-entity="CtlTipoDocumento" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipo_documento" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idClienteBodega" target-entity="MntCliente" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cliente_bodega" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

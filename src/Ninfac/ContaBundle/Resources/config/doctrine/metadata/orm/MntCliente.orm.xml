@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="MntCliente" table="mnt_cliente">
+    <indexes>
+      <index name="IDX_77D069F8664AF320" columns="id_empresa"/>
+      <index name="IDX_77D069F87EAD49C7" columns="id_municipio"/>
+      <index name="IDX_77D069F89B02FA4D" columns="id_tipo_precio"/>
+      <index name="IDX_77D069F8F57D32FD" columns="id_pais"/>
+      <index name="IDX_77D069F869B92C8F" columns="id_tipo_documento"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="uk_cliente" columns="nombre,id_pais"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="mnt_cliente_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="consignatario" type="boolean" column="consignatario" nullable="true"/>
+    <field name="nombre" type="string" column="nombre" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Nombre comercial del cliente</option>
+      </options>
+    </field>
+    <field name="razonSocial" type="string" column="razon_social" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="giro" type="string" column="giro" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="registro" type="string" column="registro" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">numero de regitro nrc de la empresa</option>
+      </options>
+    </field>
+    <field name="nit" type="string" column="nit" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dui" type="string" column="dui" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="direccion" type="string" column="direccion" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefono" type="string" column="telefono" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="string" column="email" length="60" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="exento" type="boolean" column="exento" nullable="true">
+      <options>
+        <option name="comment">si el cliente presenta autorizacion de exencion de IVA</option>
+      </options>
+    </field>
+    <field name="extranjero" type="boolean" column="extranjero" nullable="true"/>
+    <field name="contacto" type="string" column="contacto" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="activo" nullable="true"/>
+    <field name="createdBy" type="integer" column="created_by" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
+    <field name="updatedBy" type="integer" column="updated_by" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <many-to-one field="idEmpresa" target-entity="CtlEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empresa" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idMunicipio" target-entity="CtlMunicipio" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_municipio" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipoPrecio" target-entity="CtlTipoPrecio" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipo_precio" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idPais" target-entity="CtlPais" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_pais" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipoDocumento" target-entity="CtlTipoDocumento" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_tipo_documento" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

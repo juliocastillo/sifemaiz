@@ -13,6 +13,7 @@ class CtlTipoPrecioAdmin extends AbstractAdmin {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
         $datagridMapper
                 ->add('nombre')
+                ->add('porcentajeDescuento')
                 ->add('activo')
         ;
     }
@@ -20,6 +21,7 @@ class CtlTipoPrecioAdmin extends AbstractAdmin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->add('nombre')
+                ->add('porcentajeDescuento')
                 ->add('activo')
                 ->add('_action', null, [
                     'actions' => [
@@ -36,6 +38,7 @@ class CtlTipoPrecioAdmin extends AbstractAdmin {
         $id = $entity->getId();
         $formMapper
                 ->add('nombre')
+                ->add('porcentajeDescuento')
         ;
         if ($id) {  // cuando se edite el registro
             if ($entity->getActivo() == TRUE) { // si el registro esta activo
@@ -56,6 +59,7 @@ class CtlTipoPrecioAdmin extends AbstractAdmin {
         $showMapper
                 ->add('id')
                 ->add('nombre')
+                ->add('porcentajeDescuento')
                 ->add('activo')
         ;
     }

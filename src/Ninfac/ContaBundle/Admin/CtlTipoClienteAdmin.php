@@ -8,30 +8,33 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class CtlGrupoProductoAdmin extends AbstractAdmin {
-
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
+class CtlTipoClienteAdmin extends AbstractAdmin
+{
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
         $datagridMapper
-                ->add('nombre')
-                ->add('activo')
+            ->add('nombre')
+            ->add('activo')
         ;
     }
 
-    protected function configureListFields(ListMapper $listMapper) {
+    protected function configureListFields(ListMapper $listMapper)
+    {
         $listMapper
-                ->add('nombre')
-                ->add('activo')
-                ->add('_action', null, [
-                    'actions' => [
-                        'show' => [],
-                        'edit' => [],
-                        'delete' => [],
-                    ],
-                ])
+            ->add('nombre')
+            ->add('activo')
+            ->add('_action', null, [
+                'actions' => [
+                    'show' => [],
+                    'edit' => [],
+                    'delete' => [],
+                ],
+            ])
         ;
     }
 
-    protected function configureFormFields(FormMapper $formMapper) {
+    protected function configureFormFields(FormMapper $formMapper)
+    {
         $entity = $this->getSubject();   //obtiene el elemento seleccionado en un objeto
         $id = $entity->getId();
         $formMapper
@@ -52,12 +55,12 @@ class CtlGrupoProductoAdmin extends AbstractAdmin {
         ;
     }
 
-    protected function configureShowFields(ShowMapper $showMapper) {
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
         $showMapper
-                ->add('id')
-                ->add('nombre')
-                ->add('activo')
+            ->add('id')
+            ->add('nombre')
+            ->add('activo')
         ;
     }
-
 }

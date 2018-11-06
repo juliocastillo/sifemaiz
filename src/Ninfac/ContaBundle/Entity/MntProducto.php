@@ -119,6 +119,13 @@ class MntProducto {
     private $foto;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="precio_venta", type="decimal", precision=10, scale=4, nullable=false)
+     */
+    private $precioVenta;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="activo", type="boolean", nullable=true)
@@ -311,6 +318,31 @@ class MntProducto {
         return $this->nombre;
     }
 
+    
+    /**
+     * Set precioVenta
+     *
+     * @param string $precioVenta
+     *
+     * @return MntProducto
+     */
+    public function setPrecioVenta($precioVenta) {
+        $this->precioVenta = $precioVenta;
+
+        return $this;
+    }
+
+    /**
+     * Get precioVenta
+     *
+     * @return string
+     */
+    public function getPrecioVenta() {
+        return $this->precioVenta;
+    }
+
+    
+    
     /**
      * Set exento
      *

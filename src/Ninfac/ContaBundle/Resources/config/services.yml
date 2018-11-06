@@ -130,3 +130,45 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false }
         public: true
+
+    ninfac_conta.admin.ctl_tipo_cliente:
+        class: Ninfac\ContaBundle\Admin\CtlTipoClienteAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoCliente, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Tipo cliente }
+        public: true
+
+    ninfac_conta.admin.ctl_tipo_documento:
+        class: Ninfac\ContaBundle\Admin\CtlTipoDocumentoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoDocumento, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, show_in_dashboard: false }
+        public: true
+
+    ninfac_conta.admin.mnt_cliente:
+        class: Ninfac\ContaBundle\Admin\MntClienteAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\MntCliente, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Mantenimientos, label: Clientes }
+        public: true
+
+    ninfac_conta.admin.ctl_tipo_movimiento:
+        class: Ninfac\ContaBundle\Admin\CtlTipoMovimientoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoMovimiento, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras,  show_in_dashboard: false }
+        public: true
+
+    ninfac_conta.admin.ctl_motivo_movimiento:
+        class: Ninfac\ContaBundle\Admin\CtlMotivoMovimientoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlMotivoMovimiento, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Motivo Movimiento }
+        public: true
+
+    ninfac_conta.admin.mnt_proveedor:
+        class: Ninfac\ContaBundle\Admin\MntProveedorAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\MntProveedor, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Mantenimientos, label: Proveedores }
+        public: true

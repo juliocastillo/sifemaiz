@@ -24,7 +24,9 @@ class MntPrecioProductoAdmin extends AbstractAdmin
             ->add('idTipoPrecio', null, array('label' => 'Tipo de precio',
                 'attr' => array('style' => 'width:500px'),
                 ))
-            ->add('precio', null, array('attr' => array('style' => 'width:300px')))
+            ->add('precio', null, array('label' => 'Precio (calculo automatico)',
+                'read_only'=>true,
+                'attr' => array('style' => 'width:300px')))
         ;
     }
 

@@ -35,7 +35,7 @@ class MntPrecioProducto {
     /**
      * @var string
      *
-     * @ORM\Column(name="precio", type="decimal", precision=10, scale=4, nullable=false)
+     * @ORM\Column(name="precio", type="decimal", precision=10, scale=4, nullable=true)
      */
     private $precio;
 
@@ -82,7 +82,7 @@ class MntPrecioProducto {
      *
      * @ORM\ManyToOne(targetEntity="CtlTipoPrecio")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipo_precio", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_tipo_precio", referencedColumnName="id", nullable=false)
      * })
      */
     private $idTipoPrecio;

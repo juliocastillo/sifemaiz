@@ -5,12 +5,12 @@ namespace Ninfac\ContaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CtlTipoPrecio
+ * CtlTipoDocumento
  *
- * @ORM\Table(name="ctl_tipo_precio")
+ * @ORM\Table(name="ctl_tipo_documento", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_tipo_documento_nombre_key", columns={"nombre"})})
  * @ORM\Entity
  */
-class CtlTipoPrecio {
+class CtlTipoDocumento {
 
     /**
      * @var integer
@@ -18,25 +18,17 @@ class CtlTipoPrecio {
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="ctl_tipo_precio_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="ctl_tipo_documento_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=80, nullable=false)
+     * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
      */
     private $nombre;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="porcentaje_descuento", type="integer", nullable=false)
-     */
-    private $porcentajeDescuento;
-    
-    
     /**
      * @var boolean
      *
@@ -58,7 +50,7 @@ class CtlTipoPrecio {
      *
      * @param string $nombre
      *
-     * @return CtlTipoPrecio
+     * @return CtlTipoDocumento
      */
     public function setNombre($nombre) {
         $this->nombre = $nombre;
@@ -76,34 +68,11 @@ class CtlTipoPrecio {
     }
 
     /**
-     * Set porcentajeDescuento
-     *
-     * @param integer $porcentajeDescuento
-     *
-     * @return MntPrecioProducto
-     */
-    public function setPorcentajeDescuento($porcentajeDescuento) {
-        $this->porcentajeDescuento = $porcentajeDescuento;
-
-        return $this;
-    }
-
-    /**
-     * Get porcentajeDescuento
-     *
-     * @return integer
-     */
-    public function getPorcentajeDescuento() {
-        return $this->porcentajeDescuento;
-    }
-    
-    
-    /**
      * Set activo
      *
      * @param boolean $activo
      *
-     * @return CtlTipoPrecio
+     * @return CtlTipoDocumento
      */
     public function setActivo($activo) {
         $this->activo = $activo;
@@ -121,7 +90,7 @@ class CtlTipoPrecio {
     }
 
     public function __toString() {
-        return (string) $this->nombre . ',  ' . (string) $this->porcentajeDescuento .' % Descuento';
+        return (string) $this->nombre;
     }
 
 }

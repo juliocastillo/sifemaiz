@@ -8,11 +8,12 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class CtlGrupoProductoAdmin extends AbstractAdmin {
+class CtlMotivoMovimientoAdmin extends AbstractAdmin {
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
         $datagridMapper
                 ->add('nombre')
+                ->add('idTipoMovimiento')
                 ->add('activo')
         ;
     }
@@ -20,6 +21,7 @@ class CtlGrupoProductoAdmin extends AbstractAdmin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->add('nombre')
+                ->add('idTipoMovimiento')
                 ->add('activo')
                 ->add('_action', null, [
                     'actions' => [
@@ -36,6 +38,7 @@ class CtlGrupoProductoAdmin extends AbstractAdmin {
         $id = $entity->getId();
         $formMapper
                 ->add('nombre')
+                ->add('idTipoMovimiento')                
         ;
         if ($id) {  // cuando se edite el registro
             if ($entity->getActivo() == TRUE) { // si el registro esta activo
@@ -56,6 +59,7 @@ class CtlGrupoProductoAdmin extends AbstractAdmin {
         $showMapper
                 ->add('id')
                 ->add('nombre')
+                ->add('idTipoMovimiento')
                 ->add('activo')
         ;
     }
