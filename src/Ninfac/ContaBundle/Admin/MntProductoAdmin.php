@@ -68,7 +68,8 @@ class MntProductoAdmin extends AbstractAdmin {
                 ))
                 ->add('minimo')
                 ->add('maximo')
-                ->add('precioVenta')
+                ->add('precioVenta', null, array(// permitir buscar un item de un catalogo
+                    'label' => 'Precio de venta al publico'))
                 ->end()
         ;
         if ($id) {  // cuando se edite el registro
@@ -120,7 +121,7 @@ class MntProductoAdmin extends AbstractAdmin {
                 ->add('exento')
                 ->add('enPromocion')
                 ->add('pistola')
-
+                ->add('idCuentacontable')
 //                ->add('foto', 'file', array('required' => false))
                 ->end()
                 ->with('Detalle de precios')

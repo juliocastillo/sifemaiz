@@ -101,7 +101,7 @@ class InvInventarioDetalle
     /**
      * @var \InvInventario
      *
-     * @ORM\ManyToOne(targetEntity="InvInventario")
+     * @ORM\ManyToOne(targetEntity="InvInventario", inversedBy="inventarioDetalle")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_inventario", referencedColumnName="id")
      * })

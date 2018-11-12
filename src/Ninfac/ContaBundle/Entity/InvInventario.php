@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="inv_inventario", indexes={@ORM\Index(name="IDX_AE87F435AA67C589", columns={"id_cliente_origen_traslado"}), @ORM\Index(name="IDX_AE87F435664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_AE87F4357C1986A7", columns={"id_inventario_traslado"}), @ORM\Index(name="IDX_AE87F435C0674963", columns={"id_motivo_movimiento"}), @ORM\Index(name="IDX_AE87F43596F5D4E9", columns={"id_proveedor"}), @ORM\Index(name="IDX_AE87F43569B92C8F", columns={"id_tipo_documento"}), @ORM\Index(name="IDX_AE87F43587A87B12", columns={"id_cliente_bodega"})})
  * @ORM\Entity
  */
-class InvInventario
-{
+class InvInventario {
+
     /**
      * @var integer
      *
@@ -141,15 +141,19 @@ class InvInventario
      */
     private $idClienteBodega;
 
-
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="InvInventarioDetalle", mappedBy="idInvInventario", cascade={"all"}, orphanRemoval=true)
+     *
+     */
+    private $inventarioDetalle;
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -160,8 +164,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setFecha($fecha)
-    {
+    public function setFecha($fecha) {
         $this->fecha = $fecha;
 
         return $this;
@@ -172,8 +175,7 @@ class InvInventario
      *
      * @return \DateTime
      */
-    public function getFecha()
-    {
+    public function getFecha() {
         return $this->fecha;
     }
 
@@ -184,8 +186,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setNumeroDocumento($numeroDocumento)
-    {
+    public function setNumeroDocumento($numeroDocumento) {
         $this->numeroDocumento = $numeroDocumento;
 
         return $this;
@@ -196,8 +197,7 @@ class InvInventario
      *
      * @return string
      */
-    public function getNumeroDocumento()
-    {
+    public function getNumeroDocumento() {
         return $this->numeroDocumento;
     }
 
@@ -208,8 +208,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setComentario($comentario)
-    {
+    public function setComentario($comentario) {
         $this->comentario = $comentario;
 
         return $this;
@@ -220,8 +219,7 @@ class InvInventario
      *
      * @return string
      */
-    public function getComentario()
-    {
+    public function getComentario() {
         return $this->comentario;
     }
 
@@ -232,8 +230,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setCreatedBy($createdBy)
-    {
+    public function setCreatedBy($createdBy) {
         $this->createdBy = $createdBy;
 
         return $this;
@@ -244,8 +241,7 @@ class InvInventario
      *
      * @return integer
      */
-    public function getCreatedBy()
-    {
+    public function getCreatedBy() {
         return $this->createdBy;
     }
 
@@ -256,8 +252,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -268,8 +263,7 @@ class InvInventario
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -280,8 +274,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setUpdatedBy($updatedBy)
-    {
+    public function setUpdatedBy($updatedBy) {
         $this->updatedBy = $updatedBy;
 
         return $this;
@@ -292,8 +285,7 @@ class InvInventario
      *
      * @return integer
      */
-    public function getUpdatedBy()
-    {
+    public function getUpdatedBy() {
         return $this->updatedBy;
     }
 
@@ -304,8 +296,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -316,8 +307,7 @@ class InvInventario
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -328,8 +318,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setIdClienteOrigenTraslado(\Ninfac\ContaBundle\Entity\MntCliente $idClienteOrigenTraslado = null)
-    {
+    public function setIdClienteOrigenTraslado(\Ninfac\ContaBundle\Entity\MntCliente $idClienteOrigenTraslado = null) {
         $this->idClienteOrigenTraslado = $idClienteOrigenTraslado;
 
         return $this;
@@ -340,8 +329,7 @@ class InvInventario
      *
      * @return \Ninfac\ContaBundle\Entity\MntCliente
      */
-    public function getIdClienteOrigenTraslado()
-    {
+    public function getIdClienteOrigenTraslado() {
         return $this->idClienteOrigenTraslado;
     }
 
@@ -352,8 +340,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setIdEmpresa(\Ninfac\ContaBundle\Entity\CtlEmpresa $idEmpresa = null)
-    {
+    public function setIdEmpresa(\Ninfac\ContaBundle\Entity\CtlEmpresa $idEmpresa = null) {
         $this->idEmpresa = $idEmpresa;
 
         return $this;
@@ -364,8 +351,7 @@ class InvInventario
      *
      * @return \Ninfac\ContaBundle\Entity\CtlEmpresa
      */
-    public function getIdEmpresa()
-    {
+    public function getIdEmpresa() {
         return $this->idEmpresa;
     }
 
@@ -376,8 +362,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setIdInventarioTraslado(\Ninfac\ContaBundle\Entity\InvInventario $idInventarioTraslado = null)
-    {
+    public function setIdInventarioTraslado(\Ninfac\ContaBundle\Entity\InvInventario $idInventarioTraslado = null) {
         $this->idInventarioTraslado = $idInventarioTraslado;
 
         return $this;
@@ -388,8 +373,7 @@ class InvInventario
      *
      * @return \Ninfac\ContaBundle\Entity\InvInventario
      */
-    public function getIdInventarioTraslado()
-    {
+    public function getIdInventarioTraslado() {
         return $this->idInventarioTraslado;
     }
 
@@ -400,8 +384,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setIdMotivoMovimiento(\Ninfac\ContaBundle\Entity\CtlMotivoMovimiento $idMotivoMovimiento = null)
-    {
+    public function setIdMotivoMovimiento(\Ninfac\ContaBundle\Entity\CtlMotivoMovimiento $idMotivoMovimiento = null) {
         $this->idMotivoMovimiento = $idMotivoMovimiento;
 
         return $this;
@@ -412,8 +395,7 @@ class InvInventario
      *
      * @return \Ninfac\ContaBundle\Entity\CtlMotivoMovimiento
      */
-    public function getIdMotivoMovimiento()
-    {
+    public function getIdMotivoMovimiento() {
         return $this->idMotivoMovimiento;
     }
 
@@ -424,8 +406,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setIdProveedor(\Ninfac\ContaBundle\Entity\MntProveedor $idProveedor = null)
-    {
+    public function setIdProveedor(\Ninfac\ContaBundle\Entity\MntProveedor $idProveedor = null) {
         $this->idProveedor = $idProveedor;
 
         return $this;
@@ -436,8 +417,7 @@ class InvInventario
      *
      * @return \Ninfac\ContaBundle\Entity\MntProveedor
      */
-    public function getIdProveedor()
-    {
+    public function getIdProveedor() {
         return $this->idProveedor;
     }
 
@@ -448,8 +428,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setIdTipoDocumento(\Ninfac\ContaBundle\Entity\CtlTipoDocumento $idTipoDocumento = null)
-    {
+    public function setIdTipoDocumento(\Ninfac\ContaBundle\Entity\CtlTipoDocumento $idTipoDocumento = null) {
         $this->idTipoDocumento = $idTipoDocumento;
 
         return $this;
@@ -460,8 +439,7 @@ class InvInventario
      *
      * @return \Ninfac\ContaBundle\Entity\CtlTipoDocumento
      */
-    public function getIdTipoDocumento()
-    {
+    public function getIdTipoDocumento() {
         return $this->idTipoDocumento;
     }
 
@@ -472,8 +450,7 @@ class InvInventario
      *
      * @return InvInventario
      */
-    public function setIdClienteBodega(\Ninfac\ContaBundle\Entity\MntCliente $idClienteBodega = null)
-    {
+    public function setIdClienteBodega(\Ninfac\ContaBundle\Entity\MntCliente $idClienteBodega = null) {
         $this->idClienteBodega = $idClienteBodega;
 
         return $this;
@@ -484,8 +461,50 @@ class InvInventario
      *
      * @return \Ninfac\ContaBundle\Entity\MntCliente
      */
-    public function getIdClienteBodega()
-    {
+    public function getIdClienteBodega() {
         return $this->idClienteBodega;
     }
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->inventarioDetalle = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add inventarioDetalle
+     *
+     * @param \Ninfac\ContaBundle\Entity\InvInventarioDetalle $inventarioDetalle
+     *
+     * @return InvInventario
+     */
+    public function addInventarioDetalle(\Ninfac\ContaBundle\Entity\InvInventarioDetalle $inventarioDetalle) {
+        $this->inventarioDetalle[] = $inventarioDetalle;
+
+        return $this;
+    }
+
+    /**
+     * Remove inventarioDetalle
+     *
+     * @param \Ninfac\ContaBundle\Entity\InvInventarioDetalle $inventarioDetalle
+     */
+    public function removeInventarioDetalle(\Ninfac\ContaBundle\Entity\InvInventarioDetalle $inventarioDetalle) {
+        $this->inventarioDetalle->removeElement($inventarioDetalle);
+    }
+
+    /**
+     * Get inventarioDetalle
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInventarioDetalle() {
+        return $this->inventarioDetalle;
+    }
+
+    public function __toString() {
+        return (string) $this->numeroDocumento ? (string) $this->numeroDocumento : '';
+    }
+
 }

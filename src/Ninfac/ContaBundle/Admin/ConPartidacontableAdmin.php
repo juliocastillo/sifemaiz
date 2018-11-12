@@ -27,8 +27,11 @@ class ConPartidacontableAdmin extends AbstractAdmin {
 
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
-                ->add('id')
-                ->add('fecha')
+                ->add('fecha','date',array(
+                                    'widget' => 'single_text',
+                                    'format' => 'd/m/Y',
+                                    'attr' => array('style'=>'width:100px', 'maxlength' => '10'),
+                    ))
                 ->add('numero')
                 ->add('corrAnual')
                 ->add('corrMensual')
@@ -64,7 +67,16 @@ class ConPartidacontableAdmin extends AbstractAdmin {
                     'label' => 'Tipo de partida',
                     'attr' => array('style' => 'width:300px'),
                 ))
-                ->add('fecha', null, array('label' => 'Fecha partida', 'data' => new \DateTime('today')))
+//                ->add('fecha', null, array('label' => 'Fecha partida', 'data' => new \DateTime('today')))
+                ->add('fecha', null, array(
+                        'label' => 'Fecha',
+                        'widget' => 'single_text', // un sólo input para la fecha, no tres.
+                        'format' => 'dd/MM/y',
+                        'attr' => array(
+                            'class' => 'bootstrap-datepicker',
+                            'data-date-end-date' => '0d',
+                            'style' => 'width:200px', 'maxlength' => '25'
+                        )))
                 ->add('concepto','text')
                 ->add('partidaInicial')
                 ->add('activo')

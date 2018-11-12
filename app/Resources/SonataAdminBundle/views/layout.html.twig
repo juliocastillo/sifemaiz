@@ -1,5 +1,13 @@
 {% extends "SonataAdminBundle::standard_layout.html.twig"%}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/ninfacconta/js/funciones_generales.js') }}"> </script>
+    <script src="{{ asset('bundles/ninfacconta/js/corelayout.js') }}"> </script>
+    <script src="{{ asset('bundles/ninfacconta/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"> </script>
+    <script src="{{ asset('bundles/ninfacconta/vendors/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"> </script>
+{% endblock %}
+
 {#quitando la barra de busqueda de sonta admin#}
 {% block sonata_sidebar_search %}
 {{ parent() }}

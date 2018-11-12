@@ -72,6 +72,14 @@ class MntProveedorAdmin extends AbstractAdmin
                 ->add('nit')
                 ->add('dui')
                 ->add('exento')
+                ->add('idTipoMovimiento', EntityType::class, array(
+                    "mapped" => false,
+                    'class' => CtlTipoMovimiento::class,
+                    'choice_label' => 'nombre',
+                    "multiple" => false,
+                    'empty_value' => '...Seleccione...',
+//                    "expanded" => true
+                ))
                 ->end()
                 ->with('Geograficos')
                 ->add('extranjero')

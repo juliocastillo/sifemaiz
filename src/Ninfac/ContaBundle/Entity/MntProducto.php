@@ -63,6 +63,16 @@ class MntProducto {
     private $idMarca;
 
     /**
+     * @var \MntCuentacontable
+     *
+     * @ORM\ManyToOne(targetEntity="MntCuentacontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cuentacontable", referencedColumnName="id")
+     * })
+     */
+    private $idCuentacontable;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="codigo", type="string", length=25, nullable=false)
@@ -318,7 +328,6 @@ class MntProducto {
         return $this->nombre;
     }
 
-    
     /**
      * Set precioVenta
      *
@@ -341,8 +350,6 @@ class MntProducto {
         return $this->precioVenta;
     }
 
-    
-    
     /**
      * Set exento
      *
@@ -645,9 +652,30 @@ class MntProducto {
         return $this->precioProducto;
     }
 
-    
+    /**
+     * Set idCuentacontable
+     *
+     * @param \Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontable
+     *
+     * @return MntProducto
+     */
+    public function setIdCuentacontable(\Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontable = null) {
+        $this->idCuentacontable = $idCuentacontable;
+
+        return $this;
+    }
+
+    /**
+     * Get idCuentacontable
+     *
+     * @return \Ninfac\ContaBundle\Entity\MntCuentacontable
+     */
+    public function getIdCuentacontable() {
+        return $this->idCuentacontable;
+    }
+
     public function __toString() {
-        return $this->nombre ? $this->nombre : '';
+        return (string) $this->nombre ? (string) $this->nombre : '';
     }
 
 }

@@ -615,4 +615,8 @@ class ConPartidacontable
     {
         return $this->conPartidacontableDetalle;
     }
+    
+    public function __toString() {
+        return $this->concepto;
+    }
 }
