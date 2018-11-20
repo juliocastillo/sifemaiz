@@ -186,3 +186,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: Inventario, show_in_dashboard: false }
         public: true
+
+    ninfac_conta.admin.mnt_empleado:
+        class: Ninfac\ContaBundle\Admin\MntEmpleadoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\MntEmpleado, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Mantenimientos, label: Empleados }
+        public: true

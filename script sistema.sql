@@ -16,3 +16,10 @@ UPDATE mnt_precio_producto SET id=nextval('mnt_precio_producto_id_seq');
 
 
 ALTER TABLE mnt_producto ADD COLUMN precio_publico numeric(10, 4) NOT NULL;
+
+
+--MAPEAR UNA SOLA ENTIDAD
+
+    php app/console doctrine:mapping:convert xml ./src/Minsal/CatalogosBundle/Resources/config/doctrine/metadata/orm  --from-database --filter="DetalleDependenciaEstablecimiento" --force
+    php app/console doctrine:mapping:import MinsalCatalogosBundle annotation --filter="DetalleDependenciaEstablecimiento"
+    php app/console doctrine:generate:entities MinsalCatalogosBundle:DetalleDependenciaEstablecimiento
