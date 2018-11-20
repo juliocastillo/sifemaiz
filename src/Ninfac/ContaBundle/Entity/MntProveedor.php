@@ -155,6 +155,16 @@ class MntProveedor {
     private $idPais;
 
     /**
+     * @var \MntCuentacontable
+     *
+     * @ORM\ManyToOne(targetEntity="MntCuentacontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cuentacontable", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $idCuentacontable;
+
+    /**
      * Get id
      *
      * @return integer
@@ -557,6 +567,28 @@ class MntProveedor {
      */
     public function getIdPais() {
         return $this->idPais;
+    }
+
+    /**
+     * Set idCuentacontable
+     *
+     * @param \Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontable
+     *
+     * @return MntProveedor
+     */
+    public function setIdCuentacontable(\Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontable = null) {
+        $this->idCuentacontable = $idCuentacontable;
+
+        return $this;
+    }
+
+    /**
+     * Get idCuentacontable
+     *
+     * @return \Ninfac\ContaBundle\Entity\MntCuentacontable
+     */
+    public function getIdCuentacontable() {
+        return $this->idCuentacontable;
     }
 
     public function __toString() {

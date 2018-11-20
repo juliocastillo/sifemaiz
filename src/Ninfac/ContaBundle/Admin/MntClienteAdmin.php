@@ -7,6 +7,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType; 
+use Ninfac\ContaBundle\Entity\MntCuentacontable;
 
 class MntClienteAdmin extends AbstractAdmin {
 
@@ -64,9 +66,7 @@ class MntClienteAdmin extends AbstractAdmin {
         ;
         $formMapper
                 ->with('Generalidades')
-                ->add('consignatario',null, array('label' => 'Cliente consignatario (bodega)'))
-                ->add('idTipoPrecio')
-                ->add('idTipoDocumento')
+                ->add('consignatario', null, array('label' => 'Cliente consignatario (bodega)'))
                 ->add('nombre')
                 ->add('razonSocial')
                 ->add('giro')
@@ -74,6 +74,7 @@ class MntClienteAdmin extends AbstractAdmin {
                 ->add('nit')
                 ->add('dui')
                 ->add('exento')
+                ->add('idCuentacontable')
                 ->end()
                 ->with('Geograficos')
                 ->add('extranjero')
@@ -81,8 +82,10 @@ class MntClienteAdmin extends AbstractAdmin {
                 ->add('idMunicipio')
                 ->add('direccion')
                 ->add('telefono')
-                ->add('email','email')
+                ->add('email', 'email')
                 ->add('contacto')
+                ->add('idTipoPrecio')
+                ->add('idTipoDocumento')
                 ->add('activo')
         ;
         if ($id) {  // cuando se edite el registro
@@ -142,7 +145,9 @@ class MntClienteAdmin extends AbstractAdmin {
                 ->getId();
         $val->setCreatedBy($userId);
         $val->setCreatedAt(new \DateTime());
-
+        
+        
+        
     }
 
     /*
@@ -170,7 +175,6 @@ class MntClienteAdmin extends AbstractAdmin {
                 ->getId();
         $val->setUpdatedBy($userId);
         $val->setUpdatedAt(new \DateTime());
-
     }
 
 }

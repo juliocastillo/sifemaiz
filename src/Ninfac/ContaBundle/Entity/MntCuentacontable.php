@@ -424,4 +424,8 @@ class MntCuentacontable
     public function __toString() {
         return (string)$this->cuenta.' '.$this->nombre;
     }
+    
+    public function getCuentaNombre() {
+        return (string)$this->cuenta.' '.$this->nombre;
+    }
 }

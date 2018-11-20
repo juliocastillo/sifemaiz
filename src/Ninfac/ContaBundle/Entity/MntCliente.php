@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="mnt_cliente", uniqueConstraints={@ORM\UniqueConstraint(name="uk_cliente", columns={"nombre", "id_pais"})}, indexes={@ORM\Index(name="IDX_77D069F8664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_77D069F87EAD49C7", columns={"id_municipio"}), @ORM\Index(name="IDX_77D069F89B02FA4D", columns={"id_tipo_precio"}), @ORM\Index(name="IDX_77D069F8F57D32FD", columns={"id_pais"}), @ORM\Index(name="IDX_77D069F869B92C8F", columns={"id_tipo_documento"})})
  * @ORM\Entity
  */
-class MntCliente
-{
+class MntCliente {
+
     /**
      * @var integer
      *
@@ -198,15 +198,22 @@ class MntCliente
      */
     private $idTipoDocumento;
 
-
+    /**
+     * @var \MntCuentacontable
+     *
+     * @ORM\ManyToOne(targetEntity="MntCuentacontable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cuentacontable", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $idCuentacontable;
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -217,8 +224,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setConsignatario($consignatario)
-    {
+    public function setConsignatario($consignatario) {
         $this->consignatario = $consignatario;
 
         return $this;
@@ -229,8 +235,7 @@ class MntCliente
      *
      * @return boolean
      */
-    public function getConsignatario()
-    {
+    public function getConsignatario() {
         return $this->consignatario;
     }
 
@@ -241,8 +246,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
 
         return $this;
@@ -253,8 +257,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getNombre()
-    {
+    public function getNombre() {
         return $this->nombre;
     }
 
@@ -265,8 +268,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setRazonSocial($razonSocial)
-    {
+    public function setRazonSocial($razonSocial) {
         $this->razonSocial = $razonSocial;
 
         return $this;
@@ -277,8 +279,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getRazonSocial()
-    {
+    public function getRazonSocial() {
         return $this->razonSocial;
     }
 
@@ -289,8 +290,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setGiro($giro)
-    {
+    public function setGiro($giro) {
         $this->giro = $giro;
 
         return $this;
@@ -301,8 +301,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getGiro()
-    {
+    public function getGiro() {
         return $this->giro;
     }
 
@@ -313,8 +312,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setRegistro($registro)
-    {
+    public function setRegistro($registro) {
         $this->registro = $registro;
 
         return $this;
@@ -325,8 +323,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getRegistro()
-    {
+    public function getRegistro() {
         return $this->registro;
     }
 
@@ -337,8 +334,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setNit($nit)
-    {
+    public function setNit($nit) {
         $this->nit = $nit;
 
         return $this;
@@ -349,8 +345,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getNit()
-    {
+    public function getNit() {
         return $this->nit;
     }
 
@@ -361,8 +356,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setDui($dui)
-    {
+    public function setDui($dui) {
         $this->dui = $dui;
 
         return $this;
@@ -373,8 +367,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getDui()
-    {
+    public function getDui() {
         return $this->dui;
     }
 
@@ -385,8 +378,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setDireccion($direccion)
-    {
+    public function setDireccion($direccion) {
         $this->direccion = $direccion;
 
         return $this;
@@ -397,8 +389,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getDireccion()
-    {
+    public function getDireccion() {
         return $this->direccion;
     }
 
@@ -409,8 +400,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setTelefono($telefono)
-    {
+    public function setTelefono($telefono) {
         $this->telefono = $telefono;
 
         return $this;
@@ -421,8 +411,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getTelefono()
-    {
+    public function getTelefono() {
         return $this->telefono;
     }
 
@@ -433,8 +422,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -445,8 +433,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -457,8 +444,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setExento($exento)
-    {
+    public function setExento($exento) {
         $this->exento = $exento;
 
         return $this;
@@ -469,8 +455,7 @@ class MntCliente
      *
      * @return boolean
      */
-    public function getExento()
-    {
+    public function getExento() {
         return $this->exento;
     }
 
@@ -481,8 +466,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setExtranjero($extranjero)
-    {
+    public function setExtranjero($extranjero) {
         $this->extranjero = $extranjero;
 
         return $this;
@@ -493,8 +477,7 @@ class MntCliente
      *
      * @return boolean
      */
-    public function getExtranjero()
-    {
+    public function getExtranjero() {
         return $this->extranjero;
     }
 
@@ -505,8 +488,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setContacto($contacto)
-    {
+    public function setContacto($contacto) {
         $this->contacto = $contacto;
 
         return $this;
@@ -517,8 +499,7 @@ class MntCliente
      *
      * @return string
      */
-    public function getContacto()
-    {
+    public function getContacto() {
         return $this->contacto;
     }
 
@@ -529,8 +510,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setActivo($activo)
-    {
+    public function setActivo($activo) {
         $this->activo = $activo;
 
         return $this;
@@ -541,8 +521,7 @@ class MntCliente
      *
      * @return boolean
      */
-    public function getActivo()
-    {
+    public function getActivo() {
         return $this->activo;
     }
 
@@ -553,8 +532,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setCreatedBy($createdBy)
-    {
+    public function setCreatedBy($createdBy) {
         $this->createdBy = $createdBy;
 
         return $this;
@@ -565,8 +543,7 @@ class MntCliente
      *
      * @return integer
      */
-    public function getCreatedBy()
-    {
+    public function getCreatedBy() {
         return $this->createdBy;
     }
 
@@ -577,8 +554,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -589,8 +565,7 @@ class MntCliente
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -601,8 +576,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setUpdatedBy($updatedBy)
-    {
+    public function setUpdatedBy($updatedBy) {
         $this->updatedBy = $updatedBy;
 
         return $this;
@@ -613,8 +587,7 @@ class MntCliente
      *
      * @return integer
      */
-    public function getUpdatedBy()
-    {
+    public function getUpdatedBy() {
         return $this->updatedBy;
     }
 
@@ -625,8 +598,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -637,8 +609,7 @@ class MntCliente
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -649,8 +620,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setIdEmpresa(\Ninfac\ContaBundle\Entity\CtlEmpresa $idEmpresa = null)
-    {
+    public function setIdEmpresa(\Ninfac\ContaBundle\Entity\CtlEmpresa $idEmpresa = null) {
         $this->idEmpresa = $idEmpresa;
 
         return $this;
@@ -661,8 +631,7 @@ class MntCliente
      *
      * @return \Ninfac\ContaBundle\Entity\CtlEmpresa
      */
-    public function getIdEmpresa()
-    {
+    public function getIdEmpresa() {
         return $this->idEmpresa;
     }
 
@@ -673,8 +642,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setIdMunicipio(\Ninfac\ContaBundle\Entity\CtlMunicipio $idMunicipio = null)
-    {
+    public function setIdMunicipio(\Ninfac\ContaBundle\Entity\CtlMunicipio $idMunicipio = null) {
         $this->idMunicipio = $idMunicipio;
 
         return $this;
@@ -685,8 +653,7 @@ class MntCliente
      *
      * @return \Ninfac\ContaBundle\Entity\CtlMunicipio
      */
-    public function getIdMunicipio()
-    {
+    public function getIdMunicipio() {
         return $this->idMunicipio;
     }
 
@@ -697,8 +664,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setIdTipoPrecio(\Ninfac\ContaBundle\Entity\CtlTipoPrecio $idTipoPrecio = null)
-    {
+    public function setIdTipoPrecio(\Ninfac\ContaBundle\Entity\CtlTipoPrecio $idTipoPrecio = null) {
         $this->idTipoPrecio = $idTipoPrecio;
 
         return $this;
@@ -709,8 +675,7 @@ class MntCliente
      *
      * @return \Ninfac\ContaBundle\Entity\CtlTipoPrecio
      */
-    public function getIdTipoPrecio()
-    {
+    public function getIdTipoPrecio() {
         return $this->idTipoPrecio;
     }
 
@@ -721,8 +686,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setIdPais(\Ninfac\ContaBundle\Entity\CtlPais $idPais = null)
-    {
+    public function setIdPais(\Ninfac\ContaBundle\Entity\CtlPais $idPais = null) {
         $this->idPais = $idPais;
 
         return $this;
@@ -733,8 +697,7 @@ class MntCliente
      *
      * @return \Ninfac\ContaBundle\Entity\CtlPais
      */
-    public function getIdPais()
-    {
+    public function getIdPais() {
         return $this->idPais;
     }
 
@@ -745,8 +708,7 @@ class MntCliente
      *
      * @return MntCliente
      */
-    public function setIdTipoDocumento(\Ninfac\ContaBundle\Entity\CtlTipoDocumento $idTipoDocumento = null)
-    {
+    public function setIdTipoDocumento(\Ninfac\ContaBundle\Entity\CtlTipoDocumento $idTipoDocumento = null) {
         $this->idTipoDocumento = $idTipoDocumento;
 
         return $this;
@@ -757,8 +719,35 @@ class MntCliente
      *
      * @return \Ninfac\ContaBundle\Entity\CtlTipoDocumento
      */
-    public function getIdTipoDocumento()
-    {
+    public function getIdTipoDocumento() {
         return $this->idTipoDocumento;
+    }
+
+    /**
+     * Set idCuentacontable
+     *
+     * @param \Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontable
+     *
+     * @return MntCliente
+     */
+    public function setIdCuentacontable(\Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontable = null)
+    {
+        $this->idCuentacontable = $idCuentacontable;
+
+        return $this;
+    }
+
+    /**
+     * Get idCuentacontable
+     *
+     * @return \Ninfac\ContaBundle\Entity\MntCuentacontable
+     */
+    public function getIdCuentacontable()
+    {
+        return $this->idCuentacontable;
+    }
+
+    public function __toString() {
+        return (string) $this->nombre;
     }
 }
