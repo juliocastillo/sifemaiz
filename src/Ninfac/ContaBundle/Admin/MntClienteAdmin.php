@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType; 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Ninfac\ContaBundle\Entity\MntCuentacontable;
 
 class MntClienteAdmin extends AbstractAdmin {
@@ -38,12 +38,6 @@ class MntClienteAdmin extends AbstractAdmin {
                 ->add('razonSocial')
                 ->add('giro')
                 ->add('registro')
-                ->add('nit')
-                ->add('dui')
-                ->add('direccion')
-                ->add('telefono')
-                ->add('email')
-                ->add('exento')
                 ->add('extranjero')
                 ->add('contacto')
                 ->add('activo')
@@ -74,7 +68,8 @@ class MntClienteAdmin extends AbstractAdmin {
                 ->add('nit')
                 ->add('dui')
                 ->add('exento')
-                ->add('idCuentacontable')
+                ->add('idCuentacontable', null, array('label' => 'Cuenta contable'))
+                ->add('idEmpleadoVendedor', null, array('label' => 'Empleado vendedor asignado'))
                 ->end()
                 ->with('Geograficos')
                 ->add('extranjero')
@@ -84,8 +79,8 @@ class MntClienteAdmin extends AbstractAdmin {
                 ->add('telefono')
                 ->add('email', 'email')
                 ->add('contacto')
-                ->add('idTipoPrecio')
-                ->add('idTipoDocumento')
+                ->add('idTipoPrecio', null, array('label' => 'Tipo de precio'))
+                ->add('idTipoDocumento', null, array('label' => 'Tipo de documento'))
                 ->add('activo')
         ;
         if ($id) {  // cuando se edite el registro
@@ -145,9 +140,6 @@ class MntClienteAdmin extends AbstractAdmin {
                 ->getId();
         $val->setCreatedBy($userId);
         $val->setCreatedAt(new \DateTime());
-        
-        
-        
     }
 
     /*

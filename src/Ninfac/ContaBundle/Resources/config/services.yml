@@ -15,7 +15,7 @@ services:
         class: Ninfac\ContaBundle\Admin\ConPartidacontableDetalleAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\ConPartidacontableDetalle, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: Contabilidad, label: Detalle de partida, show_in_dashboard: false }
         public: true
 
     #MENU LISTAS ADMINISTRABLES
@@ -71,7 +71,7 @@ services:
         class: Ninfac\ContaBundle\Admin\CtlMarcaProductoAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\CtlMarcaProducto, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Listas maestras, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Marca de producto, show_in_dashboard: false }
         public: true
 
     ninfac_conta.admin.ctl_grupo_producto:
@@ -85,7 +85,7 @@ services:
         class: Ninfac\ContaBundle\Admin\CtlSubgrupoProductoAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\CtlSubgrupoProducto, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Listas maestras, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Subgrupo de producto, show_in_dashboard: false }
         public: true
 
     #MANTENIMIENTOS
@@ -107,7 +107,7 @@ services:
         class: Ninfac\ContaBundle\Admin\CtlEditorialProductoAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\CtlEditorialProducto, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Listas maestras, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Editorial producto, show_in_dashboard: false }
         public: true
 
     ninfac_conta.admin.ctl_tipo_precio:
@@ -121,14 +121,14 @@ services:
         class: Ninfac\ContaBundle\Admin\MntPrecioProductoAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\MntPrecioProducto, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: Inventario, label: Precio producto, show_in_dashboard: false }
         public: true
 
     ninfac_conta.admin.ctl_presentacion_producto:
         class: Ninfac\ContaBundle\Admin\CtlPresentacionProductoAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\CtlPresentacionProducto, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: Inventario, label: Presentacion producto, show_in_dashboard: false }
         public: true
 
     ninfac_conta.admin.ctl_tipo_cliente:
@@ -142,7 +142,7 @@ services:
         class: Ninfac\ContaBundle\Admin\CtlTipoDocumentoAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoDocumento, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Listas maestras, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Tipo documento, show_in_dashboard: false }
         public: true
 
     ninfac_conta.admin.mnt_cliente:
@@ -156,7 +156,7 @@ services:
         class: Ninfac\ContaBundle\Admin\CtlTipoMovimientoAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\CtlTipoMovimiento, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Listas maestras,  show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Tipo movimiento, show_in_dashboard: false }
         public: true
 
     ninfac_conta.admin.ctl_motivo_movimiento:
@@ -184,7 +184,7 @@ services:
         class: Ninfac\ContaBundle\Admin\InvInventarioDetalleAdmin
         arguments: [~, Ninfac\ContaBundle\Entity\InvInventarioDetalle, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Inventario, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: Inventario, label: Detalle de inventario, show_in_dashboard: false }
         public: true
 
     ninfac_conta.admin.mnt_empleado:
@@ -192,4 +192,60 @@ services:
         arguments: [~, Ninfac\ContaBundle\Entity\MntEmpleado, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Mantenimientos, label: Empleados }
+        public: true
+
+    ninfac_conta.admin.ctl_banco:
+        class: Ninfac\ContaBundle\Admin\CtlBancoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlBanco, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Bancos }
+        public: true
+
+    ninfac_conta.admin.ctl_cargo:
+        class: Ninfac\ContaBundle\Admin\CtlCargoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlCargo, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Cargo }
+        public: true
+
+    ninfac_conta.admin.ctl_sexo:
+        class: Ninfac\ContaBundle\Admin\CtlSexoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlSexo, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Sexo, show_in_dashboard: false }
+        public: true
+
+    ninfac_conta.admin.ctl_estadocivil:
+        class: Ninfac\ContaBundle\Admin\CtlEstadocivilAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlEstadocivil, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Estado civil, show_in_dashboard: false }
+        public: true
+
+    ninfac_conta.admin.ctl_oficina:
+        class: Ninfac\ContaBundle\Admin\CtlOficinaAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlOficina, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Listas maestras, label: Oficinas }
+        public: true
+
+    ninfac_conta.admin.ctl_tipocontrato:
+        class: Ninfac\ContaBundle\Admin\CtlTipocontratoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlTipocontrato, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Tipo de contratos }
+        public: true
+
+    ninfac_conta.admin.ctl_nivelestudio:
+        class: Ninfac\ContaBundle\Admin\CtlNivelestudioAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlNivelestudio, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Nivel de estudio, show_in_dashboard: false }
+        public: true
+
+    ninfac_conta.admin.ctl_centrotrabajo:
+        class: Ninfac\ContaBundle\Admin\CtlCentrotrabajoAdmin
+        arguments: [~, Ninfac\ContaBundle\Entity\CtlCentrotrabajo, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Listas maestras, label: Centro de trabajo }
         public: true

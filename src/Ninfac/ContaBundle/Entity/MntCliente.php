@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * MntCliente
  *
- * @ORM\Table(name="mnt_cliente", uniqueConstraints={@ORM\UniqueConstraint(name="uk_cliente", columns={"nombre", "id_pais"})}, indexes={@ORM\Index(name="IDX_77D069F8664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_77D069F87EAD49C7", columns={"id_municipio"}), @ORM\Index(name="IDX_77D069F89B02FA4D", columns={"id_tipo_precio"}), @ORM\Index(name="IDX_77D069F8F57D32FD", columns={"id_pais"}), @ORM\Index(name="IDX_77D069F869B92C8F", columns={"id_tipo_documento"})})
+ * @ORM\Table(name="mnt_cliente", uniqueConstraints={@ORM\UniqueConstraint(name="uk_cliente", columns={"nombre", "id_pais"})}, indexes={@ORM\Index(name="IDX_77D069F8664AF320", columns={"id_empresa"}), @ORM\Index(name="IDX_77D069F87EAD49C7", columns={"id_municipio"}), @ORM\Index(name="IDX_77D069F89B02FA4D", columns={"id_tipo_precio"}), @ORM\Index(name="IDX_77D069F8F57D32FD", columns={"id_pais"}), @ORM\Index(name="IDX_77D069F869B92C8F", columns={"id_tipo_documento"}), @ORM\Index(name="IDX_77D069F89C3C3AA2", columns={"id_cuentacontable"}), @ORM\Index(name="IDX_77D069F8107813D3", columns={"id_empleado_vendedor"})})
  * @ORM\Entity
  */
 class MntCliente {
@@ -173,7 +173,7 @@ class MntCliente {
      *
      * @ORM\ManyToOne(targetEntity="CtlTipoPrecio")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipo_precio", referencedColumnName="id", nullable=false)
+     *   @ORM\JoinColumn(name="id_tipo_precio", referencedColumnName="id")
      * })
      */
     private $idTipoPrecio;
@@ -183,7 +183,7 @@ class MntCliente {
      *
      * @ORM\ManyToOne(targetEntity="CtlPais")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_pais", referencedColumnName="id", nullable=false)
+     *   @ORM\JoinColumn(name="id_pais", referencedColumnName="id")
      * })
      */
     private $idPais;
@@ -193,7 +193,7 @@ class MntCliente {
      *
      * @ORM\ManyToOne(targetEntity="CtlTipoDocumento")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipo_documento", referencedColumnName="id", nullable=false)
+     *   @ORM\JoinColumn(name="id_tipo_documento", referencedColumnName="id")
      * })
      */
     private $idTipoDocumento;
@@ -203,10 +203,20 @@ class MntCliente {
      *
      * @ORM\ManyToOne(targetEntity="MntCuentacontable")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_cuentacontable", referencedColumnName="id", nullable=false)
+     *   @ORM\JoinColumn(name="id_cuentacontable", referencedColumnName="id")
      * })
      */
     private $idCuentacontable;
+
+    /**
+     * @var \MntEmpleado
+     *
+     * @ORM\ManyToOne(targetEntity="MntEmpleado")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_empleado_vendedor", referencedColumnName="id")
+     * })
+     */
+    private $idEmpleadoVendedor;
 
     /**
      * Get id
@@ -730,8 +740,7 @@ class MntCliente {
      *
      * @return MntCliente
      */
-    public function setIdCuentacontable(\Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontable = null)
-    {
+    public function setIdCuentacontable(\Ninfac\ContaBundle\Entity\MntCuentacontable $idCuentacontable = null) {
         $this->idCuentacontable = $idCuentacontable;
 
         return $this;
@@ -742,12 +751,34 @@ class MntCliente {
      *
      * @return \Ninfac\ContaBundle\Entity\MntCuentacontable
      */
-    public function getIdCuentacontable()
-    {
+    public function getIdCuentacontable() {
         return $this->idCuentacontable;
+    }
+
+    /**
+     * Set idEmpleadoVendedor
+     *
+     * @param \Ninfac\ContaBundle\Entity\MntEmpleado $idEmpleadoVendedor
+     *
+     * @return MntCliente
+     */
+    public function setIdEmpleadoVendedor(\Ninfac\ContaBundle\Entity\MntEmpleado $idEmpleadoVendedor = null) {
+        $this->idEmpleadoVendedor = $idEmpleadoVendedor;
+
+        return $this;
+    }
+
+    /**
+     * Get idEmpleadoVendedor
+     *
+     * @return \Ninfac\ContaBundle\Entity\MntEmpleado
+     */
+    public function getIdEmpleadoVendedor() {
+        return $this->idEmpleadoVendedor;
     }
 
     public function __toString() {
         return (string) $this->nombre;
     }
+
 }

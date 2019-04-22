@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="ctl_sexo")
  * @ORM\Entity
  */
-class CtlSexo
-{
+class CtlSexo {
+
     /**
      * @var integer
      *
@@ -29,15 +29,12 @@ class CtlSexo
      */
     private $nombre;
 
-
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -48,8 +45,7 @@ class CtlSexo
      *
      * @return CtlSexo
      */
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
 
         return $this;
@@ -60,8 +56,12 @@ class CtlSexo
      *
      * @return string
      */
-    public function getNombre()
-    {
+    public function getNombre() {
         return $this->nombre;
     }
+
+    public function __toString() {
+        return (string) $this->nombre;
+    }
+
 }

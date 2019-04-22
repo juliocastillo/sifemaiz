@@ -7,6 +7,8 @@
       <index name="IDX_77D069F89B02FA4D" columns="id_tipo_precio"/>
       <index name="IDX_77D069F8F57D32FD" columns="id_pais"/>
       <index name="IDX_77D069F869B92C8F" columns="id_tipo_documento"/>
+      <index name="IDX_77D069F89C3C3AA2" columns="id_cuentacontable"/>
+      <index name="IDX_77D069F8107813D3" columns="id_empleado_vendedor"/>
     </indexes>
     <unique-constraints>
       <unique-constraint name="uk_cliente" columns="nombre,id_pais"/>
@@ -110,6 +112,16 @@
     <many-to-one field="idTipoDocumento" target-entity="CtlTipoDocumento" fetch="LAZY">
       <join-columns>
         <join-column name="id_tipo_documento" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCuentacontable" target-entity="MntCuentacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_cuentacontable" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmpleadoVendedor" target-entity="MntEmpleado" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_empleado_vendedor" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

@@ -95,4 +95,8 @@ class CtlTipocontrato
     {
         return $this->activo;
     }
+    
+    public function __toString() {
+        return (string) $this->nombre;
+    }
 }

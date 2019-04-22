@@ -617,6 +617,6 @@ class ConPartidacontable
     }
     
     public function __toString() {
-        return $this->concepto;
+        return (string) $this->concepto;
     }
 }

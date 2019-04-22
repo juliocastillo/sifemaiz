@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="ctl_nivelestudio")
  * @ORM\Entity
  */
-class CtlNivelestudio
-{
+class CtlNivelestudio {
+
     /**
      * @var integer
      *
@@ -30,21 +30,11 @@ class CtlNivelestudio
     private $nombre;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="activo", type="boolean", nullable=true)
-     */
-    private $activo;
-
-
-
-    /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -55,8 +45,7 @@ class CtlNivelestudio
      *
      * @return CtlNivelestudio
      */
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
 
         return $this;
@@ -67,32 +56,11 @@ class CtlNivelestudio
      *
      * @return string
      */
-    public function getNombre()
-    {
+    public function getNombre() {
         return $this->nombre;
     }
 
-    /**
-     * Set activo
-     *
-     * @param boolean $activo
-     *
-     * @return CtlNivelestudio
-     */
-    public function setActivo($activo)
-    {
-        $this->activo = $activo;
-
-        return $this;
-    }
-
-    /**
-     * Get activo
-     *
-     * @return boolean
-     */
-    public function getActivo()
-    {
-        return $this->activo;
+    public function __toString() {
+        return (string) $this->nombre;
     }
 }

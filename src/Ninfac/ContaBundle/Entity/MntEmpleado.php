@@ -1240,6 +1240,6 @@ class MntEmpleado
     }
     
     public function __toString() {
-        return (string) $this->nombreDui;
+        return (string) $this->nombreDui . ' '. (string) $this->apellidoDui;
     }
 }

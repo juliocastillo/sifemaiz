@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="ctl_centrotrabajo")
  * @ORM\Entity
  */
-class CtlCentrotrabajo
-{
+class CtlCentrotrabajo {
+
     /**
      * @var integer
      *
@@ -36,15 +36,12 @@ class CtlCentrotrabajo
      */
     private $activo;
 
-
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -55,8 +52,7 @@ class CtlCentrotrabajo
      *
      * @return CtlCentrotrabajo
      */
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
 
         return $this;
@@ -67,8 +63,7 @@ class CtlCentrotrabajo
      *
      * @return string
      */
-    public function getNombre()
-    {
+    public function getNombre() {
         return $this->nombre;
     }
 
@@ -79,8 +74,7 @@ class CtlCentrotrabajo
      *
      * @return CtlCentrotrabajo
      */
-    public function setActivo($activo)
-    {
+    public function setActivo($activo) {
         $this->activo = $activo;
 
         return $this;
@@ -91,8 +85,12 @@ class CtlCentrotrabajo
      *
      * @return boolean
      */
-    public function getActivo()
-    {
+    public function getActivo() {
         return $this->activo;
     }
+
+    public function __toString() {
+        return (string) $this->nombre;
+    }
+
 }

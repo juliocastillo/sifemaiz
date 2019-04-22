@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="ctl_oficina", indexes={@ORM\Index(name="IDX_F36D8D3FF8B09C83", columns={"id_centrotrabajo"})})
  * @ORM\Entity
  */
-class CtlOficina
-{
+class CtlOficina {
+
     /**
      * @var integer
      *
@@ -46,15 +46,12 @@ class CtlOficina
      */
     private $idCentrotrabajo;
 
-
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -65,8 +62,7 @@ class CtlOficina
      *
      * @return CtlOficina
      */
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
 
         return $this;
@@ -77,8 +73,7 @@ class CtlOficina
      *
      * @return string
      */
-    public function getNombre()
-    {
+    public function getNombre() {
         return $this->nombre;
     }
 
@@ -89,8 +84,7 @@ class CtlOficina
      *
      * @return CtlOficina
      */
-    public function setActivo($activo)
-    {
+    public function setActivo($activo) {
         $this->activo = $activo;
 
         return $this;
@@ -101,8 +95,7 @@ class CtlOficina
      *
      * @return boolean
      */
-    public function getActivo()
-    {
+    public function getActivo() {
         return $this->activo;
     }
 
@@ -113,8 +106,7 @@ class CtlOficina
      *
      * @return CtlOficina
      */
-    public function setIdCentrotrabajo(\Ninfac\ContaBundle\Entity\CtlCentrotrabajo $idCentrotrabajo = null)
-    {
+    public function setIdCentrotrabajo(\Ninfac\ContaBundle\Entity\CtlCentrotrabajo $idCentrotrabajo = null) {
         $this->idCentrotrabajo = $idCentrotrabajo;
 
         return $this;
@@ -125,8 +117,12 @@ class CtlOficina
      *
      * @return \Ninfac\ContaBundle\Entity\CtlCentrotrabajo
      */
-    public function getIdCentrotrabajo()
-    {
+    public function getIdCentrotrabajo() {
         return $this->idCentrotrabajo;
     }
+
+    public function __toString() {
+        return (string) $this->nombre;
+    }
+
 }

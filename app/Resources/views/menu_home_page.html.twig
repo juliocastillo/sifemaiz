@@ -15,115 +15,119 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
+                <!-- Empresa -->
+                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_CONTA_MENU')) %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Empresa <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('conta_empresa_select') }}">Abrir empresa</a></li>
+                            <li><a href="{{ path('conta_periodo_select') }}">Seleccionar periodo</a></li>
+                            <li><a href="{{ path('conta_catalogo_import_select') }}">Importar catálogo</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+
                 <!-- Contabildad -->
                 {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_CONTA_MENU')) %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Empresa <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ path('conta_empresa_select') }}">Abrir empresa</a></li>
-                        <li><a href="{{ path('conta_periodo_select') }}">Seleccionar periodo</a></li>
-                        <li><a href="{{ path('conta_catalogo_import_select') }}">Importar catálogo</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{{ path('conta_partidacontable_admin') }}">Administrador partidas</a></li>
-{#                        <li><a href="{{ path('sonata_admin_redirect') }}">Administrar</a></li>#}
-                    </ul>
-                </li>
-                {% endif %}
-
-                <!-- Activo fijo -->
-                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_AFIJO_MENU')) %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Afijo <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-                {% endif %}
-
-                <!-- Planillas -->
-                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_PLANI_MENU')) %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Planilla <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-                {% endif %}
-
-                <!-- Ventas -->
-                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_VENTA_MENU')) %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ventas <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-                {% endif %}
-
-                <!-- Cuentas por cobrar -->
-                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_CXC_MENU')) %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CXC <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contabilidad <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('admin_ninfac_conta_conpartidacontable_create') }}">Partidas contables</a></li>
+                        </ul>
+                    </li>
                 {% endif %}
 
                 <!-- Inventarios -->
                 {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_INVE_MENU')) %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inven <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inventarios <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('admin_ninfac_conta_invinventario_create') }}">Movimiento de inventario</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+
+
+
+
+                <!-- Activo fijo -->
+                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_AFIJO_MENU')) %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Afijo <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+
+                <!-- Planillas -->
+                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_PLANI_MENU')) %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Planilla <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+
+                <!-- Ventas -->
+                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_VENTA_MENU')) %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ventas <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+
+                <!-- Cuentas por cobrar -->
+                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_CXC_MENU')) %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CXC <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
                 {% endif %}
 
                 <!-- Cuentas por pagar -->
                 {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_CXP_MENU')) %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CXP <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CXP <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
                 {% endif %}
             </ul>
 
@@ -132,10 +136,10 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> Herramientas <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('user_password_change') }}">Cambiar su Password</a></li>
-                        {% if (is_granted('ROLE_ADMIN')) %}
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{{ path('sonata_admin_redirect') }}">Administración del sistema</a></li>
-                        {% endif %}
+                            {% if (is_granted('ROLE_ADMIN')) %}
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ path('sonata_admin_redirect') }}">Administración del sistema</a></li>
+                            {% endif %}
                     </ul>
 
                 </li>
